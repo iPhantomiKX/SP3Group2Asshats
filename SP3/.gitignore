@@ -1,0 +1,10 @@
+Debug/
+Release/
+*.opensdf
+*.sdf
+*.suo
+*.user
+ipch/
+Doxygen/
+SP3/Image/
+SP3/OBJ/
