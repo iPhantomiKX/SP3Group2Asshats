@@ -1,5 +1,5 @@
 #include "Mesh.h"
-#include "Vertex.h"
+#include "../Vertex/Vertex.h"
 #include "GL\glew.h"
 
 #include <iostream>

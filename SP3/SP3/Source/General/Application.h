@@ -2,7 +2,7 @@
 #define APPLICATION_H
 
 #include "timer.h"
-#include "Scene.h"
+#include "../Scene/Scene.h"
 
 class Application
 {

@@ -1,11 +1,11 @@
 #ifndef SCENE_SP3_H
 #define SCENE_SP3_H
 
-#include "Scene.h"
+#include "../Scene.h"
 #include "Mtx44.h"
 #include "MatrixStack.h"
-#include "Mesh.h"
-#include "Vertex.h"
+#include "../../Mesh/Mesh.h"
+#include "../../Vertex/Vertex.h"
 
 class SceneSP3 : public Scene
 {

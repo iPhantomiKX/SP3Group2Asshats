@@ -11,29 +11,31 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Source\Application.cpp" />
-    <ClCompile Include="Source\LoadOBJ.cpp" />
-    <ClCompile Include="Source\LoadTGA.cpp" />
+    <ClCompile Include="Source\GameObject\GameObject.cpp" />
+    <ClCompile Include="Source\General\Application.cpp" />
+    <ClCompile Include="Source\Graphics\LoadOBJ.cpp" />
+    <ClCompile Include="Source\Graphics\LoadTGA.cpp" />
     <ClCompile Include="Source\main.cpp" />
-    <ClCompile Include="Source\Mesh.cpp" />
-    <ClCompile Include="Source\MeshBuilder.cpp" />
-    <ClCompile Include="Source\SceneSP3.cpp" />
+    <ClCompile Include="Source\Mesh\Mesh.cpp" />
+    <ClCompile Include="Source\Mesh\MeshBuilder.cpp" />
+    <ClCompile Include="Source\Scene\Zone 1\SceneSP3.cpp" />
     <ClCompile Include="Source\shader.cpp" />
-    <ClCompile Include="Source\Utility.cpp" />
+    <ClCompile Include="Source\Vertex\Utility.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Source\Application.h" />
-    <ClInclude Include="Source\CheckMemoryLeak.h" />
-    <ClInclude Include="Source\LoadOBJ.h" />
-    <ClInclude Include="Source\LoadTGA.h" />
-    <ClInclude Include="Source\Material.h" />
-    <ClInclude Include="Source\Mesh.h" />
-    <ClInclude Include="Source\MeshBuilder.h" />
-    <ClInclude Include="Source\Scene.h" />
-    <ClInclude Include="Source\SceneSP3.h" />
+    <ClInclude Include="Source\GameObject\GameObject.h" />
+    <ClInclude Include="Source\General\Application.h" />
+    <ClInclude Include="Source\General\CheckMemoryLeak.h" />
+    <ClInclude Include="Source\Graphics\LoadOBJ.h" />
+    <ClInclude Include="Source\Graphics\LoadTGA.h" />
+    <ClInclude Include="Source\Mesh\Material.h" />
+    <ClInclude Include="Source\Mesh\Mesh.h" />
+    <ClInclude Include="Source\Mesh\MeshBuilder.h" />
+    <ClInclude Include="Source\Scene\Scene.h" />
+    <ClInclude Include="Source\Scene\Zone 1\SceneSP3.h" />
     <ClInclude Include="Source\shader.hpp" />
-    <ClInclude Include="Source\Utility.h" />
-    <ClInclude Include="Source\Vertex.h" />
+    <ClInclude Include="Source\Vertex\Utility.h" />
+    <ClInclude Include="Source\Vertex\Vertex.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{78E3AB79-2AE7-46F6-9594-CA339B3E63C7}</ProjectGuid>

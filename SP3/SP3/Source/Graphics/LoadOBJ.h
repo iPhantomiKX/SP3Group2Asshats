@@ -2,7 +2,7 @@
 #define LOAD_OBJ_H
 
 #include <vector>
-#include "Vertex.h"
+#include "../Vertex/Vertex.h"
 #include "Vector3.h"
 
 bool LoadOBJ(

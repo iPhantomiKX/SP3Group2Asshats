@@ -2,7 +2,7 @@
 #define MESH_BUILDER_H
 
 #include "Mesh.h"
-#include "Vertex.h"
+#include "../Vertex/Vertex.h"
 
 /******************************************************************************/
 /*!

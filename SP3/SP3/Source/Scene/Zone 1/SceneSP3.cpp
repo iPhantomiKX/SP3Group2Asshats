@@ -1,10 +1,10 @@
 #include "GL\glew.h"
-#include "shader.hpp"
+#include "../../shader.hpp"
 
 #include "SceneSP3.h"
-#include "Application.h"
-#include "LoadTGA.h"
-#include "MeshBuilder.h"
+#include "../../General/Application.h"
+#include "../../Graphics/LoadTGA.h"
+#include "../../Mesh/MeshBuilder.h"
 
 #include <sstream>
 

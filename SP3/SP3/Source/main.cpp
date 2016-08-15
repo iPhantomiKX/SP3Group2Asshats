@@ -1,6 +1,6 @@
-#include "Application.h"
+#include "General/Application.h"
 
-#include "CheckMemoryLeak.h"
+#include "General/CheckMemoryLeak.h"
 
 int main(void)
 {

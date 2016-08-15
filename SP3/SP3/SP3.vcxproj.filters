@@ -1,70 +1,76 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="Source\Application.cpp">
+    <ClCompile Include="Source\shader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\LoadOBJ.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\LoadTGA.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="Source\General\Application.cpp">
+      <Filter>Source Files\General</Filter>
     </ClCompile>
     <ClCompile Include="Source\main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Mesh.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="Source\Graphics\LoadOBJ.cpp">
+      <Filter>Source Files\Graphics</Filter>
     </ClCompile>
-    <ClCompile Include="Source\MeshBuilder.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="Source\Graphics\LoadTGA.cpp">
+      <Filter>Source Files\Graphics</Filter>
     </ClCompile>
-    <ClCompile Include="Source\shader.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="Source\Vertex\Utility.cpp">
+      <Filter>Source Files\Vertex</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Utility.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="Source\GameObject\GameObject.cpp">
+      <Filter>Source Files\GameObject</Filter>
     </ClCompile>
-    <ClCompile Include="Source\SceneSP3.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="Source\Scene\Zone 1\SceneSP3.cpp">
+      <Filter>Source Files\Scene\Zone 1</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Mesh\Mesh.cpp">
+      <Filter>Source Files\Mesh</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Mesh\MeshBuilder.cpp">
+      <Filter>Source Files\Mesh</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Source\Application.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\CheckMemoryLeak.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\LoadOBJ.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\LoadTGA.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Material.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Mesh.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\MeshBuilder.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Scene.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Source\shader.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Utility.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="Source\General\Application.h">
+      <Filter>Header Files\General</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Vertex.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="Source\General\CheckMemoryLeak.h">
+      <Filter>Header Files\General</Filter>
     </ClInclude>
-    <ClInclude Include="Source\SceneSP3.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="Source\Graphics\LoadOBJ.h">
+      <Filter>Header Files\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Graphics\LoadTGA.h">
+      <Filter>Header Files\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Vertex\Vertex.h">
+      <Filter>Header Files\Vertex</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Vertex\Utility.h">
+      <Filter>Header Files\Vertex</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GameObject\GameObject.h">
+      <Filter>Header Files\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Scene\Scene.h">
+      <Filter>Header Files\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Scene\Zone 1\SceneSP3.h">
+      <Filter>Header Files\Scene\Zone 1</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Mesh\Mesh.h">
+      <Filter>Header Files\Mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Mesh\MeshBuilder.h">
+      <Filter>Header Files\Mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Mesh\Material.h">
+      <Filter>Header Files\Mesh</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -73,6 +79,60 @@
     </Filter>
     <Filter Include="Source Files">
       <UniqueIdentifier>{08c6d739-c905-4185-8a1a-b4b5d5fa4689}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\General">
+      <UniqueIdentifier>{ad516cd8-274d-483c-97ef-e3a9ae8f0cbd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\General">
+      <UniqueIdentifier>{747f0ce8-3aa8-475b-9ea0-af6331fda1a3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Graphics">
+      <UniqueIdentifier>{413ef7c0-d197-45ff-88f6-8d2a2e4e51b2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Graphics">
+      <UniqueIdentifier>{bdb2cc77-8803-41b7-a350-850ab7261c35}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Mesh">
+      <UniqueIdentifier>{4f253b29-e63c-4709-8a1d-3371b296767d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Mesh">
+      <UniqueIdentifier>{f49064a1-0e47-4632-a8a2-05cd4b1a99fb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Scene">
+      <UniqueIdentifier>{bd67a017-358b-4fd5-b26f-73839f6c9b1a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Scene">
+      <UniqueIdentifier>{ad95482c-3860-469b-ad09-3351ec958f92}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Vertex">
+      <UniqueIdentifier>{8d44a7cb-a191-4b72-84be-ed87b328662b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Vertex">
+      <UniqueIdentifier>{9eb52019-4040-4ef2-8355-b3d846b76a96}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\GameObject">
+      <UniqueIdentifier>{02891d46-b8dd-4216-829c-82d0b7513290}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GameObject">
+      <UniqueIdentifier>{775b1d0d-8b58-46e7-af22-474f1987eb55}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Audio">
+      <UniqueIdentifier>{ca6a8735-c379-46bb-b3f3-05cc95314646}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Audio">
+      <UniqueIdentifier>{5a6fe7a8-0e9b-4ee5-bf5e-52b5e81ff107}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Scene\Zone 1">
+      <UniqueIdentifier>{0c2f527f-7c2e-4407-aae6-764f312c0129}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Scene\Main Menu">
+      <UniqueIdentifier>{f592ca9d-0c22-4939-8b11-804375ee8726}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Scene\Zone 1">
+      <UniqueIdentifier>{48d78fb2-9329-413c-81fa-1e4219dd272a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Scene\Main Menu">
+      <UniqueIdentifier>{fddd7501-f021-4f5f-bf93-b9851cddfd83}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
