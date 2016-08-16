@@ -3,8 +3,8 @@
 
 #include "Mtx44.h"
 #include "MatrixStack.h"
-#include "../Mesh/Mesh.h"
-#include "../Vertex/Vertex.h"
+#include "../Graphics/Mesh/Mesh.h"
+#include "../Graphics/Vertex/Vertex.h"
 
 class Scene
 {

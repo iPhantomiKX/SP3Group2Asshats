@@ -3,8 +3,10 @@
 
 #include "SceneSP3.h"
 #include "../../General/Application.h"
-//#include "../../Graphics/LoadTGA.h"
-//#include "../../Mesh/MeshBuilder.h"
+//#include "../../Graphics/LoadOBJ/LoadTGA.h"
+//#include "../../Graphics/Mesh/MeshBuilder.h"
+
+#include "../../General/SharedData.h"
 
 #include <sstream>
 
@@ -18,6 +20,12 @@ SceneSP3::~SceneSP3()
 
 void SceneSP3::Init()
 {
+	// Projection matrix : 45° Field of View, 4:3 ratio, display range : 0.1 unit <-> 1000 units
+	Mtx44 perspective;
+	perspective.SetToPerspective(45.0f, 4.0f / 3.0f, 0.1f, 10000.0f);
+	//perspective.SetToOrtho(-80, 80, -60, 60, -1000, 1000);
+	projectionStack.LoadMatrix(perspective);
+
     bLButtonState = false;
 }
 
@@ -59,6 +67,10 @@ void SceneSP3::Render()
     modelStack.LoadIdentity();
 
     //RenderStuff();
+
+	modelStack.PushMatrix();
+	RenderMesh(SharedData::GetInstance()->graphicsLoader->GetMesh(GraphicsLoader::GEO_BOX_06), false);
+	modelStack.PopMatrix();
 }
 
 void SceneSP3::Exit()

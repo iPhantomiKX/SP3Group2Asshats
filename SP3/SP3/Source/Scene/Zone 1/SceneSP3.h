@@ -5,17 +5,6 @@
 
 class SceneSP3 : public Scene
 {
-    enum GEOMETRY_TYPE
-    {
-        GEO_BOX_06,
-        GEO_BOX_09,
-        GEO_TEXTBOX,
-        // Text
-        GEO_TEXT_IMPACT,
-        GEO_TEXT_CENTURYGOTHIC,
-        NUM_GEOMETRY
-    };
-
     float m_worldHeight;
     float m_worldWidth;
 

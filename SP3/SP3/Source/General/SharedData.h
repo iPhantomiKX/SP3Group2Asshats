@@ -2,13 +2,12 @@
 #define SHARED_DATA_H
 
 #include "../GameObject/Player.h"
+#include "../Graphics/GraphicsLoader/GraphicsLoader.h"
 
 class SharedData
 {
 	SharedData();
 	~SharedData();
-
-	Player* player;
 
 public:
 	static SharedData* GetInstance()
@@ -16,6 +15,9 @@ public:
 		static SharedData sharedData;
 		return &sharedData;
 	}
+
+	Player* player;
+	GraphicsLoader* graphicsLoader;
 };
 
 #endif

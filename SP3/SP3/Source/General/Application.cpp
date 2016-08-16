@@ -102,7 +102,7 @@ void Application::Init()
 	//m_width = 1920;
 	//m_height = 1080;
     GetMonitorResolution();
-	m_window = glfwCreateWindow(m_width, m_height, "SP3 Game", NULL, NULL);
+	m_window = glfwCreateWindow(m_width, m_height, "Mon'Colle", NULL, NULL);
 
 	//If the window couldn't be created
 	if (!m_window)

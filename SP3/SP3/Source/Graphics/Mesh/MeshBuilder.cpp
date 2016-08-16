@@ -2,7 +2,7 @@
 #include <GL\glew.h>
 #include <vector>
 #include "MyMath.h"
-#include "../Graphics/LoadOBJ.h"
+#include "../LoadOBJ/LoadOBJ.h"
 /******************************************************************************/
 /*!
 \brief

@@ -18,15 +18,19 @@
     <ClCompile Include="Source\General\Camera.cpp" />
     <ClCompile Include="Source\General\SharedData.cpp" />
     <ClCompile Include="Source\General\SceneManager.cpp" />
-    <ClCompile Include="Source\Graphics\LoadOBJ.cpp" />
-    <ClCompile Include="Source\Graphics\LoadTGA.cpp" />
     <ClCompile Include="Source\main.cpp" />
-    <ClCompile Include="Source\Mesh\Mesh.cpp" />
-    <ClCompile Include="Source\Mesh\MeshBuilder.cpp" />
     <ClCompile Include="Source\Scene\Scene.cpp" />
+    <ClCompile Include="Source\Graphics\GraphicsLoader\GraphicsLoader.cpp" />
+    <ClCompile Include="Source\Graphics\Lighting\DepthFBO.cpp" />
+    <ClCompile Include="Source\Graphics\LoadOBJ\LoadOBJ.cpp" />
+    <ClCompile Include="Source\Graphics\LoadOBJ\LoadTGA.cpp" />
+    <ClCompile Include="Source\Graphics\Mesh\LoadHmap.cpp" />
+    <ClCompile Include="Source\Graphics\Mesh\Mesh.cpp" />
+    <ClCompile Include="Source\Graphics\Mesh\MeshBuilder.cpp" />
+    <ClCompile Include="Source\Graphics\ParticleManager\Particle.cpp" />
+    <ClCompile Include="Source\Graphics\Vertex\Utility.cpp" />
     <ClCompile Include="Source\Scene\Zone 1\SceneSP3.cpp" />
     <ClCompile Include="Source\shader.cpp" />
-    <ClCompile Include="Source\Vertex\Utility.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Audio\Sound.h" />
@@ -37,16 +41,21 @@
     <ClInclude Include="Source\General\CheckMemoryLeak.h" />
     <ClInclude Include="Source\General\SharedData.h" />
     <ClInclude Include="Source\General\SceneManager.h" />
-    <ClInclude Include="Source\Graphics\LoadOBJ.h" />
-    <ClInclude Include="Source\Graphics\LoadTGA.h" />
-    <ClInclude Include="Source\Mesh\Material.h" />
-    <ClInclude Include="Source\Mesh\Mesh.h" />
-    <ClInclude Include="Source\Mesh\MeshBuilder.h" />
+    <ClInclude Include="Source\Graphics\GraphicsLoader\GraphicsLoader.h" />
+    <ClInclude Include="Source\Graphics\Lighting\DepthFBO.h" />
+    <ClInclude Include="Source\Graphics\Lighting\Light.h" />
+    <ClInclude Include="Source\Graphics\LoadOBJ\LoadOBJ.h" />
+    <ClInclude Include="Source\Graphics\LoadOBJ\LoadTGA.h" />
+    <ClInclude Include="Source\Graphics\Mesh\LoadHmap.h" />
+    <ClInclude Include="Source\Graphics\Mesh\Material.h" />
+    <ClInclude Include="Source\Graphics\Mesh\Mesh.h" />
+    <ClInclude Include="Source\Graphics\Mesh\MeshBuilder.h" />
+    <ClInclude Include="Source\Graphics\ParticleManager\Particle.h" />
+    <ClInclude Include="Source\Graphics\Vertex\Utility.h" />
+    <ClInclude Include="Source\Graphics\Vertex\Vertex.h" />
     <ClInclude Include="Source\Scene\Scene.h" />
     <ClInclude Include="Source\Scene\Zone 1\SceneSP3.h" />
     <ClInclude Include="Source\shader.hpp" />
-    <ClInclude Include="Source\Vertex\Utility.h" />
-    <ClInclude Include="Source\Vertex\Vertex.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{78E3AB79-2AE7-46F6-9594-CA339B3E63C7}</ProjectGuid>
