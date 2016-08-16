@@ -43,6 +43,12 @@
     <ClCompile Include="Source\GameObject\Player.cpp">
       <Filter>Source Files\GameObject</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Audio\Sound.cpp">
+      <Filter>Source Files\Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\General\SceneManager.cpp">
+      <Filter>Source Files\General</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\shader.hpp">
@@ -52,6 +58,9 @@
       <Filter>Header Files\General</Filter>
     </ClInclude>
     <ClInclude Include="Source\General\CheckMemoryLeak.h">
+      <Filter>Header Files\General</Filter>
+    </ClInclude>
+	<ClInclude Include="Source\General\SceneManager.h">
       <Filter>Header Files\General</Filter>
     </ClInclude>
     <ClInclude Include="Source\Graphics\LoadOBJ.h">
@@ -91,7 +100,10 @@
       <Filter>Header Files\General</Filter>
     </ClInclude>
     <ClInclude Include="Source\General\Camera.h">
-      <Filter>Header Files\General</Filter>
+	    <Filter>Header Files\General</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Audio\Sound.h">
+      <Filter>Header Files\Audio</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

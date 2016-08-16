@@ -3,6 +3,8 @@
 
 #include "timer.h"
 #include "../Scene/Scene.h"
+#include "SceneManager.h"
+
 
 class Application
 {
@@ -25,7 +27,7 @@ public:
 	static int GetWindowHeight();
 
     // Game Scenes
-    Scene *scene;
+    SceneManager *sceneManager;
 
 private:
 	Application();

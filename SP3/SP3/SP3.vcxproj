@@ -11,11 +11,13 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Source\Audio\Sound.cpp" />
     <ClCompile Include="Source\GameObject\GameObject.cpp" />
     <ClCompile Include="Source\GameObject\Player.cpp" />
     <ClCompile Include="Source\General\Application.cpp" />
     <ClCompile Include="Source\General\Camera.cpp" />
     <ClCompile Include="Source\General\SharedData.cpp" />
+    <ClCompile Include="Source\General\SceneManager.cpp" />
     <ClCompile Include="Source\Graphics\LoadOBJ.cpp" />
     <ClCompile Include="Source\Graphics\LoadTGA.cpp" />
     <ClCompile Include="Source\main.cpp" />
@@ -27,12 +29,14 @@
     <ClCompile Include="Source\Vertex\Utility.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Source\Audio\Sound.h" />
     <ClInclude Include="Source\GameObject\GameObject.h" />
     <ClInclude Include="Source\GameObject\Player.h" />
     <ClInclude Include="Source\General\Application.h" />
     <ClInclude Include="Source\General\Camera.h" />
     <ClInclude Include="Source\General\CheckMemoryLeak.h" />
     <ClInclude Include="Source\General\SharedData.h" />
+    <ClInclude Include="Source\General\SceneManager.h" />
     <ClInclude Include="Source\Graphics\LoadOBJ.h" />
     <ClInclude Include="Source\Graphics\LoadTGA.h" />
     <ClInclude Include="Source\Mesh\Material.h" />
@@ -86,7 +90,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>_VARIADIC_MAX=10;WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(SolutionDir)/Common/Source;$(SolutionDir)/glew/include;$(SolutionDir)/glfw/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)/Common/Source;$(SolutionDir)/glew/include;$(SolutionDir)/glfw/include;%(AdditionalIncludeDirectories);$(SolutionDir)/Base/irrKlang-1.5.0/include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -104,7 +108,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>_VARIADIC_MAX=10;WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(SolutionDir)/Common/Source;$(SolutionDir)/glew/include;$(SolutionDir)/glfw/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)/Common/Source;$(SolutionDir)/glew/include;$(SolutionDir)/glfw/include;%(AdditionalIncludeDirectories);$(SolutionDir)/Base/irrKlang-1.5.0/include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
