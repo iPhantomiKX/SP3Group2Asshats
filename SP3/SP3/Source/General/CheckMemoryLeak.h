@@ -1,3 +1,12 @@
+/******************************************************************************/
+/*!
+\file	CheckMemoryLeak.h
+\author Foo Jing Ting
+\par	email: 152856H\@mymail.nyp.edu.sg
+\brief
+Function that checks for memory leaks
+*/
+/******************************************************************************/
 #ifndef CHECKMEMORYLEAK_H
 #define CHECKMEMORYLEAK_H
 

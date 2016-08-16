@@ -1,5 +1,20 @@
+/****************************************************************************/
+/*!
+\file SceneManager.h
+\author Bek Kunta
+\par email: xiaobek\@gmail.com
+\brief
+A Class that handles the different scenes
+*/
+/****************************************************************************/
 #include "../Scene/Scene.h"
 
+/****************************************************************************/
+/*!
+Class SceneManager:
+\brief Defines a class that manages the different scenes in gameplay
+*/
+/****************************************************************************/
 class SceneManager
 {
 public:

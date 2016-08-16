@@ -1,3 +1,12 @@
+/******************************************************************************/
+/*!
+\file	Camera.h
+\author Wen Sheng Tang
+\par	email: tang_wen_sheng\@nyp.edu.sg
+\brief
+Class that controls field of view of scene
+*/
+/******************************************************************************/
 #ifndef CAMERA_3_H
 #define CAMERA_3_H
 

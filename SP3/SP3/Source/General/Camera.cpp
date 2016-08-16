@@ -1,3 +1,12 @@
+/******************************************************************************/
+/*!
+\file	Camera.cpp
+\author Wen Sheng Tang
+\par	email: tang_wen_sheng\@nyp.edu.sg
+\brief
+Class that controls field of view of scene
+*/
+/******************************************************************************/
 #include "Camera.h"
 #include "Application.h"
 #include "Mtx44.h"

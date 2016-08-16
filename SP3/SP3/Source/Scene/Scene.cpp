@@ -1,3 +1,12 @@
+/******************************************************************************/
+/*!
+\file	Scene.cpp
+\author Foo Jing Ting
+\par	email: 152856H\@mymail.nyp.edu.sg
+\brief
+Abstract class for scenes in gameplay
+*/
+/******************************************************************************/
 #include "GL\glew.h"
 
 #include "Scene.h"

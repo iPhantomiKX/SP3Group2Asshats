@@ -1,3 +1,12 @@
+/******************************************************************************/
+/*!
+\file	Scene.h
+\author Foo Jing Ting
+\par	email: 152856H\@mymail.nyp.edu.sg
+\brief
+Abstract class for scenes in gameplay
+*/
+/******************************************************************************/
 #ifndef SCENE_H
 #define SCENE_H
 
@@ -7,6 +16,12 @@
 #include "../Graphics/Vertex/Vertex.h"
 #include "../General/Camera.h"
 
+/******************************************************************************/
+/*!
+Class Scene:
+\brief	Abstract class for scenes in gameplay
+*/
+/******************************************************************************/
 class Scene
 {
 public:

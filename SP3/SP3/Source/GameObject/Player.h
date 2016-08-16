@@ -1,8 +1,23 @@
+/******************************************************************************/
+/*!
+\file	Player.h
+\author Foo Jing Ting
+\par	email: 152856H@mymail.nyp.edu.sg
+\brief
+Player class that stores the game's player variables
+*/
+/******************************************************************************/
 #ifndef PLAYER_H
 #define PLAYER_H
 
 #include "Vector3.h"
 
+/******************************************************************************/
+/*!
+Class Player:
+\brief	A class that represents the player of the game
+*/
+/******************************************************************************/
 class Player
 {
 public:
