@@ -12,20 +12,27 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\GameObject\GameObject.cpp" />
+    <ClCompile Include="Source\GameObject\Player.cpp" />
     <ClCompile Include="Source\General\Application.cpp" />
+    <ClCompile Include="Source\General\Camera.cpp" />
+    <ClCompile Include="Source\General\SharedData.cpp" />
     <ClCompile Include="Source\Graphics\LoadOBJ.cpp" />
     <ClCompile Include="Source\Graphics\LoadTGA.cpp" />
     <ClCompile Include="Source\main.cpp" />
     <ClCompile Include="Source\Mesh\Mesh.cpp" />
     <ClCompile Include="Source\Mesh\MeshBuilder.cpp" />
+    <ClCompile Include="Source\Scene\Scene.cpp" />
     <ClCompile Include="Source\Scene\Zone 1\SceneSP3.cpp" />
     <ClCompile Include="Source\shader.cpp" />
     <ClCompile Include="Source\Vertex\Utility.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\GameObject\GameObject.h" />
+    <ClInclude Include="Source\GameObject\Player.h" />
     <ClInclude Include="Source\General\Application.h" />
+    <ClInclude Include="Source\General\Camera.h" />
     <ClInclude Include="Source\General\CheckMemoryLeak.h" />
+    <ClInclude Include="Source\General\SharedData.h" />
     <ClInclude Include="Source\Graphics\LoadOBJ.h" />
     <ClInclude Include="Source\Graphics\LoadTGA.h" />
     <ClInclude Include="Source\Mesh\Material.h" />
