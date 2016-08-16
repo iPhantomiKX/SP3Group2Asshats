@@ -1,3 +1,12 @@
+/******************************************************************************/
+/*!
+\file	LoadHmap.h
+\author Muhammad Amirul Bin Zaol-kefli
+\par	email: 150509T@mymail.nyp.edu.sg
+\brief
+Load Terrain Map
+*/
+/******************************************************************************/
 #ifndef LOAD_HMAP_H
 #define LOAD_HMAP_H
 

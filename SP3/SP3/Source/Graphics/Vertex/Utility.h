@@ -1,3 +1,12 @@
+/******************************************************************************/
+/*!
+\file	Utility.h
+\author Wen Sheng Tang
+\par	email: tang_wen_sheng\@nyp.edu.sg
+\brief
+Function for operator overload
+*/
+/******************************************************************************/
 #ifndef UTILITY_H
 #define UTILITY_H
 

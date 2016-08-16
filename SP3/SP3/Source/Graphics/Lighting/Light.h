@@ -1,9 +1,24 @@
+/******************************************************************************/
+/*!
+\file	Light.h
+\author Muhammad Amirul Bin Zaol-kefli
+\par	email: 150509T@mymail.nyp.edu.sg
+\brief
+Lighting for Scenes
+*/
+/******************************************************************************/
 #ifndef LIGHT_H
 #define LIGHT_H
 
 #include "../Vertex/Vertex.h"
 #include "Vector3.h"
 
+/******************************************************************************/
+/*!
+\brief
+Light struct
+*/
+/******************************************************************************/
 struct Light
 {
 	enum LIGHT_TYPE

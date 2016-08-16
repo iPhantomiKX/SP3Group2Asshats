@@ -1,3 +1,12 @@
+/******************************************************************************/
+/*!
+\file	GraphicsLoader.h
+\author Muhammad Amirul Bin Zaol-kefli
+\par	email: 150509T@mymail.nyp.edu.sg
+\brief
+Load Graphics for every instance
+*/
+/******************************************************************************/
 #ifndef GRAPHICS_LOADER_H
 #define GRAPHICS_LOADER_H
 
@@ -11,6 +20,12 @@
 
 #include <vector>
 
+/******************************************************************************/
+/*!
+\brief
+GraphicsLoader class
+*/
+/******************************************************************************/
 class GraphicsLoader
 {
 public:
