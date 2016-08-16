@@ -2,6 +2,10 @@
 
 SharedData::SharedData()
 {
+}
+
+void SharedData::Init()
+{
 	player = new Player();
 	graphicsLoader = new GraphicsLoader();
 	graphicsLoader->Init();

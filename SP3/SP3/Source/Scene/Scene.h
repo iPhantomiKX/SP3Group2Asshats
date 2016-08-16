@@ -5,6 +5,7 @@
 #include "MatrixStack.h"
 #include "../Graphics/Mesh/Mesh.h"
 #include "../Graphics/Vertex/Vertex.h"
+#include "../General/Camera.h"
 
 class Scene
 {
@@ -20,6 +21,8 @@ public:
 	MS modelStack;
 	MS viewStack;
 	MS projectionStack;
+
+	Camera camera;
 
 	// To render
 	// ideal case is put objects in a vector; then use for loop to go through the list to render them

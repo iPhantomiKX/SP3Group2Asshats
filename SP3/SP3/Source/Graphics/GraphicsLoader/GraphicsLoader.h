@@ -76,6 +76,7 @@ public:
 
 	enum GEOMETRY_TYPE
 	{
+		GEO_AXES,
 		GEO_BOX_06,
 		GEO_BOX_09,
 		GEO_TEXTBOX,

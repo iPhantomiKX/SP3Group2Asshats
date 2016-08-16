@@ -10,12 +10,17 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#include "SharedData.h"
 #include "../Scene/Zone 1/SceneSP3.h"
 
 GLFWwindow* m_window;
 const unsigned char FPS = 60; // FPS of this game
 const unsigned int frameTime = 1000 / FPS; // time for each frame
-int m_width, m_height;
+
+int Application::m_width = 0;
+int Application::m_height = 0;
+double Application::cursorXPos = 0;
+double Application::cursorYPos = 0;
 
 //Define an error callback
 static void error_callback(int error, const char* description)
@@ -34,8 +39,8 @@ static void key_callback(GLFWwindow* window, int key, int scancode, int action, 
 
 void resize_callback(GLFWwindow* window, int w, int h)
 {
-	m_width = w;
-	m_height = h;
+	Application::m_width = w;
+	Application::m_height = h;
 	glViewport(0, 0, w, h);
 }
 
@@ -130,19 +135,24 @@ void Application::Init()
 		//return -1;
 	}
 
+	// Initialise Shared Data
+	SharedData::GetInstance()->Init();
+
 	// Initialise scene manager
 	sceneManager = new SceneManager();
+
+    GetCursorPos(&cursorXPos, &cursorYPos);
 }
 
 void Application::Run()
 {
-
-	sceneManager->ChangeScene(0);
+	sceneManager->ChangeScene(1);
 
     //Main Loop
 	m_timer.startTimer();    // Start timer to calculate how long it takes to render this frame
     while (!glfwWindowShouldClose(m_window) && !IsKeyPressed(VK_ESCAPE))
 	{
+        GetCursorPos(&cursorXPos, &cursorYPos);
 		sceneManager->Update(m_timer.getElapsedTime());
 		sceneManager->Render();
 		//Swap buffers
@@ -163,4 +173,14 @@ void Application::Exit()
 	glfwDestroyWindow(m_window);
 	//Finalize and clean up GLFW
 	glfwTerminate();
+}
+
+double Application::GetCursorXPos()
+{
+    return cursorXPos;
+}
+
+double Application::GetCursorYPos()
+{
+    return cursorYPos;
 }

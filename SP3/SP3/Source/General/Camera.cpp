@@ -21,7 +21,7 @@ void Camera::Init(const Vector3& pos, const Vector3& target, const Vector3& up)
 	this->up = defaultUp = right.Cross(view).Normalized();
 }
 
-static const float CAMERA_SPEED = 200.f;
+static const float CAMERA_SPEED = 5.f;
 
 void Camera::Update(double dt)
 {
@@ -96,9 +96,15 @@ void Camera::Update(double dt)
 	}
 	//Update the camera direction based on mouse move
 	// left-right rotate
-	{
+    double x, y;
+    Application::GetCursorPos(&x, &y);
+
+    if (x != Application::GetCursorXPos())
+    {
+        double diff_xpos = Application::GetCursorXPos() - x;
+
 		Vector3 view = (target - position).Normalized();
-		float yaw = (float)(-CAMERA_SPEED * (float)dt);
+        float yaw = (float)(diff_xpos * CAMERA_SPEED * (float)dt);
 		Mtx44 rotation;
 		rotation.SetToRotation(yaw, 0, 1, 0);
 		view = rotation * view;
@@ -108,8 +114,11 @@ void Camera::Update(double dt)
 		right.Normalize();
 		up = right.Cross(view).Normalized();
 	}
-	{
-		float pitch = (float)(-CAMERA_SPEED * (float)dt);
+    if (y != Application::GetCursorYPos())
+    {
+        double diff_ypos = Application::GetCursorYPos() - y;
+
+        float pitch = (float)(diff_ypos * CAMERA_SPEED * (float)dt);
 		Vector3 view = (target - position).Normalized();
 		Vector3 right = view.Cross(up);
 		right.y = 0;

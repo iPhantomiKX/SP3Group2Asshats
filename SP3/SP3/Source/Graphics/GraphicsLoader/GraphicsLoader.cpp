@@ -13,7 +13,7 @@ GraphicsLoader::~GraphicsLoader()
 void GraphicsLoader::Init()
 {
 	// Black background
-	glClearColor(0.0f, 0.0f, 0.4f, 0.0f);
+	glClearColor(0.4f, 0.0f, 0.4f, 0.0f);
 	// Enable depth test
 	glEnable(GL_DEPTH_TEST);
 	// Accept fragment if it closer to the camera than the former one
@@ -30,6 +30,7 @@ void GraphicsLoader::Init()
 	glBindVertexArray(m_vertexArrayID);
 
 	m_programID = LoadShaders("Shader//Shadow.vertexshader", "Shader//Shadow.fragmentshader");
+    //m_programID = LoadShaders("Shader//comg.vertexshader", "Shader//comg.fragmentshader");
 
 	m_gPassShaderID = LoadShaders("Shader//GPass.vertexshader", "Shader//GPass.fragmentshader");
 	m_parameters[U_LIGHT_DEPTH_MVP_GPASS] = glGetUniformLocation(m_gPassShaderID, "lightDepthMVP");
@@ -86,11 +87,37 @@ void GraphicsLoader::Init()
 	m_parameters[U_FOG_TYPE] = glGetUniformLocation(m_programID, "fogParam.type");
 	m_parameters[U_FOG_ENABLE] = glGetUniformLocation(m_programID, "fogParam.enabled");
 
+    m_lights.type = Light::LIGHT_DIRECTIONAL;
+    m_lights.position.Set(0.f, 20.f, 0.f);
+    m_lights.color.Set(1, 1, 1);
+    m_lights.power = 1;
+    m_lights.kC = 1.f;
+    m_lights.kL = 0.01f;
+    m_lights.kQ = 0.001f;
+    m_lights.cosCutoff = cos(Math::DegreeToRadian(45));
+    m_lights.cosInner = cos(Math::DegreeToRadian(30));
+    m_lights.exponent = 3.f;
+    m_lights.spotDirection.Set(0.f, 1.f, 0.f);
+
+    glUniform1i(m_parameters[U_NUMLIGHTS], 1);
+    glUniform1i(m_parameters[U_TEXT_ENABLED], 0);
+
+    glUniform1i(m_parameters[U_LIGHT0_TYPE], m_lights.type);
+    glUniform3fv(m_parameters[U_LIGHT0_COLOR], 1, &m_lights.color.r);
+    glUniform1f(m_parameters[U_LIGHT0_POWER], m_lights.power);
+    glUniform1f(m_parameters[U_LIGHT0_KC], m_lights.kC);
+    glUniform1f(m_parameters[U_LIGHT0_KL], m_lights.kL);
+    glUniform1f(m_parameters[U_LIGHT0_KQ], m_lights.kQ);
+    glUniform1f(m_parameters[U_LIGHT0_COSCUTOFF], m_lights.cosCutoff);
+    glUniform1f(m_parameters[U_LIGHT0_COSINNER], m_lights.cosInner);
+    glUniform1f(m_parameters[U_LIGHT0_EXPONENT], m_lights.exponent);
+
 	for (int i = 0; i < NUM_GEOMETRY; ++i)
 	{
 		m_meshList[i] = NULL;
 	}
-	m_meshList[GEO_BOX_06] = MeshBuilder::GenerateCube("test", Color(1, 1, 1), 1.f);
+	m_meshList[GEO_AXES] = MeshBuilder::GenerateAxes("axes", 1000, 1000, 1000);
+	m_meshList[GEO_BOX_06] = MeshBuilder::GenerateCone("test", Color(1, 0, 0), 36, 1.f, 1.f);
 }
 
 Mesh* GraphicsLoader::GetMesh(GEOMETRY_TYPE m_geotype)

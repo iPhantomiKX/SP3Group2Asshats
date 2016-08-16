@@ -26,6 +26,15 @@ public:
 	static int GetWindowWidth();
 	static int GetWindowHeight();
 
+    static int m_width;
+    static int m_height;
+
+    static double cursorXPos;
+    static double cursorYPos;
+
+    static double GetCursorXPos();
+    static double GetCursorYPos();
+
     // Game Scenes
     SceneManager *sceneManager;
 

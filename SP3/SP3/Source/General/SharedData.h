@@ -10,6 +10,8 @@ class SharedData
 	~SharedData();
 
 public:
+	void Init();
+
 	static SharedData* GetInstance()
 	{
 		static SharedData sharedData;

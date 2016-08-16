@@ -3,6 +3,8 @@
 #include <vector>
 #include "MyMath.h"
 #include "../LoadOBJ/LoadOBJ.h"
+
+#include <iostream>
 /******************************************************************************/
 /*!
 \brief
@@ -139,6 +141,8 @@ Mesh* MeshBuilder::GenerateCube(const std::string &meshName, Color color, float 
 {
 	Vertex v;
 	std::vector<Vertex> vertex_buffer_data;
+
+    std::cout << color.r << "," << color.g << "," << color.b << "," << color.a;
 
 	v.pos.Set(-0.5f * length,-0.5f * length,-0.5f * length);
 	v.color = color;
