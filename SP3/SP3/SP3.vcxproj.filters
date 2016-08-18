@@ -230,6 +230,9 @@
     <ClCompile Include="Source\Scene\Zone 1\SceneGrass.cpp">
       <Filter>Source Files\Scene\Zone 1</Filter>
     </ClCompile>
+    <ClCompile Include="Source\GameObject\Items.cpp">
+      <Filter>Source Files\GameObject</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\shader.hpp">
@@ -309,6 +312,9 @@
     </ClInclude>
     <ClInclude Include="Source\Scene\Zone 1\SceneGrass.h">
       <Filter>Header Files\Scene\Zone 1</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GameObject\Items.h">
+      <Filter>Header Files\GameObject</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
