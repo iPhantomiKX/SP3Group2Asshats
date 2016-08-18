@@ -12,6 +12,7 @@
 
 #include "SharedData.h"
 #include "../Scene/Zone 1/SceneSP3.h"
+#include "../Scene/Zone 1/SceneGrass.h"
 
 GLFWwindow* m_window;
 const unsigned char FPS = 60; // FPS of this game
@@ -147,16 +148,23 @@ void Application::Init()
 	sceneManager = new SceneManager();
 
     GetCursorPos(&cursorXPos, &cursorYPos);
+	glfwSetInputMode(m_window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+
 }
 
 void Application::Run()
 {
+
 	sceneManager->ChangeScene(1);
 
     //Main Loop
 	m_timer.startTimer();    // Start timer to calculate how long it takes to render this frame
     while (!glfwWindowShouldClose(m_window) && !IsKeyPressed(VK_ESCAPE))
 	{
+		if (Application::IsKeyPressed('V'))
+		{
+			sceneManager->ChangeScene(2);
+		}
 		sceneManager->Update(m_timer.getElapsedTime());
 		GetCursorPos(&cursorXPos, &cursorYPos);
 		sceneManager->Render();

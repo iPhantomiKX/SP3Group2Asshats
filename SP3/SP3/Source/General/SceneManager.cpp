@@ -10,6 +10,7 @@ A Class that handles the different scenes
 #include "SceneManager.h"
 //#include "../Scene/MainMenu/MenuScene.h"
 #include "../Scene/Zone 1/SceneSP3.h"
+#include "../Scene/Zone 1/SceneGrass.h"
 
 SceneManager::SceneManager() : m_scene(0)
 {
@@ -34,6 +35,10 @@ void SceneManager::ChangeScene(short id)
 	else if (id == 1)
 	{
 		m_scene = new SceneSP3();
+	}
+	else if (id == 2)
+	{
+		m_scene = new SceneGrass();
 	}
 
 	if (m_scene)
