@@ -22,7 +22,10 @@ m_currentUpgradeLevel(0)
     this->m_effectiveness = effectiveness;
 }
 
+Item::~Item()
+{
 
+}
 bool Item::Upgrade()
 {
     if (this->m_currentUpgradeLevel == MAX_UPGRADE_LEVEL)

@@ -33,7 +33,7 @@ public:
 
     Item();
     Item(std::string name, TYPE type, int buyCost, int upgradeCost, int effectiveness);
-    ~Item(){};
+    ~Item();
 
 protected:
     std::string m_name;

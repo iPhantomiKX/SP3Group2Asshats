@@ -13,8 +13,8 @@ Player::Player()
 {
     Item tempInventory[Item::NUM_TYPE] =
     {
-        Item(Item::TYPE_NET, 10, 100, 10),
-        Item(Item::TYPE_NET, 10, 100, 10)
+        Item("", Item::TYPE_NET, 10, 100, 10),
+        Item("", Item::TYPE_NET, 10, 100, 10)
     };
 
     for (unsigned i = 0; i < Item::NUM_TYPE; ++i)
