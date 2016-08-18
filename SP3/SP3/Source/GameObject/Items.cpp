@@ -36,7 +36,9 @@ bool Item::Upgrade()
                 return true;
             case TYPE_BAIT:
                 this->m_effectiveness += 5;
-                return true;
+            case TYPE_MEAT:
+                //You cannot upgrade meat
+                return false;
             case TYPE_TRAP_ONE:
                 this->m_effectiveness += 200;
                 return true;
@@ -79,10 +81,22 @@ int Item::GetCurrentUpgradeLevel()
 
 bool Item::Use()
 {
-    this->m_count--;
+    if (m_count > 0)
+    {
+        this->m_count--;
+        return true;
+    }
+
+    return false;
 }
 
 bool Item::Add(int addCount)
 {
-    this->m_count = addCount;
+    if (this->m_count + addCount <= MAX_ITEM_TYPE_COUNT)
+    {
+        this->m_count += addCount;
+        return true;
+    }
+
+    return false;
 }

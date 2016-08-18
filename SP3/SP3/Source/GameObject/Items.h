@@ -4,6 +4,7 @@
 #include <string>
 
 static const int MAX_UPGRADE_LEVEL = 5;
+static const int MAX_ITEM_TYPE_COUNT = 100;
 
 class Item
 {
@@ -12,6 +13,7 @@ public:
     {
         TYPE_NET,
         TYPE_BAIT,
+        TYPE_MEAT,
         TYPE_TRAP_ONE,
         TYPE_TRAP_TWO,
         TYPE_ROCK,

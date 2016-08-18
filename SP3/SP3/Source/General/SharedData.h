@@ -12,6 +12,7 @@ Singleton class that contains variables and objects needed by different files
 
 #include "../GameObject/Player.h"
 #include "../Graphics/GraphicsLoader/GraphicsLoader.h"
+#include "../General/InputManager.h"
 
 /******************************************************************************/
 /*!
@@ -35,6 +36,7 @@ public:
 
 	Player* player;
 	GraphicsLoader* graphicsLoader;
+    InputManager* inputManager;
 };
 
 #endif

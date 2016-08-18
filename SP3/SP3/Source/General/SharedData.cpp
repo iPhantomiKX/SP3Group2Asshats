@@ -8,6 +8,7 @@ void SharedData::Init()
 {
 	player = new Player();
 	graphicsLoader = new GraphicsLoader();
+    inputManager = new InputManager();
 	graphicsLoader->Init();
 }
 
@@ -18,4 +19,7 @@ SharedData::~SharedData()
 
 	if (graphicsLoader)
 		delete graphicsLoader;
+
+    if (inputManager)
+        delete inputManager;
 }

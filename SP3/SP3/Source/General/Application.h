@@ -4,7 +4,7 @@
 #include "timer.h"
 #include "../Scene/Scene.h"
 #include "SceneManager.h"
-
+#include "InputManager.h"
 
 class Application
 {
