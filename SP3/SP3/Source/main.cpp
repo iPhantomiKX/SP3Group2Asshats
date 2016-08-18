@@ -1,6 +1,4 @@
-
-
-#include "../../Base/Source/General/Application.h"
+#include "General/Application.h"
 
 int main( void )
 {

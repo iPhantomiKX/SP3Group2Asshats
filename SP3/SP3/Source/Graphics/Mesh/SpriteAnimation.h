@@ -1,7 +1,7 @@
 #ifndef SPRITEANIMATION_H
 #define SPRITEANIMATION_H
 
-#include "../../Base/Source/Graphics/Mesh/Mesh.h"
+#include "Mesh.h"
 #include <vector>
 
 struct Animation

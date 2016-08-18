@@ -1,6 +1,6 @@
 #include "SpriteAnimation.h"
 #include "GL\glew.h"
-#include "../../Base/Source/Graphics/Vertex/Vertex.h"
+#include "../Vertex/Vertex.h"
 
 SpriteAnimation::SpriteAnimation(const std::string &meshName, int row, int col):
 Mesh(meshName)
