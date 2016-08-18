@@ -132,15 +132,50 @@ void Scene::RenderMesh(Mesh *mesh, bool enableLight)
 {
 	Mtx44 MVP, modelView, modelView_inverse_transpose;
 
+	//// rendering for light depth
+	//if (SharedData::GetInstance()->graphicsLoader->GetRenderPass() == GraphicsLoader::RENDER_PASS_PRE)
+	//{
+	//    Mtx44 lightDepthMVP = m_lightDepthProj * m_lightDepthView * modelStack.Top();
+	//    glUniformMatrix4fv(SharedData::GetInstance()->graphicsLoader->GetParameters(GraphicsLoader::U_LIGHT_DEPTH_MVP_GPASS), 1, GL_FALSE, &lightDepthMVP.a[0]);
+	//
+	//    for (int i = 0; i < Mesh::MAX_TEXTURES; ++i)
+	//    {
+	//        if (mesh->textureArray[i] > 0)
+	//        {
+	//            glUniform1i(SharedData::GetInstance()->graphicsLoader->GetParameters(static_cast<GraphicsLoader::UNIFORM_TYPE>(GraphicsLoader::U_SHADOW_COLOR_TEXTURE_ENABLED + i)), 1);
+	//            glActiveTexture(GL_TEXTURE0 + i);
+	//            glBindTexture(GL_TEXTURE_2D, mesh->textureArray[i]);
+	//            glUniform1i(SharedData::GetInstance()->graphicsLoader->GetParameters(static_cast<GraphicsLoader::UNIFORM_TYPE>(GraphicsLoader::U_SHADOW_COLOR_TEXTURE + i)), i);
+	//        }
+	//        else {
+	//            glUniform1i(SharedData::GetInstance()->graphicsLoader->GetParameters(static_cast<GraphicsLoader::UNIFORM_TYPE>(GraphicsLoader::U_SHADOW_COLOR_TEXTURE_ENABLED + i)), 0);
+	//        }
+	//
+	//    }
+	//
+	//    mesh->Render();
+	//
+	//    return;
+	//}
+
 	MVP = projectionStack.Top() * viewStack.Top() * modelStack.Top();
 	glUniformMatrix4fv(SharedData::GetInstance()->graphicsLoader->GetParameters(GraphicsLoader::U_MVP), 1, GL_FALSE, &MVP.a[0]);
+
+	//...to here
+	//have fog all the time, regardless of whether light is enabled
+	modelView = viewStack.Top() * modelStack.Top();
+	glUniformMatrix4fv(SharedData::GetInstance()->graphicsLoader->GetParameters(GraphicsLoader::U_MODELVIEW), 1, GL_FALSE, &modelView.a[0]);
+
 	if (enableLight)
 	{
 		glUniform1i(SharedData::GetInstance()->graphicsLoader->GetParameters(GraphicsLoader::U_LIGHTENABLED), 1);
-		modelView = viewStack.Top() * modelStack.Top();
-		glUniformMatrix4fv(SharedData::GetInstance()->graphicsLoader->GetParameters(GraphicsLoader::U_MODELVIEW), 1, GL_FALSE, &modelView.a[0]);
+
 		modelView_inverse_transpose = modelView.GetInverse().GetTranspose();
 		glUniformMatrix4fv(SharedData::GetInstance()->graphicsLoader->GetParameters(GraphicsLoader::U_MODELVIEW_INVERSE_TRANSPOSE), 1, GL_FALSE, &modelView.a[0]);
+
+		//// Light shadows
+		//Mtx44 lightDepthMVP = m_lightDepthProj * m_lightDepthView * modelStack.Top();
+		//glUniformMatrix4fv(SharedData::GetInstance()->graphicsLoader->GetParameters(GraphicsLoader::U_LIGHT_DEPTH_MVP), 1, GL_FALSE, &lightDepthMVP.a[0]);
 
 		//load material
 		glUniform3fv(SharedData::GetInstance()->graphicsLoader->GetParameters(GraphicsLoader::U_MATERIAL_AMBIENT), 1, &mesh->material.kAmbient.r);
@@ -152,20 +187,18 @@ void Scene::RenderMesh(Mesh *mesh, bool enableLight)
 	{
 		glUniform1i(SharedData::GetInstance()->graphicsLoader->GetParameters(GraphicsLoader::U_LIGHTENABLED), 0);
 	}
-	if (mesh->textureID > 0)
-	{
-		glUniform1i(SharedData::GetInstance()->graphicsLoader->GetParameters(GraphicsLoader::U_COLOR_TEXTURE_ENABLED), 1);
-		glActiveTexture(GL_TEXTURE0);
-		glBindTexture(GL_TEXTURE_2D, mesh->textureID);
-		glUniform1i(SharedData::GetInstance()->graphicsLoader->GetParameters(GraphicsLoader::U_COLOR_TEXTURE), 0);
+
+	for (int i = 0; i < Mesh::MAX_TEXTURES; ++i) {
+		if (mesh->textureArray[i] > 0) {
+			glUniform1i(SharedData::GetInstance()->graphicsLoader->GetParameters(static_cast<GraphicsLoader::UNIFORM_TYPE>(GraphicsLoader::U_COLOR_TEXTURE_ENABLED + i)), 1);  //MUST BE IN SEQUENCE
+			glActiveTexture(GL_TEXTURE0 + i);
+			glBindTexture(GL_TEXTURE_2D, mesh->textureArray[i]);
+			glUniform1i(SharedData::GetInstance()->graphicsLoader->GetParameters(static_cast<GraphicsLoader::UNIFORM_TYPE>(GraphicsLoader::U_COLOR_TEXTURE + i)), i);
+		}
+		else {
+			glUniform1i(SharedData::GetInstance()->graphicsLoader->GetParameters(static_cast<GraphicsLoader::UNIFORM_TYPE>(GraphicsLoader::U_COLOR_TEXTURE_ENABLED + i)), 0);
+		}
 	}
-	else
-	{
-		glUniform1i(SharedData::GetInstance()->graphicsLoader->GetParameters(GraphicsLoader::U_COLOR_TEXTURE_ENABLED), 0);
-	}
+
 	mesh->Render();
-	if (mesh->textureID > 0)
-	{
-		glBindTexture(GL_TEXTURE_2D, 0);
-	}
 }

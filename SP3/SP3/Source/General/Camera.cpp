@@ -30,7 +30,7 @@ void Camera::Init(const Vector3& pos, const Vector3& target, const Vector3& up)
 	this->up = defaultUp = right.Cross(view).Normalized();
 }
 
-static const float CAMERA_SPEED = 5.f;
+static const float CAMERA_SPEED = 5.0f;
 
 void Camera::Update(double dt)
 {
@@ -123,7 +123,7 @@ void Camera::Update(double dt)
 		right.Normalize();
 		up = right.Cross(view).Normalized();
 	}
-    if (y != Application::cursorYPos)
+    if (y != Application::cursorYPos - 0.5)
     {
         double diff_ypos = Application::cursorYPos - y;
 

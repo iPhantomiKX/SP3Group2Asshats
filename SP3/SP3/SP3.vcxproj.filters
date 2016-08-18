@@ -227,6 +227,9 @@
     <ClCompile Include="Source\General\Application.cpp">
       <Filter>Source Files\General</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Scene\Zone 1\SceneGrass.cpp">
+      <Filter>Source Files\Scene\Zone 1</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\shader.hpp">
@@ -303,6 +306,9 @@
     </ClInclude>
     <ClInclude Include="Source\General\Camera.h">
       <Filter>Header Files\General</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Scene\Zone 1\SceneGrass.h">
+      <Filter>Header Files\Scene\Zone 1</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
