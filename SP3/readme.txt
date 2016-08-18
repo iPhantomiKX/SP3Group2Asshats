@@ -20,5 +20,5 @@ DONE BY: Group 2
 
 Foo Jing Ting (152856H)
 Chua Yunzhen Randall (155106R)
-Bek Kunta ()
-Amirul ()
+Bek Kunta (155214Q)
+Muhammad Amirul Bin Zaol-kefli (150509T)
