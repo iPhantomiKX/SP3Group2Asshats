@@ -1,0 +1,88 @@
+#include "Items.h"
+
+
+Item::Item() : 
+m_type(NUM_TYPE),
+m_buyCost(0),
+m_upgradeCost(0),
+m_effectiveness(0),
+m_count(0),
+m_currentUpgradeLevel(0)
+{
+}
+
+Item::Item(std::string name, TYPE type, int buyCost, int upgradeCost, int effectiveness) :
+m_count(0),
+m_currentUpgradeLevel(0)
+{
+    this->m_name = name;
+    this->m_type = type;
+    this->m_buyCost = buyCost;
+    this->m_upgradeCost = upgradeCost;
+    this->m_effectiveness = effectiveness;
+}
+
+
+bool Item::Upgrade()
+{
+    if (this->m_currentUpgradeLevel == MAX_UPGRADE_LEVEL)
+        return false;
+
+    else
+        switch (this->m_type)
+        {
+            case TYPE_NET:
+                this->m_effectiveness += 5;
+                return true;
+            case TYPE_BAIT:
+                this->m_effectiveness += 5;
+                return true;
+            case TYPE_TRAP_ONE:
+                this->m_effectiveness += 200;
+                return true;
+            case TYPE_TRAP_TWO:
+                this->m_effectiveness += 200;
+                return true;
+            case TYPE_ROCK:
+                this->m_effectiveness++;
+                return true;
+
+            default:
+                return false;
+        }
+}
+
+int Item::GetBuyCost()
+{
+    return this->m_buyCost;
+}
+
+int Item::GetUpgradeCost()
+{
+    return this->m_upgradeCost;
+}
+
+int Item::GetEffectiveness()
+{
+    return this->m_effectiveness;
+}
+
+int Item::GetItemType()
+{
+    return this->m_type;
+}
+
+int Item::GetCurrentUpgradeLevel()
+{
+    return this->m_currentUpgradeLevel;
+}
+
+bool Item::Use()
+{
+    this->m_count--;
+}
+
+bool Item::Add(int addCount)
+{
+    this->m_count = addCount;
+}

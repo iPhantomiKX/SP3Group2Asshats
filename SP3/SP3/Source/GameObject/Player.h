@@ -11,6 +11,8 @@ Player class that stores the game's player variables
 #define PLAYER_H
 
 #include "Vector3.h"
+#include "Items.h"
+#include <vector>
 
 /******************************************************************************/
 /*!
@@ -29,6 +31,8 @@ public:
 		MOVEMENT_STATE_PRONE,
 		MOVEMENT_STATE_TOTAL
 	};
+
+    Item inventory[Item::NUM_TYPE];
 
 private:
 

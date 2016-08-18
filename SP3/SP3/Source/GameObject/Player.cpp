@@ -11,6 +11,17 @@ Player class that stores the game's player variables
 
 Player::Player()
 {
+    Item tempInventory[Item::NUM_TYPE] =
+    {
+        Item("net", Item::TYPE_NET, 10, 100, 10),
+        Item("net", Item::TYPE_NET, 10, 100, 10)
+    };
+
+    for (unsigned i = 0; i < Item::NUM_TYPE; ++i)
+    {
+        inventory[i] = tempInventory[i];
+    }
+
 }
 
 Player::~Player()
