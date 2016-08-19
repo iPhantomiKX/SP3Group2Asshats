@@ -85,6 +85,12 @@
     <Filter Include="Source Files\Graphics\Vertex">
       <UniqueIdentifier>{de4f3cbb-f161-41e7-b2c5-5256cec8119b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\GameObject\Monsters">
+      <UniqueIdentifier>{263a7b78-1785-4d02-b645-e1d612b28a7d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GameObject\Monsters">
+      <UniqueIdentifier>{d91bebbc-6db0-489b-ba92-d539d93d9aa3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="Shader\comg.fragmentshader">
@@ -344,6 +350,45 @@
       <Filter>Header Files\GameObject</Filter>
     </ClInclude>
     <ClInclude Include="Source\GameObject\ItemProjectiles.h">
+      <Filter>Header Files\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GameObject\Monsters\Rabbit.h">
+      <Filter>Header Files\GameObject\Monsters</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GameObject\Monsters\Bird.h">
+      <Filter>Header Files\GameObject\Monsters</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GameObject\Monsters\Fairy.h">
+      <Filter>Header Files\GameObject\Monsters</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GameObject\Monsters\MukBoss.h">
+      <Filter>Header Files\GameObject\Monsters</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GameObject\Monsters\Grimejam.h">
+      <Filter>Header Files\GameObject\Monsters</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GameObject\Monsters\Kof.h">
+      <Filter>Header Files\GameObject\Monsters</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GameObject\Monsters\Golem.h">
+      <Filter>Header Files\GameObject\Monsters</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GameObject\Monsters\Fossil.h">
+      <Filter>Header Files\GameObject\Monsters</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GameObject\Monsters\RockSnake.h">
+      <Filter>Header Files\GameObject\Monsters</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GameObject\Monsters\Magma.h">
+      <Filter>Header Files\GameObject\Monsters</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GameObject\Monsters\FireBugs.h">
+      <Filter>Header Files\GameObject\Monsters</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GameObject\Monsters\MagmaBerzeker.h">
+      <Filter>Header Files\GameObject\Monsters</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GameObject\AI_Strategy.h">
       <Filter>Header Files\GameObject</Filter>
     </ClInclude>
   </ItemGroup>

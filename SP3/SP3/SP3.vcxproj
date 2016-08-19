@@ -70,11 +70,24 @@
   <ItemGroup>
     <ClInclude Include="Source\Audio\Sound.h" />
     <ClInclude Include="Source\GameObject\AABB.h" />
+    <ClInclude Include="Source\GameObject\AI_Strategy.h" />
     <ClInclude Include="Source\GameObject\GameObject.h" />
     <ClInclude Include="Source\GameObject\ItemProjectiles.h" />
     <ClInclude Include="Source\GameObject\Items.h" />
     <ClInclude Include="Source\GameObject\Monster.h" />
     <ClInclude Include="Source\GameObject\MonsterFactory.h" />
+    <ClInclude Include="Source\GameObject\Monsters\Bird.h" />
+    <ClInclude Include="Source\GameObject\Monsters\Fairy.h" />
+    <ClInclude Include="Source\GameObject\Monsters\FireBugs.h" />
+    <ClInclude Include="Source\GameObject\Monsters\Fossil.h" />
+    <ClInclude Include="Source\GameObject\Monsters\Golem.h" />
+    <ClInclude Include="Source\GameObject\Monsters\Grimejam.h" />
+    <ClInclude Include="Source\GameObject\Monsters\Kof.h" />
+    <ClInclude Include="Source\GameObject\Monsters\Magma.h" />
+    <ClInclude Include="Source\GameObject\Monsters\MagmaBerzeker.h" />
+    <ClInclude Include="Source\GameObject\Monsters\MukBoss.h" />
+    <ClInclude Include="Source\GameObject\Monsters\Rabbit.h" />
+    <ClInclude Include="Source\GameObject\Monsters\RockSnake.h" />
     <ClInclude Include="Source\GameObject\Player.h" />
     <ClInclude Include="Source\General\Application.h" />
     <ClInclude Include="Source\General\Camera.h" />
