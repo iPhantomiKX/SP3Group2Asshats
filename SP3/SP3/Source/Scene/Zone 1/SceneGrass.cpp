@@ -40,9 +40,9 @@ void SceneGrass::Init()
 
     monsterState = true;
 
-    GameObject lol;
+   /* GameObject lol;
     grass->mask[lol] = createGO(grass);
-    grass->mask[lol] = COMPONENT_HITBOX | COMPONENT_DISPLACEMENT | COMPONENT_VELOCITY | COMPONENT_HEALTH;
+    grass->mask[lol] = COMPONENT_HITBOX | COMPONENT_DISPLACEMENT | COMPONENT_VELOCITY;*/
 }
 static double counter = 0;
 
@@ -214,7 +214,7 @@ void SceneGrass::Render()
     modelStack.PushMatrix();
     modelStack.Translate(SharedData::GetInstance()->player->GetPositionVector().x + SharedData::GetInstance()->player->GetViewVector().x * 20, 0.5, SharedData::GetInstance()->player->GetPositionVector().z + SharedData::GetInstance()->player->GetViewVector().z * 20);
     modelStack.Scale(1,1,1);
-    RenderMesh(SharedData::GetInstance()->graphicsLoader->GetMesh(GraphicsLoader::GEO_Traps), false);
+    RenderMesh(SharedData::GetInstance()->graphicsLoader->GetMesh(GraphicsLoader::GEO_TRAP), false);
     modelStack.PopMatrix();
 
     //trap update
@@ -225,7 +225,7 @@ void SceneGrass::Render()
             modelStack.PushMatrix();
             modelStack.Translate(placedTraps[i].x, placedTraps[i].y, placedTraps[i].z);
             modelStack.Scale(2, 2, 2);
-            RenderMesh(SharedData::GetInstance()->graphicsLoader->GetMesh(GraphicsLoader::GEO_Traps), false);
+            RenderMesh(SharedData::GetInstance()->graphicsLoader->GetMesh(GraphicsLoader::GEO_TRAP), false);
             modelStack.PopMatrix();
         }
     }

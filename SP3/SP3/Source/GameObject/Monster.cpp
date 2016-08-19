@@ -49,6 +49,10 @@ bool Monster::CheckCapture()
     return false;
 }
 
+void Monster::Update(double dt)
+{
+
+}
 
 void Monster::move()
 {
