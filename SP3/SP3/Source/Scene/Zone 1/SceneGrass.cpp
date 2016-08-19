@@ -30,7 +30,10 @@ void SceneGrass::Init()
 	Application::GetCursorPos(&Application::cursorXPos, &Application::cursorYPos);
 	Application::SetCursorPos(Application::GetWindowWidth() / 2.f, Application::GetWindowHeight() / 2.f);
 
-	bLButtonState = false;
+	bLButtonState = false; 
+
+	hitbox.m_origin = Vector3(0,10,0);
+	hitbox.m_scale = Vector3(10, 20, 10);
 }
 
 void SceneGrass::Update(double dt)
@@ -54,6 +57,31 @@ void SceneGrass::Update(double dt)
 	//    // do stuff
 	//}
 
+	itemProjectile->UpdateProjectile(dt);
+
+	if (Application::IsKeyPressed('X'))
+	{
+		ItemProjectile::ItemProjectileList.push_back(new ItemProjectile(
+			Vector3(camera.position.x, camera.position.y, camera.position.z),
+			Vector3(SharedData::GetInstance()->player->GetViewVector().x, SharedData::GetInstance()->player->GetViewVector().y, SharedData::GetInstance()->player->GetViewVector().z),
+			50,
+			50,
+			10
+			));
+	}
+	if (ItemProjectile::ItemProjectileList.size())
+	{
+		if (hitbox.CheckCollision(ItemProjectile::ItemProjectileList[0]->position))
+		{
+			std::cout << "asdas" << std::endl;
+			std::cout << "asdas" << std::endl;
+			std::cout << "asdas" << std::endl;
+			std::cout << "asdas" << std::endl;
+			std::cout << "asdas" << std::endl;
+		}
+	}
+	
+
     SharedData::GetInstance()->player->Update(dt);
 
 	if (Application::IsKeyPressed('Q'))
@@ -68,7 +96,6 @@ void SceneGrass::Update(double dt)
 	}
 
 	camera.Update(dt);
-
 }
 
 void SceneGrass::Render()
@@ -129,7 +156,27 @@ void SceneGrass::Render()
 
 	RenderMesh(SharedData::GetInstance()->graphicsLoader->GetMesh(GraphicsLoader::GEO_AXES), false);
 
+	for (vector<ItemProjectile*>::iterator it = ItemProjectile::ItemProjectileList.begin(); it != ItemProjectile::ItemProjectileList.end(); ++it){
+		modelStack.PushMatrix();
+		modelStack.Translate(
+			(*it)->position.x,
+			(*it)->position.y,
+			(*it)->position.z
+			);
+		modelStack.Scale(1, 1, 1);
+		RenderMesh(SharedData::GetInstance()->graphicsLoader->GetMesh(GraphicsLoader::GEO_ROCKS1), false);
+		modelStack.PopMatrix();
+	}
+
 	RenderGrassScene();
+
+	modelStack.PushMatrix();
+	modelStack.Translate(hitbox.m_origin.x, hitbox.m_origin.y, hitbox.m_origin.z);
+	modelStack.Scale(hitbox.m_scale.x, hitbox.m_scale.y, hitbox.m_scale.z);
+	RenderMesh(SharedData::GetInstance()->graphicsLoader->GetMesh(GraphicsLoader::GEO_CUBE), false);
+	modelStack.PopMatrix();
+
+
 }
 
 void SceneGrass::RenderGrassScene()

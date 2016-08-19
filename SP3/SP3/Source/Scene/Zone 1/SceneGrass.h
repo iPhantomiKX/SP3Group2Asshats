@@ -2,6 +2,8 @@
 #define SCENE_GRASS_H
 
 #include "../Scene.h"
+#include "../../GameObject/ItemProjectiles.h"
+#include "../../GameObject/AABB.h"
 
 class SceneGrass : public Scene
 {
@@ -20,6 +22,10 @@ public:
 	virtual void Render();
 	virtual void RenderGrassScene();
 	virtual void Exit();
+
+	ItemProjectile* itemProjectile;
+
+	AABB hitbox;
 };
 
 #endif

@@ -118,6 +118,8 @@ void GraphicsLoader::Init()
 	m_meshList[GEO_AXES] = MeshBuilder::GenerateAxes("axes", 1000, 1000, 1000);
 	m_meshList[GEO_BOX_06] = MeshBuilder::GenerateCone("test", Color(1, 0, 0), 36, 1.f, 1.f);
 
+	m_meshList[GEO_CUBE] = MeshBuilder::GenerateCube("Cube", Color(0, 1, 0), 1.0f);
+
 	m_meshList[GEO_GRASS] = MeshBuilder::GenerateQuad("GRASS_DARKGREEN", Color(0, 1,0), 1.f, 200.f);
 	m_meshList[GEO_GRASS]->textureArray[0] = LoadTGA("Image//GrassZone//Grass.tga");
 	
