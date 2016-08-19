@@ -13,29 +13,34 @@ Player class that stores the game's player variables
 
 Player::Player()
 {
-    position.SetZero();
-    velocity.SetZero();
-    view.Set(1, 0, 0);
-    up.Set(0, 1, 0);
-
-    eyeLevel = 5.f;
-    speed = 0.f;
-    jumpSpeed = 0.f;
-    gravity = -100.f;
-    jumpHeight = 0.f;
+    m_position.SetZero();
+    m_velocity.SetZero();
+    m_view.Set(1, 0, 0);
+    m_up.Set(0, 1, 0);
+    
+    m_eyeLevel = 5.f;
+    m_speed = 0.f;
+    m_jumpSpeed = 0.f;
+    m_gravity = -100.f;
+    m_jumpHeight = 0.f;
 
     m_movementState = MOVEMENT_STATE_IDLE;
     m_heightState = HEIGHT_STATE_STANDING;
 
     Item tempInventory[Item::NUM_TYPE] =
     {
-        Item("", Item::TYPE_NET, 10, 100, 10),
-        Item("", Item::TYPE_NET, 10, 100, 10)
+        Item("Net", Item::TYPE_NET, 10, 100, 10),
+        Item("Bait", Item::TYPE_BAIT, 10, 100, 10),
+        Item("Meat", Item::TYPE_MEAT, 10, 100, 10),
+        Item("Trap1", Item::TYPE_TRAP_ONE, 10, 100, 10),
+        Item("Trap2", Item::TYPE_TRAP_TWO, 10, 100, 10),
+        Item("Rock", Item::TYPE_ROCK, 10, 100, 10)
     };
 
     for (unsigned i = 0; i < Item::NUM_TYPE; ++i)
     {
         inventory[i] = tempInventory[i];
+        inventory[i].Add(100);
     }
 
 }
@@ -46,17 +51,17 @@ Player::~Player()
 
 Vector3 Player::GetPositionVector()
 {
-    return position;
+    return m_position;
 }
 
 Vector3 Player::GetViewVector()
 {
-    return view;
+    return m_view;
 }
 
 Vector3 Player::GetUpVector()
 {
-    return up;
+    return m_up;
 }
 
 static const float CAMERA_SPEED = 5.0f;
@@ -64,54 +69,54 @@ static const float CAMERA_SPEED = 5.0f;
 void Player::Update(double dt)
 {
     m_movementState = MOVEMENT_STATE_IDLE;
-    velocity.SetZero();
+    m_velocity.SetZero();
 
     if (Application::IsKeyPressed('W'))
     {
         m_movementState = MOVEMENT_STATE_WALK;
-        //MoveForward(dt);
 
-        velocity += view.Normalized();
+        m_velocity += m_view.Normalized();
     }
     if (Application::IsKeyPressed('S'))
     {
         m_movementState = MOVEMENT_STATE_WALK;
-        //MoveBackward(dt);
-        velocity += -view.Normalized();
+        m_velocity += -m_view.Normalized();
     }
     if (Application::IsKeyPressed('A'))
     {
         m_movementState = MOVEMENT_STATE_WALK;
-        //MoveLeft(dt);
-        // set velocity here
-        Vector3 right = view.Cross(up);
+        Vector3 right = m_view.Cross(m_up);
         right.y = 0;
         right.Normalize();
-        velocity += -right;
+        m_velocity += -right;
     }
     if (Application::IsKeyPressed('D'))
     {
         m_movementState = MOVEMENT_STATE_WALK;
-        //MoveRight(dt);
-        Vector3 right = view.Cross(up);
+        Vector3 right = m_view.Cross(m_up);
         right.y = 0;
         right.Normalize();
-        velocity += right;
+        m_velocity += right;
     }
 
-    if (velocity.LengthSquared() > Math::EPSILON)
+    if (m_velocity.LengthSquared() > Math::EPSILON)
     {
-        velocity.Normalized();
-        prevVelocity = velocity;
+        m_velocity.Normalized();
+        m_prevVelocity = m_velocity;
     }
 
     if (Application::IsKeyPressed(VK_CONTROL))
     {
-        Crouch();
+        if (m_heightState == HEIGHT_STATE_STANDING)
+            crouch();
+        else if (m_heightState == HEIGHT_STATE_CROUCH)
+            prone();
+        else if (m_heightState == HEIGHT_STATE_PRONE)
+            standUp();
     }
     if (Application::IsKeyPressed(VK_SPACE))
     {
-        Jump();
+        jump();
     }
 
     if (Application::IsKeyPressed(VK_SHIFT))
@@ -123,74 +128,90 @@ void Player::Update(double dt)
     }
 
     if (m_heightState == HEIGHT_STATE_CROUCH)
-    {
-        m_movementState = MOVEMENT_STATE_SLOW;
-    }
+        m_movementState = MOVEMENT_STATE_CROUCH;
+    else if (m_heightState == HEIGHT_STATE_PRONE)
+        m_movementState = MOVEMENT_STATE_PRONE;
 
     switch (m_movementState)
     {
     case MOVEMENT_STATE_IDLE:
         //speed = 0;
-        if (speed != 0.f)
+        if (m_speed != 0.f)
         {
-            speed -= 40.f * (float)(dt);
-            if (speed < 0.f)
-                speed = 0.f;
+            m_speed -= 40.f * (float)(dt);
+            if (m_speed < 0.f)
+                m_speed = 0.f;
         }
-        velocity = prevVelocity;
+        m_velocity = m_prevVelocity;
         break;
 
-    case MOVEMENT_STATE_SLOW:
+    case MOVEMENT_STATE_CROUCH:
         //speed = 5.f;
-        if (speed > 5.f)
+        if (m_speed > 5.f)
         {
-            speed -= 40.f * (float)(dt);
-            if (speed < 5.f)
-                speed = 5.f;
+            m_speed -= 30.f * (float)(dt);
+            if (m_speed < 5.f)
+                m_speed = 5.f;
         }
-        else if (speed < 5.f)
+        else if (m_speed < 5.f)
         {
-            speed += 40.f * (float)(dt);
-            if (speed > 5.f)
-                speed = 5.f;
+            m_speed += 30.f * (float)(dt);
+            if (m_speed > 5.f)
+                m_speed = 5.f;
+        }
+        break;
+
+    case MOVEMENT_STATE_PRONE:
+        m_speed = 2.5f;
+        if (m_speed > 1.5f)
+        {
+            m_speed -= 15.f * (float)(dt);
+            if (m_speed < 1.5f)
+                m_speed = 1.5f;
+        }
+        else if (m_speed < 1.5f)
+        {
+            m_speed += 15.f * (float)(dt);
+            if (m_speed > 1.5f)
+                m_speed = 1.5f;
         }
         break;
 
     case MOVEMENT_STATE_WALK:
         //speed = 20.f;
-        if (speed > 20.f)
+        if (m_speed > 20.f)
         {
-            speed -= 40.f * (float)(dt);
-            if (speed < 20.f)
-                speed = 20.f;
+            m_speed -= 40.f * (float)(dt);
+            if (m_speed < 20.f)
+                m_speed = 20.f;
         }
-        else if (speed < 20.f)
+        else if (m_speed < 20.f)
         {
-            speed += 40.f * (float)(dt);
-            if (speed > 20.f)
-                speed = 20.f;
+            m_speed += 40.f * (float)(dt);
+            if (m_speed > 20.f)
+                m_speed = 20.f;
         }
         break;
 
     case MOVEMENT_STATE_RUN:
         //speed = 60.f;
-        if (speed > 60.f)
+        if (m_speed > 60.f)
         {
-            speed -= 50.f * (float)(dt);
-            if (speed < 60.f)
-                speed = 60.f;
+            m_speed -= 50.f * (float)(dt);
+            if (m_speed < 60.f)
+                m_speed = 60.f;
         }
-        else if (speed < 60.f)
+        else if (m_speed < 60.f)
         {
-            speed += 50.f * (float)(dt);
-            if (speed > 60.f)
-                speed = 60.f;
+            m_speed += 50.f * (float)(dt);
+            if (m_speed > 60.f)
+                m_speed = 60.f;
         }
         break;
     }
 
 
-    Move(dt);
+    move(dt);
 
     //Move(dt); // move by Vector3 velocity
 
@@ -206,12 +227,12 @@ void Player::Update(double dt)
         float yaw = (float)(diff_xpos * CAMERA_SPEED * (float)dt);
         Mtx44 rotation;
         rotation.SetToRotation(yaw, 0, 1, 0);
-        view = rotation * view;
+        m_view = rotation * m_view;
         //target = position + view;
-        Vector3 right = view.Cross(up);
+        Vector3 right = m_view.Cross(m_up);
         right.y = 0;
         right.Normalize();
-        up = right.Cross(view).Normalized();
+        m_up = right.Cross(m_view).Normalized();
     }
     if (y != Application::cursorYPos - 0.5)
     {
@@ -219,110 +240,141 @@ void Player::Update(double dt)
 
         float pitch = (float)(diff_ypos * CAMERA_SPEED * (float)dt);
         //Vector3 view = (target - position).Normalized();
-        Vector3 right = view.Cross(up);
+        Vector3 right = m_view.Cross(m_up);
         right.y = 0;
         right.Normalize();
-        up = right.Cross(view).Normalized();
+        m_up = right.Cross(m_view).Normalized();
         Mtx44 rotation;
         rotation.SetToRotation(pitch, right.x, right.y, right.z);
-        view = rotation * view;
+        m_view = rotation * m_view;
         //target = position + view;
     }
 }
 
-void Player::Pitch(const double dt)
+void Player::pitch(const double dt)
 {
 
 }
 
-void Player::Yaw(const double dt)
+void Player::yaw(const double dt)
 {
 
 }
 
-void Player::Move(const double dt)
+void Player::move(const double dt)
 {
-    position += velocity * speed * (float)dt;
+    m_position += m_velocity * m_speed * (float)dt;
 
-    std::cout << speed << std::endl;
-    
+    //std::cout << m_movementState << " | " << m_heightState  << " | " << m_speed << std::endl;
+    std::cout << m_position << std::endl;
     switch (m_heightState)
     {
     case HEIGHT_STATE_STANDING:
-        UpdateStandUp(dt);
+        updateStandUp(dt);
         break;
 
     case HEIGHT_STATE_CROUCH:
-        UpdateCrouch(dt);
+        updateCrouch(dt);
         break;
 
     case HEIGHT_STATE_JUMP:
-        UpdateJump(dt);
+        updateJump(dt);
         break;
 
     case HEIGHT_STATE_PRONE:
+        updateProne(dt);
         break;
     }
 
-    position.y = eyeLevel + jumpHeight;
+    m_position.y = m_eyeLevel + m_jumpHeight;
 }
 
-void Player::Crouch()
+void Player::crouch()
 {
-    if (m_heightState != HEIGHT_STATE_CROUCH && eyeLevel == 5.f) {
+    if (m_heightState != HEIGHT_STATE_CROUCH && m_eyeLevel == 5.f) 
+    {
         m_heightState = HEIGHT_STATE_CROUCH;
     }
 
-    if (m_heightState == HEIGHT_STATE_CROUCH && eyeLevel == 1.f) {
+    if (m_heightState == HEIGHT_STATE_CROUCH && m_eyeLevel == 2.5f) 
+    {
         m_heightState = HEIGHT_STATE_STANDING;
     }
 }
 
-void Player::Jump()
+void Player::prone()
+{
+    if (m_heightState != HEIGHT_STATE_PRONE && m_eyeLevel == 2.5f) 
+    {
+        m_heightState = HEIGHT_STATE_PRONE;
+    }
+
+    if (m_heightState == HEIGHT_STATE_PRONE && m_eyeLevel == 1.f) 
+    {
+        m_heightState = HEIGHT_STATE_STANDING;
+    }
+}
+
+void Player::standUp()
+{
+    if (m_heightState != HEIGHT_STATE_STANDING && m_eyeLevel == 1.f)
+    {
+        m_heightState = HEIGHT_STATE_STANDING;
+    }
+}
+
+void Player::jump()
 {
     if (m_heightState != HEIGHT_STATE_JUMP && m_heightState != HEIGHT_STATE_PRONE) {
         m_heightState = HEIGHT_STATE_JUMP;
 
-        jumpSpeed = 30.f;    //dt not needed
+        m_jumpSpeed = 30.f;    //dt not needed
     }
 }
 
-void Player::UpdateStandUp(const double dt)
+void Player::updateStandUp(const double dt)
 {
-    if (eyeLevel < 25.f) {
-        eyeLevel += (float)(20.f * dt);
-        eyeLevel = Math::Min(5.f, eyeLevel);
+    if (m_eyeLevel < 25.f) 
+    {
+        m_eyeLevel += (float)(20.f * dt);
+        m_eyeLevel = Math::Min(5.f, m_eyeLevel);
     }
 }
 
-void Player::UpdateCrouch(const double dt)
+void Player::updateCrouch(const double dt)
 {
-    eyeLevel -= (float)(20.f * dt);
-    eyeLevel = Math::Max(1.f, eyeLevel);
+    m_eyeLevel -= (float)(20.f * dt);
+    m_eyeLevel = Math::Max(2.5f, m_eyeLevel);
 }
 
-void Player::UpdateJump(const double dt)
+void Player::updateProne(const double dt)
+{
+    m_eyeLevel -= (float)(20.f * dt);
+    m_eyeLevel = Math::Max(1.f, m_eyeLevel);
+}
+
+void Player::updateJump(const double dt)
 {
     // Factor in gravity
-    jumpSpeed += (float)(gravity * dt);
+    m_jumpSpeed += (float)(m_gravity * dt);
 
     // Update camera and target position
 
-    jumpHeight += jumpSpeed * (float)dt;
+    m_jumpHeight += m_jumpSpeed * (float)dt;
 
     // Check if camera reached the ground
-    float newHeight = position.y + jumpHeight;  //player would be in the ground already
-    if (newHeight + 1.f <= position.y)
+    float newHeight = m_position.y + m_jumpHeight;  //player would be in the ground already
+    if (newHeight + 1.f <= m_position.y)
     {
         // Camera landing on ground
-        position.y = newHeight;
+        m_position.y = newHeight;
 
         //when landing, reduce MoveVel (impact)
-        speed = Math::Max(0.f, speed - 20.f);
+        //m_speed = Math::Max(0.f, m_speed - 20.f);
 
         // Reset values
-        jumpSpeed = 0.f;
+        m_jumpSpeed = 0.f;
         m_heightState = HEIGHT_STATE_STANDING;
-        jumpHeight = 0.f;
+        m_jumpHeight = 0.f;
     }
 }

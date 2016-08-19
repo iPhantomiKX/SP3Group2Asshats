@@ -26,7 +26,8 @@ public:
 	enum MOVEMENT_STATE
 	{
         MOVEMENT_STATE_IDLE,
-        MOVEMENT_STATE_SLOW,
+        MOVEMENT_STATE_CROUCH,
+        MOVEMENT_STATE_PRONE,
 		MOVEMENT_STATE_WALK,
 		MOVEMENT_STATE_RUN,
 	};
@@ -43,21 +44,36 @@ public:
     Item inventory[Item::NUM_TYPE];
 
 private:
-    Vector3 position;
-    Vector3 view;
-    Vector3 up;
-    Vector3 velocity;
+    Vector3 m_position;
+    Vector3 m_view;
+    Vector3 m_up;
+    Vector3 m_velocity;
+            
+    Vector3 m_prevVelocity;
 
-    Vector3 prevVelocity;   // for decelerating movement when idle
-
-    float eyeLevel;
-    float speed;
-    float jumpSpeed;
-    float gravity;
-    float jumpHeight;
+    float m_eyeLevel;
+    float m_speed;
+    float m_jumpSpeed;
+    float m_gravity;
+    float m_jumpHeight;
 
     MOVEMENT_STATE m_movementState;
     HEIGHT_STATE m_heightState;
+
+    void pitch(const double dt);
+    void yaw(const double dt);
+
+    void crouch();
+    void prone();
+    void standUp();
+    void jump();
+
+    void move(const double dt);
+
+    void updateStandUp(const double dt);
+    void updateCrouch(const double dt);
+    void updateProne(const double dt);
+    void updateJump(const double dt);
 
 public:
 	Player();
@@ -69,20 +85,6 @@ public:
 
     void Update(double dt);
 
-    void Pitch(const double dt);
-    void Yaw(const double dt);
-    
-    //void Walk();
-    //void Run();
-    void Crouch();
-    //void Crawl();
-    void Jump();
-
-    void Move(const double dt);
-
-    void UpdateStandUp(const double dt);
-    void UpdateCrouch(const double dt);
-    void UpdateJump(const double dt);
 };
 
 #endif
