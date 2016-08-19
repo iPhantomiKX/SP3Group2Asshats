@@ -222,13 +222,13 @@ void SceneGrass::RenderGrassScene()
 	modelStack.PushMatrix();
 	modelStack.Translate(0, 0, 2);
 	modelStack.Scale(1, 1, 1);
-	RenderMesh(SharedData::GetInstance()->graphicsLoader->GetMesh(GraphicsLoader::GEO_Traps), true);
+	RenderMesh(SharedData::GetInstance()->graphicsLoader->GetMesh(GraphicsLoader::GEO_TRAP), true);
 	modelStack.PopMatrix();
 
 	modelStack.PushMatrix();
 	modelStack.Translate(500, 2800, -500);
 	//modelStack.Rotate(0, 0,0,0);
-	RenderMesh(SharedData::GetInstance()->graphicsLoader->GetMesh(GraphicsLoader::GEO_GASSZONESKYPLANE), false);
+	RenderMesh(SharedData::GetInstance()->graphicsLoader->GetMesh(GraphicsLoader::GEO_GRASSZONESKYPLANE), false);
 	modelStack.PopMatrix();
 
 	/*modelStack.PushMatrix();

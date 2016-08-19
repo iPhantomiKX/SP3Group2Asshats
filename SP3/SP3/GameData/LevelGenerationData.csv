@@ -1,0 +1,8 @@
+#tileCount,meshtype,components...<--components can be a vector
+0,empty
+1,tall grass
+2,tall grass2
+3,stone
+4,trees
+5,tree2
+6,branch

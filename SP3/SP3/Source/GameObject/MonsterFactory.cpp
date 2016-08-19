@@ -9,18 +9,31 @@ Class that creates Monsters inside a scene
 /******************************************************************************/
 #include "MonsterFactory.h"
 
-int MonsterFactory::monsterTypesQuantity = 0;
+MonsterFactory::monsterStatsMap MonsterFactory::m_monsterStatsList = {};
 
-int MonsterFactory::GetMonsterTypesQuantity()
+MonsterFactory::MonsterFactory()
 {
-    return monsterTypesQuantity;
 }
-void MonsterFactory::SetMonsterTypesQuantity(int quantity)
+
+MonsterFactory::~MonsterFactory()
 {
-    monsterTypesQuantity = quantity;
 }
 
 Monster* MonsterFactory::CreateMonster(std::string name)
 {
     return 0;
+}
+
+void MonsterFactory::AddToMap(std::string name, int stats[])
+{
+    size_t size = sizeof(stats) / sizeof(int);
+
+    std::cout << size;
+
+    int tempArray[5];
+    for (int i = 0; i < 5; ++i)
+    {
+        tempArray[i] = stats[i];
+    }
+    m_monsterStatsList.insert(std::pair<std::string, int(*)[5]>(name, &tempArray));
 }

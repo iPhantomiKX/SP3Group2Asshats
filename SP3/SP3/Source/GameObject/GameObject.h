@@ -5,13 +5,14 @@
 #include "AABB.h"
 #include <iostream>
 
-enum Components
+enum COMPONENTS
 {
 	COMPONENT_NONE = 0,
 	COMPONENT_DISPLACEMENT = 1 << 0,
 	COMPONENT_VELOCITY = 1 << 1,
 	COMPONENT_APPEARANCE = 1 << 2,
 	COMPONENT_HITBOX = 1 << 3,
+    //COMPONENT_TOTAL
 };
 
 typedef int GameObject;	//Easier to reference

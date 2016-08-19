@@ -123,7 +123,7 @@ void Scene::RenderTextOnScreen(Mesh* mesh, std::string text, Color color, float 
             offsetIncrease = 1.f;
         }
         else {
-            offsetIncrease = (float)(mesh->fontSize[text[i]] / 64.f) + 0.2f;
+            offsetIncrease = (float)(mesh->fontSize[text[i]] / 64.f) + 0.1f;
         }
         translationOffset += offsetIncrease;
     }

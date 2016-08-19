@@ -40,6 +40,7 @@
     <ClCompile Include="Source\Audio\Sound.cpp" />
     <ClCompile Include="Source\GameObject\AABB.cpp" />
     <ClCompile Include="Source\GameObject\GameObject.cpp" />
+    <ClCompile Include="Source\GameObject\ItemProjectiles.cpp" />
     <ClCompile Include="Source\GameObject\Items.cpp" />
     <ClCompile Include="Source\GameObject\Monster.cpp" />
     <ClCompile Include="Source\GameObject\MonsterFactory.cpp" />
@@ -70,6 +71,7 @@
     <ClInclude Include="Source\Audio\Sound.h" />
     <ClInclude Include="Source\GameObject\AABB.h" />
     <ClInclude Include="Source\GameObject\GameObject.h" />
+    <ClInclude Include="Source\GameObject\ItemProjectiles.h" />
     <ClInclude Include="Source\GameObject\Items.h" />
     <ClInclude Include="Source\GameObject\Monster.h" />
     <ClInclude Include="Source\GameObject\MonsterFactory.h" />

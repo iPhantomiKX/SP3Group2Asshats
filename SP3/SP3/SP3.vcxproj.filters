@@ -245,6 +245,9 @@
     <ClCompile Include="Source\GameObject\MonsterFactory.cpp">
       <Filter>Source Files\GameObject</Filter>
     </ClCompile>
+    <ClCompile Include="Source\GameObject\ItemProjectiles.cpp">
+      <Filter>Source Files\GameObject</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\shader.hpp">
@@ -338,6 +341,9 @@
       <Filter>Header Files\GameObject</Filter>
     </ClInclude>
     <ClInclude Include="Source\GameObject\MonsterFactory.h">
+      <Filter>Header Files\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GameObject\ItemProjectiles.h">
       <Filter>Header Files\GameObject</Filter>
     </ClInclude>
   </ItemGroup>
