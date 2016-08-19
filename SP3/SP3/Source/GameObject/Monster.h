@@ -16,8 +16,7 @@ Class that defines a monster's variables and statistics
 class Monster
 {
 public:
-    Monster();
-    ~Monster();
+    virtual ~Monster();
     
     std::string GetName();
     int GetHealthStat();
@@ -26,7 +25,11 @@ public:
     int GetFearStat();
     bool CheckCapture();
 
+	virtual void Update(double dt);
+
 protected:
+	Monster();
+
     std::string m_name;
 
     int m_healthStat;
@@ -44,10 +47,10 @@ protected:
     Vector3 m_scale;  // for rendering
 
     void move();
-    void changeHealthStat(int damage);
-    void changeAggressionStat(int aggression);
-    void changeFearStat(int fear);
-    void changeCaptureRateStat(int captureRate);
+    void changeHealthStat(const int damage);
+    void changeAggressionStat(const int aggression);
+    void changeFearStat(const int fear);
+    void changeCaptureRateStat(const int captureRate);
 };
 
 #endif

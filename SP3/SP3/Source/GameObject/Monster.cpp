@@ -55,22 +55,22 @@ void Monster::move()
     m_position += m_velocity;   // * dt
 }
 
-void Monster::changeHealthStat(int damage)
+void Monster::changeHealthStat(const int damage)
 {
     m_healthStat += damage;
 }
 
-void Monster::changeAggressionStat(int aggression)
+void Monster::changeAggressionStat(const int aggression)
 {
     m_aggressionStat += aggression;
 }
 
-void Monster::changeFearStat(int fear)
+void Monster::changeFearStat(const int fear)
 {
     m_fearStat += fear;
 }
 
-void Monster::changeCaptureRateStat(int captureRate)
+void Monster::changeCaptureRateStat(const int captureRate)
 {
     m_captureRateStat += captureRate;
 }

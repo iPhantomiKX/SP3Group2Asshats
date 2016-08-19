@@ -141,11 +141,11 @@ void GraphicsLoader::Init()
 	m_meshList[GEO_ROCKS1] = MeshBuilder::GenerateOBJ("Rock", "OBJ//GrassZone//Rocks.obj");
 	m_meshList[GEO_ROCKS1]->textureArray[0] = LoadTGA("Image//GrassZone//Rock3.tga");
 
-	m_meshList[GEO_Traps] = MeshBuilder::GenerateOBJ("Trap", "OBJ//GrassZone//Traps.obj");
-	m_meshList[GEO_Traps]->textureArray[0] = LoadTGA("Image//GrassZone//Steel.tga");
+	m_meshList[GEO_TRAP] = MeshBuilder::GenerateOBJ("Trap", "OBJ//GrassZone//Traps.obj");
+	m_meshList[GEO_TRAP]->textureArray[0] = LoadTGA("Image//GrassZone//Steel.tga");
 
-	m_meshList[GEO_GASSZONESKYPLANE] = MeshBuilder::GenerateSkyPlane("skyplane", Color(1, 1, 1), 128, 400.0f, 3000.0f, 1.0f, 1.0f);
-	m_meshList[GEO_GASSZONESKYPLANE]->textureArray[0] = LoadTGA("Image//GrassZone//SkyPlane.tga");
+	m_meshList[GEO_GRASSZONESKYPLANE] = MeshBuilder::GenerateSkyPlane("skyplane", Color(1, 1, 1), 128, 400.0f, 3000.0f, 1.0f, 1.0f);
+	m_meshList[GEO_GRASSZONESKYPLANE]->textureArray[0] = LoadTGA("Image//GrassZone//SkyPlane.tga");
 
 	//m_meshList[GEO_ROCKS2] = MeshBuilder::GenerateOBJ("Bird", "OBJ//stone_2.obj");
 	//m_meshList[GEO_ROCKS2]->textureArray[0] = LoadTGA("Image//Rock2.tga");

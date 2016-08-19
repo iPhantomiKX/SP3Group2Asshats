@@ -8,9 +8,19 @@
 #include "../Graphics/Vertex/Vertex.h"
 #include "../General/Camera.h"
 
+#include "../Graphics/GraphicsLoader/GraphicsLoader.h"
+#include "../GameObject/GameObject.h"
+
+#include <vector>
+#include <map>
+
 class Scene
 {
 public:
+    std::map<int, std::pair<GraphicsLoader::GEOMETRY_TYPE, std::vector<COMPONENTS>> > m_levelGenerationData;
+
+    static int** m_levelMap;    // store for pathfinding
+
 	Scene() {}
 	~Scene() {}
 

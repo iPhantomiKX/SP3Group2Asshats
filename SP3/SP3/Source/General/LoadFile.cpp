@@ -8,7 +8,6 @@ Function to read CSV files for game data
 */
 /******************************************************************************/
 #include <iostream>
-#include <fstream>
 #include <sstream>
 #include "LoadFile.h"
 
@@ -28,6 +27,9 @@ bool LoadFile(const char* file_path, FILE_TYPE file_type)
     while (!fileStream.eof())
     {
         std::getline(fileStream, line);
+        if (line[0] == '#' || line == "")   // empty line OR comment
+            continue;
+
         ++numOfLines;
     }
 
@@ -37,16 +39,21 @@ bool LoadFile(const char* file_path, FILE_TYPE file_type)
     switch (file_type)
     {
     case FILE_MONSTERDATA:
-    {
-                             MonsterFactory::SetMonsterTypesQuantity(numOfLines);
-                             LoadMonsterData();
-                             break;
-    }
+        //MonsterFactory::SetMonsterTypesQuantity(numOfLines);
+        LoadMonsterData(fileStream);
+        break;
+
+    case FILE_LEVELGENERATIONDATA:
+        LoadLevelGenerationData(fileStream);
+        break;
+
+    case FILE_LEVELMAPDATA:
+        LoadLevelMapData(fileStream);
+        break;
 
     case FILE_SAVEDATA:
-    {
-                          break;
-    }
+        LoadSaveData(fileStream);
+        break;
 
     }
 
@@ -68,12 +75,67 @@ bool LoadFile(const char* file_path, FILE_TYPE file_type)
     //
 }
 
-void LoadMonsterData()
+void LoadMonsterData(std::ifstream& fileStream)
+{
+    while (!fileStream.eof())
+    {
+        std::string line;
+        std::getline(fileStream, line);
+
+        if (line == "" || line[0] == '#')   // empty line OR comment
+            continue;
+
+        std::stringstream dataStream(line);
+        std::string data;
+        std::getline(dataStream, data, ',');
+
+        // first content is name of monster
+        std::string tempName = data;
+
+
+        int stats[5] = {};
+        for (int i = 0; i < 5; ++i)
+        {
+            std::getline(dataStream, data, ',');
+            stats[i] = std::stoi(data);
+        }
+        //// second content is health
+        //std::getline(dataStream, data, ',');
+        //stats[0] = std::stoi(data);
+        //
+        //// third content is capture rate
+        //std::getline(dataStream, data, ',');
+        //stats[1] = std::stoi(data);
+        //
+        //// fourth content is aggression
+        //std::getline(dataStream, data, ',');
+        //stats[2] = std::stoi(data);
+        //
+        //// fifth content is fear
+        //std::getline(dataStream, data, ',');
+        //stats[3] = std::stoi(data);
+        //
+        //// sixth content is strategy enum value
+        //std::getline(dataStream, data);
+        //stats[4] = std::stoi(data);
+
+        // push into map
+        MonsterFactory::AddToMap(tempName, stats);
+    }
+    
+}
+
+void LoadLevelGenerationData(std::ifstream& fileStream)
 {
 
 }
 
-void LoadSaveData()
+void LoadLevelMapData(std::ifstream& fileStream)
+{
+
+}
+
+void LoadSaveData(std::ifstream& fileStream)
 {
 
 }
