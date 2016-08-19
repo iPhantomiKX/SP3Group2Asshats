@@ -266,7 +266,7 @@ void Player::move(const double dt)
     m_position += m_velocity * m_speed * (float)dt;
 
     //std::cout << m_movementState << " | " << m_heightState  << " | " << m_speed << std::endl;
-    std::cout << m_position << std::endl;
+    //std::cout << m_position << std::endl;
     switch (m_heightState)
     {
     case HEIGHT_STATE_STANDING:

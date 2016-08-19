@@ -4,6 +4,7 @@
 #include "../Scene.h"
 #include "../../GameObject/ItemProjectiles.h"
 #include "../../GameObject/AABB.h"
+#include "../../GameObject/GameObject.h"
 
 class SceneGrass : public Scene
 {
@@ -23,9 +24,18 @@ public:
 	virtual void RenderGrassScene();
 	virtual void Exit();
 
+    //Test stuff
 	ItemProjectile* itemProjectile;
 
-	AABB hitbox;
+    //For placing traps
+    bool placing = false;
+    std::vector<Vector3> placedTraps;
+    Vector3 monsterPos;
+    Vector3 monsterVel;
+    AABB hitbox;
+    bool monsterState;
+
+    World *grass;
 };
 
 #endif
