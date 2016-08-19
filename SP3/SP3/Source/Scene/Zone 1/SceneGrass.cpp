@@ -54,6 +54,8 @@ void SceneGrass::Update(double dt)
 	//    // do stuff
 	//}
 
+    SharedData::GetInstance()->player->Update(dt);
+
 	if (Application::IsKeyPressed('Q'))
 	{
 		camera.position.y += (float)(10.f * dt);
@@ -156,7 +158,7 @@ void SceneGrass::RenderGrassScene()
 	modelStack.Scale(1, 1, 1);
 	RenderMesh(SharedData::GetInstance()->graphicsLoader->GetMesh(GraphicsLoader::GEO_GRASS1), true);
 	modelStack.PopMatrix();
-
+    
 	modelStack.PushMatrix();
 	modelStack.Translate(12, 0, 0);
 	modelStack.Rotate(180, 0, 1, 0);

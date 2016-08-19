@@ -1,7 +1,7 @@
 /******************************************************************************/
 /*!
 \file	AABB.h
-\author Randall
+\author Chua Yunzhen Randall
 \par	155106R
 \brief
 Struct to define an AABB

@@ -1,3 +1,12 @@
+/******************************************************************************/
+/*!
+\file	Monster.cpp
+\author Foo Jing Ting
+\par	email: 152856H@mymail.nyp.edu.sg
+\brief
+Class that defines a monster's variables and statistics
+*/
+/******************************************************************************/
 #include "Monster.h"
 
 Monster::Monster()
@@ -8,61 +17,60 @@ Monster::Monster()
 
 Monster::~Monster()
 {
-
 }
 
 std::string Monster::GetName()
 {
-
+    return m_name;
 }
 
 int Monster::GetHealthStat()
 {
-
+    return m_healthStat;
 }
 
 int Monster::GetCaptureRateStat()
 {
-
+    return m_captureRateStat;
 }
 
 int Monster::GetAggressionStat()
 {
-
+    return m_aggressionStat;
 }
 
 int Monster::GetFearStat()
 {
-
+    return m_fearStat;
 }
 
 bool Monster::CheckCapture()
 {
-
+    return false;
 }
 
 
-void move()
+void Monster::move()
 {
-
+    m_position += m_velocity;   // * dt
 }
 
-void changeHealthStat(int damage)
+void Monster::changeHealthStat(int damage)
 {
-
+    m_healthStat += damage;
 }
 
-void changeAggressionStat(int aggression)
+void Monster::changeAggressionStat(int aggression)
 {
-
+    m_aggressionStat += aggression;
 }
 
-void changeFearStat(int fear)
+void Monster::changeFearStat(int fear)
 {
-
+    m_fearStat += fear;
 }
 
-void changeCaptureRateStat(int captureRate)
+void Monster::changeCaptureRateStat(int captureRate)
 {
-
+    m_captureRateStat += captureRate;
 }

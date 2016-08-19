@@ -233,6 +233,18 @@
     <ClCompile Include="Source\GameObject\Items.cpp">
       <Filter>Source Files\GameObject</Filter>
     </ClCompile>
+    <ClCompile Include="Source\General\InputManager.cpp">
+      <Filter>Source Files\General</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GameObject\Monster.cpp">
+      <Filter>Source Files\GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\General\LoadFile.cpp">
+      <Filter>Source Files\General</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GameObject\MonsterFactory.cpp">
+      <Filter>Source Files\GameObject</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\shader.hpp">
@@ -314,6 +326,18 @@
       <Filter>Header Files\Scene\Zone 1</Filter>
     </ClInclude>
     <ClInclude Include="Source\GameObject\Items.h">
+      <Filter>Header Files\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\General\LoadFile.h">
+      <Filter>Header Files\General</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\General\InputManager.h">
+      <Filter>Header Files\General</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GameObject\Monster.h">
+      <Filter>Header Files\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GameObject\MonsterFactory.h">
       <Filter>Header Files\GameObject</Filter>
     </ClInclude>
   </ItemGroup>
