@@ -49,9 +49,14 @@ bool Monster::CheckCapture()
     return false;
 }
 
-void Monster::Update(double dt)
+void Monster::SetPosition(Vector3 m_position)
 {
+	this->m_position = m_position;
+}
 
+Vector3 Monster::GetPosition()
+{
+	return m_position;
 }
 
 void Monster::move()
@@ -61,7 +66,7 @@ void Monster::move()
 
 void Monster::changeHealthStat(const int damage)
 {
-    m_healthStat += damage;
+    m_healthStat -= damage;
 }
 
 void Monster::changeAggressionStat(const int aggression)

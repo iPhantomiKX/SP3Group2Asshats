@@ -12,6 +12,7 @@ Class that defines a monster's variables and statistics
 
 #include <string>
 #include "Vector3.h"
+#include "AI_Strategy.h"
 
 class Monster
 {
@@ -24,8 +25,10 @@ public:
     int GetAggressionStat();
     int GetFearStat();
     bool CheckCapture();
+	void SetPosition(Vector3 m_position);
+	Vector3 GetPosition();
 
-	virtual void Update(double dt);
+	virtual void Update(double dt) = 0;
 
 protected:
 	Monster();
@@ -36,6 +39,8 @@ protected:
     int m_captureRateStat; 
     int m_aggressionStat;
     int m_fearStat;
+
+	AI_Strategy* Strategy;
 
     // Mesh_type OR
     // Enemy_type
