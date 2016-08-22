@@ -5,6 +5,9 @@
 #include "AABB.h"
 #include <iostream>
 
+//GO is just an int with reference to the World componenets
+typedef unsigned int GameObject;
+
 enum COMPONENTS
 {
     COMPONENT_NONE = 0,
@@ -12,11 +15,12 @@ enum COMPONENTS
     COMPONENT_VELOCITY = 1 << 1,
     COMPONENT_APPEARANCE = 1 << 2,
     COMPONENT_HITBOX = 1 << 3,
-    COMPONENT_TRAP = 1 << 4
+    COMPONENT_TRAP = 1 << 4,
+    COMPONENT_AI = 1 << 5,
     //COMPONENT_TOTAL
 };
 
-//Componenets
+//Components
 struct Appearance
 {
     Vector3 scale;
@@ -39,7 +43,16 @@ struct Health
 struct Trap_Script
 {
     float radius;
-    double effectTimer;
+    double triggerDuration;
+    double triggerTimer;
+    bool activated;
+    GameObject caughtMonster;
+    Vector3 caughtMonsterVel;
+};
+
+struct Net_Script
+{
+
 };
 
 struct Projectile_Script
@@ -47,12 +60,9 @@ struct Projectile_Script
     float speed;
 };
 
-//GO is just an int with reference to the World componenets
-typedef int GameObject;	
-
 struct World
 {
-    static const int GAMEOBJECT_COUNT = 10;
+    static const GameObject GAMEOBJECT_COUNT = 200;
 
 	GameObject mask[GAMEOBJECT_COUNT];
 
@@ -61,6 +71,7 @@ struct World
     Appearance appearance[GAMEOBJECT_COUNT];
 	AABB hitbox[GAMEOBJECT_COUNT];
     Trap_Script trap[GAMEOBJECT_COUNT];
+    //Monster[GAMEOBJECT_COUNT];
 };
 
 //"FetchGO"

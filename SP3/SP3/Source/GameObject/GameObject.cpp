@@ -2,7 +2,7 @@
 
 unsigned int createGO(World *world)
 {
-	for (unsigned GO = 0; GO < world->GAMEOBJECT_COUNT; ++GO)
+	for (GameObject GO = 0; GO < world->GAMEOBJECT_COUNT; ++GO)
 	{
 		if (world->mask[GO] == COMPONENT_NONE)
 		{
@@ -11,12 +11,13 @@ unsigned int createGO(World *world)
 			return(GO);
 		}
 	}
+
 	//Already at Max GOs
     std::cout << "at max go" << std::endl;
     return(world->GAMEOBJECT_COUNT);
 }
 
-void destroyGO(World *world, unsigned int GO)
+void destroyGO(World *world, GameObject GO)
 {
     if ((world->mask[GO] & COMPONENT_DISPLACEMENT) == COMPONENT_DISPLACEMENT)
         world->position[GO].SetZero();
@@ -34,6 +35,16 @@ void destroyGO(World *world, unsigned int GO)
     {
         world->hitbox[GO].m_origin.SetZero();
         world->hitbox[GO].m_scale.SetZero();
+    }
+
+    if ((world->mask[GO] & COMPONENT_TRAP) == COMPONENT_TRAP)
+    {
+        world->trap[GO].radius = 0;
+        world->trap[GO].triggerDuration = 0;
+        world->trap[GO].triggerTimer = 0;
+        world->trap[GO].activated = false;
+        world->trap[GO].caughtMonster = 0;
+        world->trap[GO].caughtMonsterVel.SetZero();
     }
 
 	world->mask[GO] = COMPONENT_NONE;

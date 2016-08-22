@@ -228,6 +228,7 @@ void Scene::RenderGameObjects(World* world)
             modelStack.PushMatrix();
             modelStack.Translate(world->position[GO].x, world->position[GO].y, world->position[GO].z);
             modelStack.Scale(world->appearance[GO].scale.x, world->appearance[GO].scale.y, world->appearance[GO].scale.z);
+            //modelStack.Rotate(0, 0, 0, 0);
             RenderMesh(world->appearance[GO].mesh, true);
             modelStack.PopMatrix();
         }
@@ -250,7 +251,7 @@ void Scene::UpdateGameObjects(World* world, double dt)
             pos->x += vel->x * dt;
             pos->y += vel->y * dt;
             pos->z += vel->z * dt;
-            std::cout << "asd" << std::endl;
+            //std::cout << "asd" << std::endl;
         }
 
         if ((world->mask[GO] & COMPONENT_HITBOX) == COMPONENT_HITBOX)

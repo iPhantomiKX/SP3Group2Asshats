@@ -45,8 +45,8 @@ Vector3 point to test for collision
 /******************************************************************************/
 static bool CheckCollision(const AABB& hitbox, const Vector3& vecPoint)
 {
-	Vector3 max = hitbox.m_origin + hitbox.m_scale;
-	Vector3 min = hitbox.m_origin - hitbox.m_scale;
+	Vector3 max = hitbox.m_origin + hitbox.m_scale * 0.5;
+	Vector3 min = hitbox.m_origin - hitbox.m_scale * 0.5;
 	//Check if the point is less than max and greater than min
 	if (vecPoint.x > min.x && vecPoint.x < max.x &&
 		vecPoint.y > min.y && vecPoint.y < max.y &&
@@ -68,10 +68,10 @@ Second AABB hitbox to test for collision
 /******************************************************************************/
 static bool CheckCollision(const AABB& lhsBox, const AABB& rhsBox)
 {
-	Vector3 LhsMax = lhsBox.m_origin + lhsBox.m_scale;
-	Vector3 LhsMin = lhsBox.m_origin - lhsBox.m_scale;
-	Vector3 RhsMax = rhsBox.m_origin + rhsBox.m_scale;
-	Vector3 RhsMin = rhsBox.m_origin - rhsBox.m_scale;
+	Vector3 LhsMax = lhsBox.m_origin + lhsBox.m_scale * 0.5;
+	Vector3 LhsMin = lhsBox.m_origin - lhsBox.m_scale * 0.5;
+	Vector3 RhsMax = rhsBox.m_origin + rhsBox.m_scale * 0.5;
+	Vector3 RhsMin = rhsBox.m_origin - rhsBox.m_scale * 0.5;
 
 	//Check if lhsBox's max is greater than rhsBox's min and lhsBox's min is less than rhsBox's max
 	if (LhsMax.x > LhsMin.x &&

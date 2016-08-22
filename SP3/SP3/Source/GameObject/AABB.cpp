@@ -45,8 +45,8 @@ AABB::~AABB()
 /******************************************************************************/
 bool AABB::CheckCollision(const Vector3& vecPoint)
 {
-	Vector3 max = m_origin + m_scale;
-	Vector3 min = m_origin - m_scale;
+	Vector3 max = m_origin + m_scale * 0.5;
+    Vector3 min = m_origin - m_scale * 0.5;
 
 	//Check if the point is less than max and greater than min
 	if (vecPoint.x > min.x && vecPoint.x < max.x &&
@@ -69,10 +69,10 @@ bool AABB::CheckCollision(const Vector3& vecPoint)
 /******************************************************************************/
 bool AABB::CheckCollision(const AABB& rhsBox)
 {
-	Vector3 LhsMax = m_origin + m_scale;
-	Vector3 LhsMin = m_origin - m_scale;
-	Vector3 RhsMax = rhsBox.m_origin + rhsBox.m_scale;
-	Vector3 RhsMin = rhsBox.m_origin - rhsBox.m_scale;
+	Vector3 LhsMax = m_origin + m_scale * 0.5;
+	Vector3 LhsMin = m_origin - m_scale * 0.5;
+	Vector3 RhsMax = rhsBox.m_origin + rhsBox.m_scale * 0.5;
+	Vector3 RhsMin = rhsBox.m_origin - rhsBox.m_scale * 0.5;
 
 	//Check if lhsBox's max is greater than rhsBox's min and lhsBox's min is less than rhsBox's max
 	if (LhsMax.x > LhsMin.x &&
