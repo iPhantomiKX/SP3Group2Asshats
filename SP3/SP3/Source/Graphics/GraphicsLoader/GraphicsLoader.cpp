@@ -117,10 +117,10 @@ void GraphicsLoader::Init()
 	}
 	m_meshList[GEO_AXES] = MeshBuilder::GenerateAxes("axes", 1000, 1000, 1000);
 	m_meshList[GEO_BOX_06] = MeshBuilder::GenerateCone("test", Color(1, 0, 0), 36, 1.f, 1.f);
+    
+	//m_meshList[GEO_CUBE] = MeshBuilder::GenerateCube("Cube", Color(0, 1, 0), 1.0f);
 
-	m_meshList[GEO_CUBE] = MeshBuilder::GenerateCube("Cube", Color(0, 1, 0), 1.0f);
-
-	m_meshList[GEO_GRASS] = MeshBuilder::GenerateQuad("GRASS_DARKGREEN", Color(0, 1,0), 1.f, 200.f);
+	m_meshList[GEO_GRASS] = MeshBuilder::GenerateQuad("GRASS_DARKGREEN", Color(0, 1,0), 1.f, 100);
 	m_meshList[GEO_GRASS]->textureArray[0] = LoadTGA("Image//GrassZone//Grass.tga");
 	
 	m_meshList[GEO_RABBIT] = MeshBuilder::GenerateOBJ("Rabbit", "OBJ//GrassZone//Rabbit.obj");
@@ -134,6 +134,12 @@ void GraphicsLoader::Init()
 
 	m_meshList[GEO_GRASS2] = MeshBuilder::GenerateOBJ("Grass2", "OBJ//GrassZone//Grass_03.obj");
 	m_meshList[GEO_GRASS2]->textureArray[0] = LoadTGA("Image//GrassZone//Leafs.tga");
+
+    m_meshList[GEO_TREE1] = MeshBuilder::GenerateOBJ("Grass2", "OBJ//GrassZone//TreeBush2.obj");
+    //m_meshList[GEO_TREE1]->textureArray[0] = LoadTGA("Image//GrassZone//Leafs.tga");
+
+    m_meshList[GEO_TREE2] = MeshBuilder::GenerateOBJ("Grass2", "OBJ//GrassZone//TreeBush4.obj");
+    //m_meshList[GEO_TREE2]->textureArray[0] = LoadTGA("Image//GrassZone//Leafs.tga");
 
 	//meshList[GEO_TREES] = MeshBuilder::GenerateOBJ("Bird", "OBJ//Birdv2.obj");
 	//meshList[GEO_TREES]->textureArray[0] = LoadTGA("Image//grass_lightgreen.tga");
@@ -158,6 +164,11 @@ void GraphicsLoader::Init()
 
 	//m_meshList[GEO_ROCKS5] = MeshBuilder::GenerateOBJ("Bird", "OBJ//stone_5.obj");
 	//m_meshList[GEO_ROCKS5]->textureArray[0] = LoadTGA("Image//Rock5.tga");
+
+    // Fonts
+    m_meshList[GEO_TEXT_IMPACT] = MeshBuilder::GenerateText("Font - Impact", 16, 16);
+    m_meshList[GEO_TEXT_IMPACT]->textureID = LoadTGA("Image//Fonts/Font_Impact.tga");
+    m_meshList[GEO_TEXT_IMPACT]->LoadFontData("Image//Fonts/FontData_Impact.csv");
 }
 
 Mesh* GraphicsLoader::GetMesh(GEOMETRY_TYPE m_geotype)

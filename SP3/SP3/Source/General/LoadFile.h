@@ -12,6 +12,8 @@ Function to read CSV files for game data
 
 #include <fstream>
 #include <string>
+#include "../Graphics/GraphicsLoader/GraphicsLoader.h"
+#include "../GameObject/GameObject.h"
 
 enum FILE_TYPE
 {
@@ -34,6 +36,9 @@ void LoadMonsterData(std::ifstream& fileStream);
 void LoadLevelGenerationData(std::ifstream& fileStream);
 void LoadLevelMapData(std::ifstream& fileStream);
 void LoadSaveData(std::ifstream& fileStream);
+
+GraphicsLoader::GEOMETRY_TYPE AssignMeshType(int num);
+COMPONENTS ConvertStringToComponent(std::string line);
 
 //void ConvertStringToEnum()
 //{

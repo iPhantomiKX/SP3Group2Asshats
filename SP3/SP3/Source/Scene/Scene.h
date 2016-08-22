@@ -19,7 +19,7 @@ class Scene
 public:
     std::map<int, std::pair<GraphicsLoader::GEOMETRY_TYPE, std::vector<COMPONENTS>> > m_levelGenerationData;
 
-    static int** m_levelMap;    // store for pathfinding
+    static char** m_levelMap;    // store for pathfinding
 
 	Scene() {}
 	~Scene() {}
@@ -34,6 +34,7 @@ public:
 	MS projectionStack;
 
 	Camera camera;
+	float fps;
 
 	// To render
 	// ideal case is put objects in a vector; then use for loop to go through the list to render them
