@@ -100,7 +100,7 @@ public:
 		//GEO_SPHERE8,
 		//GEO_SPHERE9,
 		//GEO_QUAD,
-		//GEO_CUBE,
+		GEO_CUBE,
 		//GEO_RING,
 		//GEO_CONE,
 		//GEO_LEFT,
@@ -127,6 +127,8 @@ public:
 		//GEO_PARTICLE_WATER,
 		GEO_BOX_06,
 
+		GEO_PLAYERBOX,
+
 		//SceneGrass
 		GEO_GRASS,
 		GEO_BIRD,
@@ -140,8 +142,11 @@ public:
 		GEO_ROCKS3,
 		GEO_ROCKS4,
 		GEO_ROCKS5,
-		GEO_TRAP,
 		GEO_GRASSZONESKYPLANE,
+
+
+		GEO_TRAP,
+		GEO_NET,
 
         GEO_TEXT_IMPACT,
 

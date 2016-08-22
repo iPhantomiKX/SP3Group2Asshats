@@ -118,7 +118,9 @@ void GraphicsLoader::Init()
 	m_meshList[GEO_AXES] = MeshBuilder::GenerateAxes("axes", 1000, 1000, 1000);
 	m_meshList[GEO_BOX_06] = MeshBuilder::GenerateCone("test", Color(1, 0, 0), 36, 1.f, 1.f);
     
-	//m_meshList[GEO_CUBE] = MeshBuilder::GenerateCube("Cube", Color(0, 1, 0), 1.0f);
+	m_meshList[GEO_CUBE] = MeshBuilder::GenerateCube("Cube", Color(0, 1, 0), 1.0f);
+
+	m_meshList[GEO_PLAYERBOX] = MeshBuilder::GenerateCube("Cube", Color(1, 0, 0), 1.0f);
 
 	m_meshList[GEO_GRASS] = MeshBuilder::GenerateQuad("GRASS_DARKGREEN", Color(0, 1,0), 1.f, 100);
 	m_meshList[GEO_GRASS]->textureArray[0] = LoadTGA("Image//GrassZone//Grass.tga");
@@ -152,6 +154,9 @@ void GraphicsLoader::Init()
 
 	m_meshList[GEO_GRASSZONESKYPLANE] = MeshBuilder::GenerateSkyPlane("skyplane", Color(1, 1, 1), 128, 400.0f, 3000.0f, 1.0f, 1.0f);
 	m_meshList[GEO_GRASSZONESKYPLANE]->textureArray[0] = LoadTGA("Image//GrassZone//SkyPlane.tga");
+
+	m_meshList[GEO_NET] = MeshBuilder::GenerateOBJ("Net", "OBJ//GrassZone//Net.obj");
+	m_meshList[GEO_NET]->textureArray[0] = LoadTGA("Image//GrassZone//Net.tga");
 
 	//m_meshList[GEO_ROCKS2] = MeshBuilder::GenerateOBJ("Bird", "OBJ//stone_2.obj");
 	//m_meshList[GEO_ROCKS2]->textureArray[0] = LoadTGA("Image//Rock2.tga");

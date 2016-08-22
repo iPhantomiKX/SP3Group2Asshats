@@ -34,14 +34,32 @@ void SceneGrass::Init()
 
     memset(&grass, 0, sizeof(grass));
 
-    /*monster = createGO(&grass);
+    monster = createGO(&grass);
     grass.mask[monster] = COMPONENT_DISPLACEMENT | COMPONENT_VELOCITY | COMPONENT_APPEARANCE | COMPONENT_HITBOX;
     grass.position[monster].SetZero();
-    grass.velocity[monster].Set(0,2,0);
+    grass.velocity[monster].Set(1,0,0);
     grass.hitbox[monster].m_origin = grass.position[monster] + Vector3(0, 0.75, -0.3);
     grass.hitbox[monster].m_scale.Set(1.5f, 1.5f, 1.75f);
     grass.appearance[monster].mesh = SharedData::GetInstance()->graphicsLoader->GetMesh(GraphicsLoader::GEO_RABBIT);
-    grass.appearance[monster].scale.Set(1, 1, 1);*/
+    grass.appearance[monster].scale.Set(1, 1, 1);
+
+	rock = createGO(&grass);
+	grass.mask[rock] = COMPONENT_DISPLACEMENT | COMPONENT_VELOCITY | COMPONENT_APPEARANCE | COMPONENT_HITBOX;
+	grass.position[rock].Set(SharedData::GetInstance()->player->GetPositionVector().x, SharedData::GetInstance()->player->GetPositionVector().y, SharedData::GetInstance()->player->GetPositionVector().z);
+	grass.appearance[rock].mesh = SharedData::GetInstance()->graphicsLoader->GetMesh(GraphicsLoader::GEO_CUBE);
+	grass.appearance[rock].scale.Set(1, 1, 1);
+
+	net = createGO(&grass);
+	grass.mask[net] = COMPONENT_DISPLACEMENT | COMPONENT_APPEARANCE;
+	grass.position[net].SetZero();
+	grass.appearance[net].mesh = SharedData::GetInstance()->graphicsLoader->GetMesh(GraphicsLoader::GEO_NET);
+	grass.appearance[net].scale.Set(2, 2, 2);
+	//HITBOX.m_origin = Vector3(0, 5, 0);
+	//HITBOX.m_scale = Vector3(10, 10, 10);
+
+	Capturing = false;
+	captureCounter = 0;
+	cd = 0;
 }
 static double counter = 0;
 
@@ -62,21 +80,63 @@ void SceneGrass::Update(double dt)
 			Vector3(SharedData::GetInstance()->player->GetViewVector().x, SharedData::GetInstance()->player->GetViewVector().y, SharedData::GetInstance()->player->GetViewVector().z),
 			500,
 			25,
-			10
+			400
 			));
 	}
 
+	//if (HITBOX.CheckCollision(SharedData::GetInstance()->player->PlayerHitBox))
+	//{
+	//	std::cout << "COLLISION!" << std::endl;
+	//}
+
     //Projectile checks
+	//if (ItemProjectile::ItemProjectileList.size())
+	//{
+	//
+
+ //       for (unsigned i = 0; i < ItemProjectile::ItemProjectileList.size(); ++i)
+ //       {
+	//	if (HITBOX.CheckCollision(ItemProjectile::ItemProjectileList[i]->position))
+	//	{
+	//		std::cout << "COLLISION!" << std::endl;
+	//	}
+ //       //    if (grass.hitbox[monster].CheckCollision(ItemProjectile::ItemProjectileList[i]->position))
+ //       //    {
+ //       //        grass.velocity[monster] = (grass.position[monster] - camera.position).Normalized();
+ //       //        grass.velocity[monster].y = 0;
+ //       //    }
+ //       }
+	//}
+
+	//Projectile checks
 	if (ItemProjectile::ItemProjectileList.size())
 	{
-        for (unsigned i = 0; i < ItemProjectile::ItemProjectileList.size(); ++i)
-        {
-            if (grass.hitbox[monster].CheckCollision(ItemProjectile::ItemProjectileList[i]->position))
-            {
-                grass.velocity[monster] = (grass.position[monster] - camera.position).Normalized();
-                grass.velocity[monster].y = 0;
-            }
-        }
+		for (unsigned i = 0; i < ItemProjectile::ItemProjectileList.size(); ++i)
+		{
+			if (grass.hitbox[monster].CheckCollision(ItemProjectile::ItemProjectileList[i]->position))
+			{
+				Capturing = true;
+				ItemProjectile::ItemProjectileList[i]->deleteBullet;
+				grass.position[net] = grass.position[monster];
+			}
+			if (Capturing == true)
+			{	
+				int v1 = rand() % 100;
+				std::cout << v1 << std::endl;
+				if (v1 < 20)
+				{
+					Captured = true;
+				}
+				Capturing = false;//fail capture
+				grass.position[net] = 0;//set net to false
+			}
+			if (Captured == true)
+			{
+				grass.velocity[monster] = 0;
+				grass.position[net] = grass.position[monster];
+				break;
+			}
+		}
 	}
 	
     //Move Gameobjects
@@ -101,6 +161,36 @@ void SceneGrass::Update(double dt)
         counter++;
     }
 
+	//if (Application::IsKeyPressed('X') && SharedData::GetInstance()->player->inventory[Item::TYPE_ROCK].Use() )
+	//{
+	//	ItemProjectile::ItemProjectileList.push_back(new ItemProjectile(
+	//		Vector3(SharedData::GetInstance()->player->GetPositionVector().x, SharedData::GetInstance()->player->GetPositionVector().y, SharedData::GetInstance()->player->GetPositionVector().z),
+	//		Vector3(SharedData::GetInstance()->player->GetViewVector().x, SharedData::GetInstance()->player->GetViewVector().y, SharedData::GetInstance()->player->GetViewVector().z),
+	//		500,
+	//		100,
+	//		10
+	//		));		
+	//}
+
+
+	if (cd > 0)
+	{
+		cd -= dt;
+	}
+
+	//std::cout << cd << std::endl;
+	if (Application::IsKeyPressed('X') && SharedData::GetInstance()->player->inventory[Item::TYPE_NET].Use() && cd < 0.5)
+	{
+		ItemProjectile::ItemProjectileList.push_back(new ItemProjectile(
+			Vector3(SharedData::GetInstance()->player->GetPositionVector().x, SharedData::GetInstance()->player->GetPositionVector().y, SharedData::GetInstance()->player->GetPositionVector().z),
+			Vector3(SharedData::GetInstance()->player->GetViewVector().x, 0.5, SharedData::GetInstance()->player->GetViewVector().z),
+			500,
+			15,
+			10
+			));
+		cd = 1;
+	}
+
     //Trap radius
     for (unsigned i = 0; i < placedTraps.size(); ++i)
     {
@@ -110,7 +200,6 @@ void SceneGrass::Update(double dt)
             //Find a way to remove trap;
         }
     }
-
 
     if (Application::IsKeyPressed('Q'))
     {
@@ -188,19 +277,27 @@ void SceneGrass::Render()
 			(*it)->position.y,
 			(*it)->position.z
 			);
-		modelStack.Scale(1, 1, 1);
-		RenderMesh(SharedData::GetInstance()->graphicsLoader->GetMesh(GraphicsLoader::GEO_ROCKS1), false);
+		modelStack.Scale(0.5, 0.5, 0.5);
+		RenderMesh(SharedData::GetInstance()->graphicsLoader->GetMesh(GraphicsLoader::GEO_NET), false);
 		modelStack.PopMatrix();
 	}
 
 	RenderGrassScene();
 
     //visable hitbox
-	/*modelStack.PushMatrix();
-    modelStack.Translate(grass.hitbox[monster].m_origin.x, grass.hitbox[monster].m_origin.y, grass.hitbox[monster].m_origin.z);
-    modelStack.Scale(grass.hitbox[monster].m_scale.x, grass.hitbox[monster].m_scale.y, grass.hitbox[monster].m_scale.z);
+	modelStack.PushMatrix();
+	modelStack.Translate(HITBOX.m_origin.x, HITBOX.m_origin.y, HITBOX.m_origin.z);
+	modelStack.Scale(HITBOX.m_scale.x * 2, HITBOX.m_scale.y * 2, HITBOX.m_scale.z * 2);
 	RenderMesh(SharedData::GetInstance()->graphicsLoader->GetMesh(GraphicsLoader::GEO_CUBE), false);
-	modelStack.PopMatrix();*/
+	modelStack.PopMatrix();
+
+	modelStack.PushMatrix();
+	modelStack.Translate(SharedData::GetInstance()->player->PlayerHitBox.m_origin.x, 0.1, SharedData::GetInstance()->player->PlayerHitBox.m_origin.z);
+	modelStack.Scale(SharedData::GetInstance()->player->PlayerHitBox.m_scale.x, SharedData::GetInstance()->player->PlayerHitBox.m_scale.y, SharedData::GetInstance()->player->PlayerHitBox.m_scale.z);
+	//modelStack.Translate(10,0,0);
+	//modelStack.Scale(10,10,10);
+	RenderMesh(SharedData::GetInstance()->graphicsLoader->GetMesh(GraphicsLoader::GEO_PLAYERBOX), false);
+	modelStack.PopMatrix();
 
     //Trap placing
     double x, y;
@@ -302,6 +399,25 @@ void SceneGrass::RenderGrassScene()
 	modelStack.Scale(1, 1, 1);
 	RenderMesh(SharedData::GetInstance()->graphicsLoader->GetMesh(GraphicsLoader::GEO_ROCKS5), false);
 	modelStack.PopMatrix();*/
+}
+
+bool SceneGrass::ViewCheckPosition(Vector3 pos, float degree)
+{
+	if (pos != camera.position)
+	{
+		Vector3 view = (pos - camera.position).Normalized();
+
+		float angleX = Math::RadianToDegree(acos(view.Dot(camera.target)));
+
+		if (angleX <= degree)
+		{
+			return true;
+		}
+		if (angleX > degree)
+		{
+			return false;
+		}
+	}
 }
 
 void SceneGrass::Exit()

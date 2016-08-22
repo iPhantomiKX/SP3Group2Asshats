@@ -12,6 +12,7 @@ Player class that stores the game's player variables
 
 #include "Vector3.h"
 #include "Items.h"
+#include "../GameObject/AABB.h"
 //#include <vector>
 
 /******************************************************************************/
@@ -84,7 +85,7 @@ public:
     Vector3 GetUpVector();
 
     void Update(double dt);
-
+	AABB PlayerHitBox;
 };
 
 #endif

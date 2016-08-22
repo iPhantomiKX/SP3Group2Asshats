@@ -21,17 +21,27 @@ public:
 	virtual void Render();
 	virtual void RenderGrassScene();
 	virtual void Exit();
-
+	bool ViewCheckPosition(Vector3 pos, float degree);
     //Test stuff
 	ItemProjectile* itemProjectile;
 
     //For placing traps
     bool placing = false;
+	bool Capturing = false;
+	bool Captured = false;
+	int captureCounter = 0;
+
+	float cd = 0;
+
     std::vector<Vector3> placedTraps;
+
+	//AABB HITBOX;
 
     World grass;
 
-    GameObject monster;
+	AABB HITBOX;
+
+    GameObject monster,rock,net;
 };
 
 #endif

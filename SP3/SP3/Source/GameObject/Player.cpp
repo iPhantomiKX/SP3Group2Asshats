@@ -25,6 +25,9 @@ Player::Player()
     m_gravity = -100.f;
     m_jumpHeight = 0.f;
 
+	PlayerHitBox.m_origin.SetZero();
+	PlayerHitBox.m_scale = Vector3(10, 0.1, 10);
+
     m_movementState = MOVEMENT_STATE_IDLE;
     m_heightState = HEIGHT_STATE_STANDING;
 
@@ -210,8 +213,7 @@ void Player::Update(double dt)
         }
         break;
     }
-
-
+	PlayerHitBox.m_origin = m_position;
     move(dt);
 
     //Move(dt); // move by Vector3 velocity
