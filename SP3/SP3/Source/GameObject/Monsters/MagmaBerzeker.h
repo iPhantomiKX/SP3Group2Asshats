@@ -2,12 +2,11 @@
 #define MONSTER_BOSS_MAGMA_BERZEKER_H
 
 #include "../Monster.h"
-#include "../AI_Strategy.h"
 
 class Boss_MagmaBerzeker : public Monster
 {
 public:
-	Boss_MagmaBerzeker()
+    Boss_MagmaBerzeker(std::string name, int stats[]) : Monster(name, stats)
 	{
 		Strategy = NULL;
 	}
@@ -38,8 +37,7 @@ public:
 	{
 
 	}
-private:
-	AI_Strategy* Strategy;
+
 };
 
 #endif

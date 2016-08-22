@@ -2,12 +2,11 @@
 #define MONSTER_GRIMEJAM_H
 
 #include "../Monster.h"
-#include "../AI_Strategy.h"
 
 class Monster_Grimejam : public Monster
 {
 public:
-	Monster_Grimejam()
+    Monster_Grimejam(std::string name, int stats[]) : Monster(name, stats)
 	{
 		Strategy = NULL;
 	}
@@ -38,8 +37,7 @@ public:
 	{
 
 	}
-private:
-	AI_Strategy* Strategy;
+
 };
 
 #endif

@@ -21,8 +21,7 @@ class MonsterFactory
     static monsterStatsMap m_monsterStatsList;
 
 public:
-    MonsterFactory();
-    ~MonsterFactory();
+    static void LoadMonsterData(const char* file_path);
 
     //static int GetMonsterTypesQuantity();
     //static void SetMonsterTypesQuantity(int quantity);

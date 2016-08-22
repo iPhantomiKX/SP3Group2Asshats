@@ -3,11 +3,10 @@
 
 #include "../Monster.h"
 
-
 class Monster_Bird : public Monster
 {
 public:
-	Monster_Bird()
+    Monster_Bird(std::string name, int stats[]) : Monster(name, stats)
 	{
 		Strategy = NULL;
 	}
@@ -39,8 +38,6 @@ public:
 
 	}
 
-private:
-	AI_Strategy* Strategy;
 };
 
 #endif 

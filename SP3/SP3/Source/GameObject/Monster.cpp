@@ -9,10 +9,16 @@ Class that defines a monster's variables and statistics
 /******************************************************************************/
 #include "Monster.h"
 
-Monster::Monster()
+Monster::Monster(std::string name, int stats[]) : m_name(name)
 {
     // idea: Monster(std::string name);
     // based on name, retrieve stats from a struct/array that already initialised with the stats from the text files
+
+    this->m_healthStat = stats[0];
+    this->m_captureRateStat = stats[1];
+    this->m_aggressionStat = stats[2];
+    this->m_fearStat = stats[3];
+    //this->Strategy = static_cast<AI_Strategy>(stats[4]);  //aggressive, bossfairy, etc.?
 }
 
 Monster::~Monster()

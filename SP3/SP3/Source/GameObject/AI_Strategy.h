@@ -11,7 +11,6 @@ Class that Updates the strategy of monster
 #define AI_STRATEGY_H
 
 #include "Vector3.h"
-#include "Monster.h"
 #include "Player.h"
 #include "AABB.h"
 
@@ -19,7 +18,7 @@ class AI_Strategy
 {
 public:
 	AI_Strategy();
-	~AI_Strategy();
+	virtual ~AI_Strategy();
 
 	enum STRATEGY_MODE
 	{
@@ -29,9 +28,9 @@ public:
 		TRAPPED,	//stun
 		TOTAL_AI_STATE,
 	};
-	AI_Strategy::STRATEGY_MODE GetCurrentStrategy();
-	void SetState(AI_Strategy::STRATEGY_MODE currentState);
-	AI_Strategy::STRATEGY_MODE GetState();
+	STRATEGY_MODE GetCurrentStrategy();
+	void SetState(STRATEGY_MODE currentState);
+	STRATEGY_MODE GetState();
 
 	//virtual void SetDestination(Vector3 Destination);
 	//virtual Vector3 GetPosition(Vector3 monsterPos);

@@ -31,21 +31,17 @@ public:
 	virtual void Update(double dt) = 0;
 
 protected:
-	Monster();
+    Monster() {}
+    Monster(std::string name, int stats[]);
 
     std::string m_name;
 
     int m_healthStat;
-    int m_captureRateStat; 
+    int m_captureRateStat;
     int m_aggressionStat;
     int m_fearStat;
 
 	AI_Strategy* Strategy;
-
-    // Mesh_type OR
-    // Enemy_type
-
-    // Strategy* strategy;
 
     Vector3 m_position;
     Vector3 m_velocity;

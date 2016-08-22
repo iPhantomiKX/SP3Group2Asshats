@@ -8,6 +8,10 @@ Class that Updates the strategy of monster
 */
 /******************************************************************************/
 #include "AI_Strategy.h"
+#include "Monster.h"
+
+Monster* monster;
+
 
 AI_Strategy::AI_Strategy()
 {
@@ -34,7 +38,7 @@ void AI_Strategy::Update()
 {
 	float AggressionLevel = monster->GetAggressionStat();
 	float FearLevel = monster->GetFearStat();
-
+    
 	if (AggressionLevel > 60 && FearLevel < 50)
 	{
 		SetState(ATTACK);
