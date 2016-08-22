@@ -30,7 +30,7 @@ void MonsterFactory::LoadMonsterData(const char* file_path)
     LoadFile(file_path, FILE_MONSTERDATA);
 }
 
-Monster* MonsterFactory::CreateMonster(std::string name)
+Monster* MonsterFactory::CreateMonster(const std::string name)
 {
     Monster* createdMonster = 0;
 

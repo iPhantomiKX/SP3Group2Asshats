@@ -156,7 +156,7 @@ void SceneGrass::Update(double dt)
         grass.position[trap].Set(SharedData::GetInstance()->player->GetPositionVector().x + SharedData::GetInstance()->player->GetViewVector().x * 20, 0, SharedData::GetInstance()->player->GetPositionVector().z + SharedData::GetInstance()->player->GetViewVector().z * 20);
         grass.appearance[trap].mesh = SharedData::GetInstance()->graphicsLoader->GetMesh(GraphicsLoader::GEO_TRAP);
         grass.appearance[trap].scale.Set(1, 1, 1);
-        grass.trap[trap].effectTimer = 3.0f;
+        //grass.trap[trap].effectTimer = 3.0f;
         grass.trap[trap].radius = 50.0f;
         counter++;
     }

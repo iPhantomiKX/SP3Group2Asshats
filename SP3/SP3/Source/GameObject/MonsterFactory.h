@@ -26,12 +26,12 @@ public:
     //static int GetMonsterTypesQuantity();
     //static void SetMonsterTypesQuantity(int quantity);
 
-    static Monster* CreateMonster(std::string name); // change to const
+    static Monster* CreateMonster(const std::string name);
 
     static void AddToMap(std::string, int stats[5]);
 
-        // generate components for the gameobject instead
-        // AI is a component -- if yes, AIcomponent->Update()
+    // generate components for the gameobject instead
+    // AI is a component -- if yes, AIcomponent->Update()
 };
 
 #endif

@@ -10,9 +10,6 @@ Class that Updates the strategy of monster
 #include "AI_Strategy.h"
 #include "Monster.h"
 
-Monster* monster;
-
-
 AI_Strategy::AI_Strategy()
 {
 }
@@ -29,7 +26,7 @@ void AI_Strategy::SetState(AI_Strategy::STRATEGY_MODE currentState)
 	this->currentState = currentState;
 }
 
-int AI_Strategy::CalculateDistance(Vector3 MonsterPos, Vector3 Destination)
+int AI_Strategy::CalculateDistance(const Vector3& MonsterPos, const Vector3& Destination)
 {
 	return int((Destination - MonsterPos).LengthSquared());
 }
@@ -41,11 +38,11 @@ void AI_Strategy::Update()
     
 	if (AggressionLevel > 60 && FearLevel < 50)
 	{
-		SetState(ATTACK);
+		SetState(STATE_ATTACK);
 	}
 	else if (AggressionLevel < 40 && FearLevel > 50)
 	{
-		SetState(RUN);
+		SetState(STATE_RUN);
 	}
 	//if (monster collide with trap)
 	//{
@@ -55,7 +52,6 @@ void AI_Strategy::Update()
 	//}
 	else
 	{
-		SetState(IDLE);
+		SetState(STATE_IDLE);
 	}
-
 }

@@ -12,10 +12,14 @@ Class that defines a monster's variables and statistics
 
 #include <string>
 #include "Vector3.h"
-#include "AI_Strategy.h"
+//#include "AI_Strategy.h"
+
+//class AI_Strategy;
 
 class Monster
 {
+	friend class AI_Strategy;
+
 public:
     virtual ~Monster();
     
@@ -41,7 +45,7 @@ protected:
     int m_aggressionStat;
     int m_fearStat;
 
-	AI_Strategy* Strategy;
+	AI_Strategy* m_strategy;
 
     Vector3 m_position;
     Vector3 m_velocity;

@@ -8,14 +8,14 @@ class Monster_Bird : public Monster
 public:
     Monster_Bird(std::string name, int stats[]) : Monster(name, stats)
 	{
-		Strategy = NULL;
+		m_strategy = NULL;
 	}
 	virtual ~Monster_Bird()
 	{
-		if (Strategy != NULL)
+		if (m_strategy != NULL)
 		{
-			delete Strategy;
-			Strategy = NULL;
+			delete m_strategy;
+			m_strategy = NULL;
 		}
 	}
 
@@ -23,13 +23,13 @@ public:
 	{
 		if (bDelete == true)
 		{
-			if (Strategy != NULL)
+			if (m_strategy != NULL)
 			{
-				delete Strategy;
-				Strategy = NULL;
+				delete m_strategy;
+				m_strategy = NULL;
 			}
 		}
-		Strategy = newAI;
+		m_strategy = newAI;
 	}
 
 	//Monster Movement update
