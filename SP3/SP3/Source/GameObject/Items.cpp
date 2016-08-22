@@ -103,3 +103,8 @@ bool Item::Add(int addCount)
 
     return false;
 }
+
+int Item::GetCount()
+{
+    return this->m_count;
+}

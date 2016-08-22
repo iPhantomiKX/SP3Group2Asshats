@@ -26,6 +26,7 @@ public:
     int GetEffectiveness();
     int GetItemType();
     int GetCurrentUpgradeLevel();
+    int GetCount();
 
     bool Use();
     bool Add(int addCount);

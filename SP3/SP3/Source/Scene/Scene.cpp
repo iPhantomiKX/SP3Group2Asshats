@@ -209,3 +209,57 @@ void Scene::RenderMesh(Mesh *mesh, bool enableLight)
 
 	mesh->Render();
 }
+
+#define RENDER_MASK (COMPONENT_DISPLACEMENT | COMPONENT_APPEARANCE)
+void Scene::RenderGameObjects(World* world)
+{
+    for (unsigned GO = 0; GO < world->GAMEOBJECT_COUNT; ++GO)
+    {
+        if ((world->mask[GO] & RENDER_MASK) == RENDER_MASK)
+        {
+            Vector3 *pos;
+            Mesh *mesh;
+    
+            pos = &(world->position[GO]);
+            mesh = (world->appearance[GO].mesh);
+    
+            modelStack.PushMatrix();
+            modelStack.Translate(world->position[GO].x, world->position[GO].y, world->position[GO].z);
+            modelStack.Scale(world->appearance[GO].scale.x, world->appearance[GO].scale.y, world->appearance[GO].scale.z);
+            RenderMesh(world->appearance[GO].mesh, true);
+            modelStack.PopMatrix();
+        }
+    }
+}
+
+#define MOVEMENT_MASK (COMPONENT_DISPLACEMENT | COMPONENT_VELOCITY)
+void Scene::UpdateGameObjects(World* world, double dt)
+{
+    for (unsigned GO = 0; GO < world->GAMEOBJECT_COUNT; ++GO)
+    {
+        Vector3 *vel;
+        vel = &(world->velocity[GO]);
+
+        if ((world->mask[GO] & MOVEMENT_MASK) == MOVEMENT_MASK)
+        {
+            Vector3 *pos;
+            pos = &(world->position[GO]);
+
+            pos->x += vel->x * dt;
+            pos->y += vel->y * dt;
+            pos->z += vel->z * dt;
+            std::cout << "asd" << std::endl;
+        }
+
+        if ((world->mask[GO] & COMPONENT_HITBOX) == COMPONENT_HITBOX)
+        {
+            Vector3 *origin;
+            origin = &(world->hitbox[GO].m_origin);
+
+            origin->x += vel->x * dt;
+            origin->y += vel->y * dt;
+            origin->z += vel->z * dt;
+        }
+
+    }
+}

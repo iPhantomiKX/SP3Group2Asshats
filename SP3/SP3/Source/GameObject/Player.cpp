@@ -10,6 +10,7 @@ Player class that stores the game's player variables
 #include "Player.h"
 #include "MyMath.h"
 #include "../General/Application.h"
+#include "../General/SharedData.h"
 
 Player::Player()
 {
@@ -71,18 +72,18 @@ void Player::Update(double dt)
     m_movementState = MOVEMENT_STATE_IDLE;
     m_velocity.SetZero();
 
-    if (Application::IsKeyPressed('W'))
+    if (SharedData::GetInstance()->inputManager->keyState[InputManager::KEY_W].IsPressed())
     {
         m_movementState = MOVEMENT_STATE_WALK;
 
         m_velocity += m_view.Normalized();
     }
-    if (Application::IsKeyPressed('S'))
+    if (SharedData::GetInstance()->inputManager->keyState[InputManager::KEY_S].IsPressed())
     {
         m_movementState = MOVEMENT_STATE_WALK;
         m_velocity += -m_view.Normalized();
     }
-    if (Application::IsKeyPressed('A'))
+    if (SharedData::GetInstance()->inputManager->keyState[InputManager::KEY_A].IsPressed())
     {
         m_movementState = MOVEMENT_STATE_WALK;
         Vector3 right = m_view.Cross(m_up);
@@ -90,7 +91,7 @@ void Player::Update(double dt)
         right.Normalize();
         m_velocity += -right;
     }
-    if (Application::IsKeyPressed('D'))
+    if (SharedData::GetInstance()->inputManager->keyState[InputManager::KEY_D].IsPressed())
     {
         m_movementState = MOVEMENT_STATE_WALK;
         Vector3 right = m_view.Cross(m_up);
@@ -105,7 +106,7 @@ void Player::Update(double dt)
         m_prevVelocity = m_velocity;
     }
 
-    if (Application::IsKeyPressed(VK_CONTROL))
+    if (SharedData::GetInstance()->inputManager->keyState[InputManager::KEY_CTRL].IsPressed())
     {
         if (m_heightState == HEIGHT_STATE_STANDING)
             crouch();
@@ -114,12 +115,12 @@ void Player::Update(double dt)
         else if (m_heightState == HEIGHT_STATE_PRONE)
             standUp();
     }
-    if (Application::IsKeyPressed(VK_SPACE))
+    if (SharedData::GetInstance()->inputManager->keyState[InputManager::KEY_SPACE].IsPressed())
     {
         jump();
     }
 
-    if (Application::IsKeyPressed(VK_SHIFT))
+    if (SharedData::GetInstance()->inputManager->keyState[InputManager::KEY_SHIFT].IsPressed())
     {
         if (m_heightState == HEIGHT_STATE_STANDING)
         {
