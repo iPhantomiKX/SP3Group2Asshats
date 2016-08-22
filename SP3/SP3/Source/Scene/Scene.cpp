@@ -12,6 +12,8 @@ Abstract class for scenes in gameplay
 #include "../../Source/Scene/Scene.h"
 #include "../General/SharedData.h"
 
+char** Scene::m_levelMap = 0;
+
 void Scene::RenderText(Mesh* mesh, std::string text, Color color)
 {
 	if (!mesh || mesh->textureID <= 0)

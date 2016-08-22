@@ -60,8 +60,8 @@ void SceneGrass::Update(double dt)
 		ItemProjectile::ItemProjectileList.push_back(new ItemProjectile(
 			Vector3(camera.position.x, camera.position.y, camera.position.z),
 			Vector3(SharedData::GetInstance()->player->GetViewVector().x, SharedData::GetInstance()->player->GetViewVector().y, SharedData::GetInstance()->player->GetViewVector().z),
-			50,
-			50,
+			500,
+			25,
 			10
 			));
 	}

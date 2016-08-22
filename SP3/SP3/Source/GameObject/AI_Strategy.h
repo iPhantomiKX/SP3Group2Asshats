@@ -48,8 +48,8 @@ private:
 	AABB hitbox;
 	//Vector3 destination;
 
-	Player* player;
-	Monster* monster;
+	//Player* player;
+	//Monster* monster;
 	//std::vector<Vector3> placedTraps;
 	//ItemProjectile* bait;
 };
