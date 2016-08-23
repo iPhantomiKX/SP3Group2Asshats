@@ -75,18 +75,18 @@ void Player::Update(double dt)
     m_movementState = MOVEMENT_STATE_IDLE;
     m_velocity.SetZero();
 
-    if (SharedData::GetInstance()->inputManager->keyState[InputManager::KEY_W].IsPressed())
+    if (SharedData::GetInstance()->inputManager->keyState[InputManager::KEY_W].isHeldDown)
     {
         m_movementState = MOVEMENT_STATE_WALK;
 
         m_velocity += m_view.Normalized();
     }
-    if (SharedData::GetInstance()->inputManager->keyState[InputManager::KEY_S].IsPressed())
+    if (SharedData::GetInstance()->inputManager->keyState[InputManager::KEY_S].isHeldDown)
     {
         m_movementState = MOVEMENT_STATE_WALK;
         m_velocity += -m_view.Normalized();
     }
-    if (SharedData::GetInstance()->inputManager->keyState[InputManager::KEY_A].IsPressed())
+    if (SharedData::GetInstance()->inputManager->keyState[InputManager::KEY_A].isHeldDown)
     {
         m_movementState = MOVEMENT_STATE_WALK;
         Vector3 right = m_view.Cross(m_up);
@@ -94,7 +94,7 @@ void Player::Update(double dt)
         right.Normalize();
         m_velocity += -right;
     }
-    if (SharedData::GetInstance()->inputManager->keyState[InputManager::KEY_D].IsPressed())
+    if (SharedData::GetInstance()->inputManager->keyState[InputManager::KEY_D].isHeldDown)
     {
         m_movementState = MOVEMENT_STATE_WALK;
         Vector3 right = m_view.Cross(m_up);
@@ -108,8 +108,11 @@ void Player::Update(double dt)
         m_velocity.Normalized();
         m_prevVelocity = m_velocity;
     }
-
-    if (SharedData::GetInstance()->inputManager->keyState[InputManager::KEY_CTRL].IsPressed())
+    if (SharedData::GetInstance()->inputManager->keyState[InputManager::KEY_CTRL].isPressed)
+    {
+        prone();
+    }
+    else if (SharedData::GetInstance()->inputManager->keyState[InputManager::KEY_CTRL].isPressed)
     {
         if (m_heightState == HEIGHT_STATE_STANDING)
             crouch();
@@ -118,12 +121,12 @@ void Player::Update(double dt)
         else if (m_heightState == HEIGHT_STATE_PRONE)
             standUp();
     }
-    if (SharedData::GetInstance()->inputManager->keyState[InputManager::KEY_SPACE].IsPressed())
+    if (SharedData::GetInstance()->inputManager->keyState[InputManager::KEY_SPACE].isHeldDown)
     {
         jump();
     }
 
-    if (SharedData::GetInstance()->inputManager->keyState[InputManager::KEY_SHIFT].IsPressed())
+    if (SharedData::GetInstance()->inputManager->keyState[InputManager::KEY_SHIFT].isHeldDown)
     {
         if (m_heightState == HEIGHT_STATE_STANDING)
         {

@@ -37,9 +37,9 @@ public:
 
     World grass;
 
-	AABB HITBOX;
+    AABB HITBOX;
     double counter;
-    GameObject monster,rock,net;
+    GameObject monster, rock, net, bait;
 };
 
 #endif

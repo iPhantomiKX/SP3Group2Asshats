@@ -11,13 +11,29 @@ InputManager::InputManager()
 
     keyState[KEY_SPACE].Assign(VK_SPACE);
     keyState[KEY_ENTER].Assign(VK_RETURN);
+
     keyState[KEY_W].Assign('W');
     keyState[KEY_A].Assign('A');
     keyState[KEY_S].Assign('S');
     keyState[KEY_D].Assign('D');
+
+    keyState[KEY_Q].Assign('Q');
+    keyState[KEY_E].Assign('E');
+
     keyState[KEY_G].Assign('G');
+    keyState[KEY_X].Assign('X');
+
     keyState[KEY_CTRL].Assign(VK_CONTROL);
     keyState[KEY_SHIFT].Assign(VK_SHIFT);
+
+    keyState[KEY_1].Assign('1');
+    keyState[KEY_2].Assign('2');
+    keyState[KEY_3].Assign('3');
+    keyState[KEY_4].Assign('4');
+    keyState[KEY_5].Assign('5');
+    keyState[KEY_6].Assign('6');
+
+    keyState[KEY_TAB].Assign(VK_TAB);
 }
 
 
@@ -41,45 +57,25 @@ void Key::Assign(unsigned short vk_key)
 }
 
 
-//bool Key::IsHeldDown()
-//{
-//
-//
-//    return false;
-//}
-//
-//bool Key::IsReleased()
-//{
-//
-//
-//    return false;
-//}
-
-bool Key::IsPressed()
-{
-    if ((GetAsyncKeyState(value) & 0x8000) != 0)
-    {
-        state = true;
-        return true;
-    }
-    return false;
-}
-
 void Key::Update()
 {
-    state = false;
+    isPressed = false;
     isReleased = false;
 
     if (isHeldDown && (GetAsyncKeyState(value) & 0x8000) != 0)
+    {
         isHeldDown = true;
+    }
     else if (isHeldDown && !(GetAsyncKeyState(value) & 0x8000) != 0)
     {   
         isHeldDown = false;
         isReleased = true;
+        isPressed = false;
     }
 
     if (!state && (GetAsyncKeyState(value) & 0x8000) != 0)
     {
+        isPressed = true;
         isHeldDown = true;
         state = true;
     }
@@ -87,5 +83,4 @@ void Key::Update()
     {
         state = false;
     }
-
 }

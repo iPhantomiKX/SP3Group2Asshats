@@ -1,7 +1,7 @@
 #ifndef INPUTMANAGER_H
 #define INPUTMANAGER_H
 #include <Windows.h>
-
+#include <iostream>
 
 struct Key
 {
@@ -11,7 +11,7 @@ public:
 
     void Assign(unsigned short vk_key);
     bool isHeldDown;
-    bool IsPressed();
+    bool isPressed;
     bool isReleased;
     void Update();
 };
@@ -33,15 +33,17 @@ public:
         KEY_S,
         KEY_D,
 
-        KEY_G,
-
+        KEY_Q,
         KEY_E,
+
+        KEY_G,
+        KEY_X,
+
         KEY_SPACE,
 
         KEY_TAB,
         KEY_ENTER,
         KEY_CTRL,
-        KEY_ALT,
         KEY_SHIFT,
 
         MOUSE_L,

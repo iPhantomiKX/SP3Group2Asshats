@@ -248,9 +248,9 @@ void Scene::UpdateGameObjects(World* world, double dt)
             Vector3 *pos;
             pos = &(world->position[GO]);
 
-            pos->x += vel->x * dt;
-            pos->y += vel->y * dt;
-            pos->z += vel->z * dt;
+            pos->x += vel->x * (float)dt;
+            pos->y += vel->y * (float)dt;
+            pos->z += vel->z * (float)dt;
             //std::cout << "asd" << std::endl;
         }
 
@@ -259,9 +259,9 @@ void Scene::UpdateGameObjects(World* world, double dt)
             Vector3 *origin;
             origin = &(world->hitbox[GO].m_origin);
 
-            origin->x += vel->x * dt;
-            origin->y += vel->y * dt;
-            origin->z += vel->z * dt;
+            origin->x += vel->x * (float)dt;
+            origin->y += vel->y * (float)dt;
+            origin->z += vel->z * (float)dt;
         }
 
     }
