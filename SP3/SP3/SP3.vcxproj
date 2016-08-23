@@ -78,6 +78,9 @@
     <ClCompile Include="Source\Scene\Scene.cpp" />
     <ClCompile Include="Source\Scene\Zone 1\SceneGrass.cpp" />
     <ClCompile Include="Source\Scene\Zone 1\SceneSP3.cpp" />
+    <ClCompile Include="Source\Scene\Zone 2\SceneSwamp.cpp" />
+    <ClCompile Include="Source\Scene\Zone 3\SceneRock.cpp" />
+    <ClCompile Include="Source\Scene\Zone 4\SceneLava.cpp" />
     <ClCompile Include="Source\shader.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -126,6 +129,9 @@
     <ClInclude Include="Source\Scene\Scene.h" />
     <ClInclude Include="Source\Scene\Zone 1\SceneGrass.h" />
     <ClInclude Include="Source\Scene\Zone 1\SceneSP3.h" />
+    <ClInclude Include="Source\Scene\Zone 2\SceneSwamp.h" />
+    <ClInclude Include="Source\Scene\Zone 3\SceneRock.h" />
+    <ClInclude Include="Source\Scene\Zone 4\SceneLava.h" />
     <ClInclude Include="Source\shader.hpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

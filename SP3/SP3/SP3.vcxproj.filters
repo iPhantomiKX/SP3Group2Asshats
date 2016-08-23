@@ -91,6 +91,24 @@
     <Filter Include="Source Files\GameObject\Monsters">
       <UniqueIdentifier>{d91bebbc-6db0-489b-ba92-d539d93d9aa3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Scene\Zone 2">
+      <UniqueIdentifier>{6571227d-15a0-46f4-a7ee-cb60e202655f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Scene\Zone 3">
+      <UniqueIdentifier>{5734e2ad-58dd-43ab-af5a-51d15212a01e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Scene\Zone 4">
+      <UniqueIdentifier>{ab3f72e7-9f86-4053-b7c5-62d1378316cc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Scene\Zone 2">
+      <UniqueIdentifier>{d5f4d2b4-8a6c-4e16-9d89-682a4701caa7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Scene\Zone 3">
+      <UniqueIdentifier>{27c2f58c-de19-4f57-99dd-59da649fa8bd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Scene\Zone 4">
+      <UniqueIdentifier>{1addd879-c9a8-4282-a925-755696221ca8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="Shader\comg.fragmentshader">
@@ -293,6 +311,15 @@
     <ClCompile Include="Source\GameObject\Monsters\RockSnake.cpp">
       <Filter>Source Files\GameObject\Monsters</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Scene\Zone 2\SceneSwamp.cpp">
+      <Filter>Source Files\Scene\Zone 2</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Scene\Zone 3\SceneRock.cpp">
+      <Filter>Source Files\Scene\Zone 3</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Scene\Zone 4\SceneLava.cpp">
+      <Filter>Source Files\Scene\Zone 4</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\shader.hpp">
@@ -432,6 +459,15 @@
     </ClInclude>
     <ClInclude Include="Source\GameObject\Pathfinding.h">
       <Filter>Header Files\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Scene\Zone 2\SceneSwamp.h">
+      <Filter>Header Files\Scene\Zone 2</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Scene\Zone 3\SceneRock.h">
+      <Filter>Header Files\Scene\Zone 3</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Scene\Zone 4\SceneLava.h">
+      <Filter>Header Files\Scene\Zone 4</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

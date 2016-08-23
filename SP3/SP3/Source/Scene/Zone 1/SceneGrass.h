@@ -6,8 +6,8 @@
 
 class SceneGrass : public Scene
 {
-	float m_worldHeight;
-	float m_worldWidth;
+	//float m_worldHeight;
+	//float m_worldWidth;
 
 	// Clicking
 	bool bLButtonState;
@@ -26,9 +26,9 @@ public:
 	ItemProjectile* itemProjectile;
 
     //For placing traps
-    bool placing = false;
-	bool Capturing = false;
-	bool Captured = false;
+    //bool b_placing = false;
+	bool b_capturing = false;
+	bool b_captured = false;
 	int captureCounter = 0;
 
     std::vector<Vector3> placedTraps;

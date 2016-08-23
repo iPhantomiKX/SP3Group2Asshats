@@ -56,10 +56,10 @@ protected:
     Vector3 m_scale;  // for rendering
 
     void move();
-    void changeHealthStat(const int damage);
-    void changeAggressionStat(const int aggression);
-    void changeFearStat(const int fear);
-    void changeCaptureRateStat(const int captureRate);
+    void changeHealthStat(const int newHealth);
+    void changeAggressionStat(const int newAggression);
+    void changeFearStat(const int newFear);
+    void changeCaptureRateStat(const int newCaptureRate);
 };
 
 #endif

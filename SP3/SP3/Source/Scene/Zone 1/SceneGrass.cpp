@@ -83,8 +83,9 @@ void SceneGrass::Init()
 	//HITBOX.m_origin = Vector3(0, 5, 0);
 	//HITBOX.m_scale = Vector3(10, 10, 10);
 
-	Capturing = false;
-	captureCounter = 0;
+	b_capturing = false;
+    b_captured = false;
+    captureCounter = 0;
     counter = 0;
 }
 static double counter = 0;
@@ -92,8 +93,10 @@ static double counter = 0;
 void SceneGrass::Update(double dt)
 {
 	//Calculating aspect ratio
-	m_worldHeight = 100.f;
-	m_worldWidth = m_worldHeight * (float)Application::GetWindowWidth() / Application::GetWindowHeight();
+	//m_worldHeight = 100.f;
+	//m_worldWidth = m_worldHeight * (float)Application::GetWindowWidth() / Application::GetWindowHeight();
+
+    fps = (float)(1.f / dt);
 
     //===============================================================================================================================//
     //                                                            Updates                                                            //
@@ -124,22 +127,22 @@ void SceneGrass::Update(double dt)
 		{
 			if (grass.hitbox[monster].CheckCollision(ItemProjectile::ItemProjectileList[i]->position))
 			{
-				Capturing = true;
+				b_capturing = true;
 				ItemProjectile::ItemProjectileList[i]->deleteBullet;
 				grass.position[net] = grass.position[monster];
 			}
-			if (Capturing == true)
+            if (b_capturing == true)
 			{	
 				int v1 = rand() % 100;
 				std::cout << v1 << std::endl;
 				if (v1 < 20)
 				{
-					Captured = true;
+                    b_captured = true;
 				}
-				Capturing = false;//fail capture
+                b_capturing = false;//fail capture
 				grass.position[net] = 0;//set net to false
 			}
-			if (Captured == true)
+            if (b_captured == true)
 			{
 				grass.velocity[monster] = 0;
 				grass.position[net] = grass.position[monster];
@@ -379,6 +382,7 @@ void SceneGrass::Update(double dt)
         counter = 0;
     }*/
 
+    // for buffer time between projectile launches
     counter += dt;
 }
 
@@ -425,7 +429,7 @@ void SceneGrass::Render()
 
 	RenderGrassScene();
 
-    //visable hitbox
+    //visible hitbox
 	/*modelStack.PushMatrix();
 	modelStack.Translate(HITBOX.m_origin.x, HITBOX.m_origin.y, HITBOX.m_origin.z);
 	modelStack.Scale(HITBOX.m_scale.x * 2, HITBOX.m_scale.y * 2, HITBOX.m_scale.z * 2);
@@ -459,7 +463,7 @@ void SceneGrass::RenderGrassScene()
 	modelStack.PushMatrix();
 	modelStack.Translate(0, 0, 0);
 	modelStack.Rotate(-90, 1, 0, 0);
-	modelStack.Scale(1000, 1000, 100);
+	modelStack.Scale(200, 200, 100);
 	RenderMesh(SharedData::GetInstance()->graphicsLoader->GetMesh(GraphicsLoader::GEO_GRASS), true);
 	modelStack.PopMatrix();
 
