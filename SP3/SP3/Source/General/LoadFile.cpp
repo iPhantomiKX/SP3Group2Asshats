@@ -94,8 +94,8 @@ void LoadMonsterData(std::ifstream& fileStream)
         // first content is name of monster
         std::string tempName = data;
 
-        int stats[5] = {};
-        for (int i = 0; i < 5; ++i)
+        int stats[4] = {};
+        for (int i = 0; i < 4; ++i)
         {
             std::getline(dataStream, data, ',');
             stats[i] = std::stoi(data);
