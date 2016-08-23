@@ -76,6 +76,10 @@ void ItemProjectile::Update(double dt)
 		deleteBullet = true;
 	}
 
+	if (position.y <= 1)
+	{
+		deleteBullet = true;
+	}
 
 }
 /****************************************************************************/

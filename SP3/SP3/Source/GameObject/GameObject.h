@@ -17,6 +17,8 @@ enum COMPONENTS
     COMPONENT_HITBOX = 1 << 3,
     COMPONENT_TRAP = 1 << 4,
     COMPONENT_AI = 1 << 5,
+	COMPONENT_CAPTURE = 1 << 6,
+	COMPONENT_BAIT = 1 << 7,
     //COMPONENT_TOTAL
 };
 
@@ -60,17 +62,35 @@ struct Projectile_Script
     float speed;
 };
 
+struct Capture_Script
+{
+	bool capturingMonster;
+	bool capturedMonster;
+	float timeBeforeCapture;
+};
+
+struct Bait_Script
+{
+	Vector3 pos;
+	bool eattingBait;
+	bool foundBait;
+	float scentRadius;
+	float foundRadius;
+	float timeEatting;
+};
+
 struct World
 {
     static const GameObject GAMEOBJECT_COUNT = 200;
 
 	GameObject mask[GAMEOBJECT_COUNT];
-
 	Vector3 position[GAMEOBJECT_COUNT];
 	Vector3 velocity[GAMEOBJECT_COUNT];
     Appearance appearance[GAMEOBJECT_COUNT];
 	AABB hitbox[GAMEOBJECT_COUNT];
     Trap_Script trap[GAMEOBJECT_COUNT];
+	Capture_Script capture[GAMEOBJECT_COUNT];
+	Bait_Script bait[GAMEOBJECT_COUNT];
     //Monster[GAMEOBJECT_COUNT];
 };
 
