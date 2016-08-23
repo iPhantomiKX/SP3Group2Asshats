@@ -11,8 +11,26 @@ Abstract class for scenes in gameplay
 
 #include "../../Source/Scene/Scene.h"
 #include "../General/SharedData.h"
+#include "../General/LoadFile.h"
 
+Scene::LevelGenerationMap Scene::m_levelGenerationData = {};
 char** Scene::m_levelMap = 0;
+
+void Scene::LoadLevelGenerationData(const char* file_path)
+{
+    LoadFile(file_path, FILE_LEVELGENERATIONDATA);
+}
+
+void Scene::LoadLevelMap(const char* file_path)
+{
+    LoadFile(file_path, FILE_LEVELMAPDATA);
+}
+
+void Scene::AddToMap(char tileCount, GraphicsLoader::GEOMETRY_TYPE meshType, const std::vector<COMPONENTS>& componentsList)
+{
+    std::pair<GraphicsLoader::GEOMETRY_TYPE, std::vector<COMPONENTS>> pair(meshType, componentsList);
+    m_levelGenerationData.insert(std::pair<char, std::pair<GraphicsLoader::GEOMETRY_TYPE, std::vector<COMPONENTS>>>(tileCount, pair));
+}
 
 void Scene::RenderText(Mesh* mesh, std::string text, Color color)
 {

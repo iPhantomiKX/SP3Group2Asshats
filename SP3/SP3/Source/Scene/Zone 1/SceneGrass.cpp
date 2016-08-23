@@ -31,10 +31,34 @@ void SceneGrass::Init()
 	Application::SetCursorPos(Application::GetWindowWidth() / 2.f, Application::GetWindowHeight() / 2.f);
 
 	bLButtonState = false; 
-
     //Set heap(?)
-    std::cout << sizeof(grass) << std::endl;
     memset(&grass, 0, sizeof(grass));
+
+    // Load map
+    Scene::LoadLevelMap("GameData/GrassScene.csv");
+    for (int rows = 0; rows < Scene::m_rows; ++rows)
+    {
+        for (int cols = 0; cols < Scene::m_cols; ++cols)
+        {
+            if (m_levelMap[rows][cols] == '0')
+                continue;
+
+            LevelGenerationMap::iterator it = Scene::m_levelGenerationData.find(m_levelMap[rows][cols]);
+
+            // it->first is tileCount
+            // first in it->second is mesh
+            // second in it->second is vector of components
+            //std::cout << m_levelMap[rows][cols] << " ";
+
+            GameObject go = createGO(&grass);
+            grass.mask[go] = COMPONENT_DISPLACEMENT | COMPONENT_APPEARANCE | COMPONENT_HITBOX;
+            grass.position[go].Set(-100.f + cols * Scene::tileSize, 0.f, -100.f + rows * Scene::tileSize);
+            grass.hitbox[go].m_origin = grass.position[go];
+            grass.hitbox[go].m_scale.Set(4.f, 4.f, 4.f);
+            grass.appearance[go].mesh = SharedData::GetInstance()->graphicsLoader->GetMesh((it->second).first);
+            grass.appearance[go].scale.Set(1, 1, 1);
+        }
+    }
 
     monster = createGO(&grass);
     grass.mask[monster] = COMPONENT_DISPLACEMENT | COMPONENT_VELOCITY | COMPONENT_APPEARANCE | COMPONENT_HITBOX | COMPONENT_AI;

@@ -17,9 +17,17 @@
 class Scene
 {
 public:
-    std::map<int, std::pair<GraphicsLoader::GEOMETRY_TYPE, std::vector<COMPONENTS>> > m_levelGenerationData;
+    typedef std::map<char, std::pair<GraphicsLoader::GEOMETRY_TYPE, std::vector<COMPONENTS>> > LevelGenerationMap;
+    static LevelGenerationMap m_levelGenerationData;
+    static void AddToMap(char tileCount, GraphicsLoader::GEOMETRY_TYPE meshType, const std::vector<COMPONENTS>& componentsList);
+    static void LoadLevelGenerationData(const char* file_path);
+    static void LoadLevelMap(const char* file_path);
 
     static char** m_levelMap;    // store for pathfinding
+
+    static const int m_rows = 50;
+    static const int m_cols = 50;
+    static const int tileSize = 4;
 
 	Scene() {}
 	~Scene() {}

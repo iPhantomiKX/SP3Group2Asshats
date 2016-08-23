@@ -75,12 +75,10 @@ void MonsterFactory::AddToMap(std::string name, int stats[])
 {
     size_t size = sizeof(stats) / sizeof(int);
 
-    std::cout << size;
-
-    int tempArray[5];
-    for (int i = 0; i < 5; ++i)
+    int tempArray[4];
+    for (int i = 0; i < 4; ++i)
     {
         tempArray[i] = stats[i];
     }
-    m_monsterStatsList.insert(std::pair<std::string, int(*)[5]>(name, &tempArray));
+    m_monsterStatsList.insert(std::pair<std::string, int(*)[4]>(name, &tempArray));
 }

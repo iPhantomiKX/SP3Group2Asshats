@@ -104,7 +104,7 @@ void LoadMonsterData(std::ifstream& fileStream)
         // push into map
         MonsterFactory::AddToMap(tempName, stats);
     }
-    
+
 }
 
 void LoadLevelGenerationData(std::ifstream& fileStream)
@@ -125,21 +125,23 @@ void LoadLevelGenerationData(std::ifstream& fileStream)
 
         // second content is tile count
         std::getline(dataStream, data, ',');
-        int tempTileCount = std::stoi(data);
+        char tempTileCount = data[0];
 
-        if (tempTileCount == 0)
+        if (tempTileCount == '0')
             continue;
 
         // remainder is components
         std::vector<COMPONENTS> tempComponents;
         std::getline(dataStream, data, ',');
-        for (; data != ""; std::getline(dataStream, data, ','))
+        for (std::string prevData = ""; prevData != data; std::getline(dataStream, data, ','))
         {
             tempComponents.push_back(ConvertStringToComponent(data));
-            std::cout << "Converted! ";
+            //std::cout << "Converted! ";
+            prevData = data;
         }
 
         // push into map
+        Scene::AddToMap(tempTileCount, AssignMeshType(tempTileCount - 48), tempComponents);
         //MonsterFactory::AddToMap(tempName, stats);
         //std::map<int, std::pair<GraphicsLoader::GEOMETRY_TYPE, std::vector<COMPONENTS>> > m_levelGenerationData;
     }
@@ -165,7 +167,7 @@ GraphicsLoader::GEOMETRY_TYPE AssignMeshType(int num)
     //if (line == "tree4")
     //    return GraphicsLoader::GEO_TREE2;
 
-    return GraphicsLoader::NUM_GEOMETRY;
+    //return GraphicsLoader::NUM_GEOMETRY;
 }
 
 COMPONENTS ConvertStringToComponent(std::string line)
@@ -199,13 +201,28 @@ void LoadLevelMapData(std::ifstream& fileStream)
         Scene::m_levelMap[i] = new char[50];
     }
 
-    for (int i = 0; i < 50; ++i) {
-        fileStream.read((char*)&Scene::m_levelMap[i][0], 50);
+    std::string line;
+    int rowCount = 0;
+    while (!fileStream.eof())
+    {
+        std::getline(fileStream, line);
+        std::stringstream dataStream(line);
+        std::string data;
+        std::getline(dataStream, data, ',');
+        if (line[0] == '#' || line == "")   // empty line OR comment
+            continue;
+
+        for (int i = 0; i < Scene::m_cols; ++i)
+        {
+            Scene::m_levelMap[rowCount][i] = data[0];
+            std::getline(dataStream, data, ',');
+        }
+
+        ++rowCount;
     }
-    fileStream.close();
 }
 
-void LoadSaveData(std::ifstream& fileStream) 
+void LoadSaveData(std::ifstream& fileStream)
 {
 
 }

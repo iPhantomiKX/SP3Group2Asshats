@@ -257,6 +257,42 @@
     <ClCompile Include="Source\GameObject\AI_Strategy.cpp">
       <Filter>Source Files\GameObject</Filter>
     </ClCompile>
+    <ClCompile Include="Source\GameObject\Monsters\Bird.cpp">
+      <Filter>Source Files\GameObject\Monsters</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GameObject\Monsters\Fairy.cpp">
+      <Filter>Source Files\GameObject\Monsters</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GameObject\Monsters\FireBugs.cpp">
+      <Filter>Source Files\GameObject\Monsters</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GameObject\Monsters\Fossil.cpp">
+      <Filter>Source Files\GameObject\Monsters</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GameObject\Monsters\Golem.cpp">
+      <Filter>Source Files\GameObject\Monsters</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GameObject\Monsters\Grimejam.cpp">
+      <Filter>Source Files\GameObject\Monsters</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GameObject\Monsters\Kof.cpp">
+      <Filter>Source Files\GameObject\Monsters</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GameObject\Monsters\Magma.cpp">
+      <Filter>Source Files\GameObject\Monsters</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GameObject\Monsters\MagmaBerzeker.cpp">
+      <Filter>Source Files\GameObject\Monsters</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GameObject\Monsters\MukBoss.cpp">
+      <Filter>Source Files\GameObject\Monsters</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GameObject\Monsters\Rabbit.cpp">
+      <Filter>Source Files\GameObject\Monsters</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GameObject\Monsters\RockSnake.cpp">
+      <Filter>Source Files\GameObject\Monsters</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\shader.hpp">
@@ -393,6 +429,9 @@
     </ClInclude>
     <ClInclude Include="Source\GameObject\Monsters\Rabbit.h">
       <Filter>Header Files\GameObject\Monsters</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GameObject\Pathfinding.h">
+      <Filter>Header Files\GameObject</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

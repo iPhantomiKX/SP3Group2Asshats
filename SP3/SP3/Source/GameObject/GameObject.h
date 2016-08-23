@@ -81,7 +81,7 @@ struct Bait_Script
 
 struct World
 {
-    static const GameObject GAMEOBJECT_COUNT = 200;
+    static const GameObject GAMEOBJECT_COUNT = 1000;
 
 	GameObject mask[GAMEOBJECT_COUNT];
 	Vector3 position[GAMEOBJECT_COUNT];

@@ -1,5 +1,6 @@
 #include "SharedData.h"
 #include "../GameObject/MonsterFactory.h"
+#include "../Scene/Scene.h"
 
 SharedData::SharedData()
 {
@@ -13,6 +14,7 @@ void SharedData::Init()
 	graphicsLoader->Init();
 
     MonsterFactory::LoadMonsterData("GameData/MonstersData.csv");
+    Scene::LoadLevelGenerationData("GameData/LevelGenerationData.csv");
 }
 
 SharedData::~SharedData()

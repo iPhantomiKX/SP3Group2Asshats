@@ -87,9 +87,9 @@ void GraphicsLoader::Init()
 	glUseProgram(m_programID);
 
 	m_lights.type = Light::LIGHT_DIRECTIONAL;
-	m_lights.position.Set(0, 200, 200);
+	m_lights.position.Set(0, 20, 10);
 	m_lights.color.Set(1, 1, 1);
-	m_lights.power = 1.f;
+	m_lights.power = 10.f;
 	m_lights.kC = 1.f;
 	m_lights.kL = 0.01f;
 	m_lights.kQ = 0.001f;

@@ -19,7 +19,7 @@ class AI_Strategy
 {
 public:
 	AI_Strategy();
-	virtual ~AI_Strategy();
+	~AI_Strategy();
 
 	enum STRATEGY_MODE
 	{

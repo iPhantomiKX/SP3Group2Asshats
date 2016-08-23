@@ -18,7 +18,7 @@ Monster::Monster(std::string name, int stats[]) : m_name(name)
     this->m_captureRateStat = stats[1];
     this->m_aggressionStat = stats[2];
     this->m_fearStat = stats[3];
-    this->m_strategy = (AI_Strategy *)(stats[4]);  //aggressive, bossfairy, etc.?
+    //this->m_strategy = (AI_Strategy *)(stats[4]);  //aggressive, bossfairy, etc.?
 }
 
 Monster::~Monster()

@@ -17,7 +17,7 @@ Class that creates Monsters inside a scene
 class MonsterFactory
 {
     //static int monsterTypesQuantity;
-    typedef std::map<std::string, int(*)[5]> monsterStatsMap;
+    typedef std::map<std::string, int(*)[4]> monsterStatsMap;
     static monsterStatsMap m_monsterStatsList;
 
 public:
@@ -28,7 +28,7 @@ public:
 
     static Monster* CreateMonster(const std::string name);
 
-    static void AddToMap(std::string, int stats[5]);
+    static void AddToMap(std::string, int stats[4]);
 
     // generate components for the gameobject instead
     // AI is a component -- if yes, AIcomponent->Update()

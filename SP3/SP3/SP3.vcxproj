@@ -45,6 +45,18 @@
     <ClCompile Include="Source\GameObject\Items.cpp" />
     <ClCompile Include="Source\GameObject\Monster.cpp" />
     <ClCompile Include="Source\GameObject\MonsterFactory.cpp" />
+    <ClCompile Include="Source\GameObject\Monsters\Bird.cpp" />
+    <ClCompile Include="Source\GameObject\Monsters\Fairy.cpp" />
+    <ClCompile Include="Source\GameObject\Monsters\FireBugs.cpp" />
+    <ClCompile Include="Source\GameObject\Monsters\Fossil.cpp" />
+    <ClCompile Include="Source\GameObject\Monsters\Golem.cpp" />
+    <ClCompile Include="Source\GameObject\Monsters\Grimejam.cpp" />
+    <ClCompile Include="Source\GameObject\Monsters\Kof.cpp" />
+    <ClCompile Include="Source\GameObject\Monsters\Magma.cpp" />
+    <ClCompile Include="Source\GameObject\Monsters\MagmaBerzeker.cpp" />
+    <ClCompile Include="Source\GameObject\Monsters\MukBoss.cpp" />
+    <ClCompile Include="Source\GameObject\Monsters\Rabbit.cpp" />
+    <ClCompile Include="Source\GameObject\Monsters\RockSnake.cpp" />
     <ClCompile Include="Source\GameObject\Player.cpp" />
     <ClCompile Include="Source\General\Application.cpp" />
     <ClCompile Include="Source\General\Camera.cpp" />
@@ -89,6 +101,7 @@
     <ClInclude Include="Source\GameObject\Monsters\MukBoss.h" />
     <ClInclude Include="Source\GameObject\Monsters\Rabbit.h" />
     <ClInclude Include="Source\GameObject\Monsters\RockSnake.h" />
+    <ClInclude Include="Source\GameObject\Pathfinding.h" />
     <ClInclude Include="Source\GameObject\Player.h" />
     <ClInclude Include="Source\General\Application.h" />
     <ClInclude Include="Source\General\Camera.h" />
