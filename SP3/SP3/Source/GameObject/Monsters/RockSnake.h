@@ -2,6 +2,7 @@
 #define MONSTER_BOSS_ROCKSNAKE_H
 
 #include "../Monster.h"
+#include "../../General/SharedData.h"
 
 class Boss_RockSnake : public Monster
 {

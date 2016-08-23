@@ -2,6 +2,7 @@
 #define MONSTER_BIRD_H
 
 #include "../Monster.h"
+#include "../../General/SharedData.h"
 
 class Monster_Bird : public Monster
 {
@@ -37,12 +38,12 @@ public:
 	{
 		// Do distance check between player, bait, traps
 		// Do aggression change and fear change respectively
-		if ((GetPosition() - player->GetPositionVector()).LengthSquared() < 8)
+		if ((GetPosition() - SharedData::GetInstance()->player->GetPositionVector()).LengthSquared() < 8)
 		{
 			changeAggressionStat(5);
 			changeFearStat(-5);
 		}
-		else if ((GetPosition() - player->GetPositionVector()).LengthSquared() > 8)
+		else if ((GetPosition() - SharedData::GetInstance()->player->GetPositionVector()).LengthSquared() > 8)
 		{
 			GetAggressionStat();
 			GetFearStat();

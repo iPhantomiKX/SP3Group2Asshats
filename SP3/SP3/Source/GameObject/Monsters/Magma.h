@@ -2,6 +2,7 @@
 #define MONSTER_MAGMA_H
 
 #include "../Monster.h"
+#include "../../General/SharedData.h"
 
 class Monster_Magma : public Monster
 {

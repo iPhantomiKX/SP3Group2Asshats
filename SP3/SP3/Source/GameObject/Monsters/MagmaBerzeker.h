@@ -2,6 +2,7 @@
 #define MONSTER_BOSS_MAGMA_BERZEKER_H
 
 #include "../Monster.h"
+#include "../../General/SharedData.h"
 
 class Boss_MagmaBerzeker : public Monster
 {

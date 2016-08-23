@@ -2,6 +2,7 @@
 #define MONSTER_BOSS_FAIRY_H
 
 #include "../Monster.h"
+#include "../../General/SharedData.h"
 
 class Boss_Fairy : public Monster
 {

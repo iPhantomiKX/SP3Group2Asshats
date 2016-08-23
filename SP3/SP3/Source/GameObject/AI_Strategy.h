@@ -29,6 +29,7 @@ public:
 		STATE_TRAPPED,	//stun
 		TOTAL_AI_STATE,
 	};
+
 	STRATEGY_MODE GetCurrentStrategy();
 	void SetState(STRATEGY_MODE currentState);
 	STRATEGY_MODE GetState();

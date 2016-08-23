@@ -2,6 +2,7 @@
 #define MONSTER_FOSSIL_H
 
 #include "../Monster.h"
+#include "../../General/SharedData.h"
 
 class Monster_Fossil : public Monster
 {

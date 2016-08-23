@@ -2,6 +2,7 @@
 #define MONSTER_FIRE_BUGS_H
 
 #include "../Monster.h"
+#include "../../General/SharedData.h"
 
 class Monster_FireBugs : public Monster
 {

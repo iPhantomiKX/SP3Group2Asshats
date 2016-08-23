@@ -2,6 +2,7 @@
 #define MONSTER_GRIMEJAM_H
 
 #include "../Monster.h"
+#include "../../General/SharedData.h"
 
 class Monster_Grimejam : public Monster
 {

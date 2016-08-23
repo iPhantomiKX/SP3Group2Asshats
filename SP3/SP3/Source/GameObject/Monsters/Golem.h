@@ -2,6 +2,7 @@
 #define MONSTER_GOLEM_H
 
 #include "../Monster.h"
+#include "../../General/SharedData.h"
 
 class Monster_Golem : public Monster
 {

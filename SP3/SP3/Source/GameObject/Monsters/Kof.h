@@ -2,6 +2,7 @@
 #define MONSTER_KOF_H
 
 #include "../Monster.h"
+#include "../../General/SharedData.h"
 
 class Monster_Kof : public Monster
 {
