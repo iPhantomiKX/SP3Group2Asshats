@@ -33,14 +33,14 @@ int AI_Strategy::CalculateDistance(const Vector3& MonsterPos, const Vector3& Des
 
 void AI_Strategy::Update()
 {
-	float AggressionLevel = monster->GetAggressionStat();
-	float FearLevel = monster->GetFearStat();
+	float m_aggressionLevel = monster->GetAggressionStat();
+	float m_fearLevel = monster->GetFearStat();
     
-	if (AggressionLevel > 60 && FearLevel < 50)
+	if (m_aggressionLevel > 60 && m_fearLevel < 50)
 	{
 		SetState(STATE_ATTACK);
 	}
-	else if (AggressionLevel < 40 && FearLevel > 50)
+	else if (m_aggressionLevel < 40 && m_fearLevel > 50)
 	{
 		SetState(STATE_RUN);
 	}

@@ -35,7 +35,9 @@ public:
 	//Monster Movement update
 	virtual void Update(double dt)
 	{
+		// Do distance check between player, bait, traps
 
+		// Do aggression change and fear change respectively
 	}
 
 };

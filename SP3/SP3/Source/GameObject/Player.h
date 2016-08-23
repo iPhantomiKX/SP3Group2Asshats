@@ -23,6 +23,7 @@ Class Player:
 /******************************************************************************/
 class Player
 {
+	friend class Monster;
 public:
 	enum MOVEMENT_STATE
 	{

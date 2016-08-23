@@ -35,7 +35,23 @@ public:
     //Monster Movement update
     virtual void Update(double dt)
     {
-
+		// Do distance check between player, bait, traps
+		// Do aggression change and fear change respectively
+		if ((GetPosition() - player->GetPositionVector()).LengthSquared() < 8)
+		{
+			changeAggressionStat(5);
+			changeFearStat(-5);
+		}
+		else if ((GetPosition() - player->GetPositionVector()).LengthSquared() > 8)
+		{
+			GetAggressionStat();
+			GetFearStat();
+		}
+		if (GetHealthStat() < 40)
+		{
+			changeAggressionStat(-5);
+			changeFearStat(5);
+		}
     }
 
 };
