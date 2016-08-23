@@ -15,6 +15,7 @@ InputManager::InputManager()
     keyState[KEY_A].Assign('A');
     keyState[KEY_S].Assign('S');
     keyState[KEY_D].Assign('D');
+    keyState[KEY_G].Assign('G');
     keyState[KEY_CTRL].Assign(VK_CONTROL);
     keyState[KEY_SHIFT].Assign(VK_SHIFT);
 }

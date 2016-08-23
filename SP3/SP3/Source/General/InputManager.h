@@ -33,6 +33,8 @@ public:
         KEY_S,
         KEY_D,
 
+        KEY_G,
+
         KEY_E,
         KEY_SPACE,
 

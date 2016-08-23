@@ -31,8 +31,6 @@ public:
 	bool Captured = false;
 	int captureCounter = 0;
 
-	float cd = 0;
-
     std::vector<Vector3> placedTraps;
 
 	//AABB HITBOX;
@@ -40,7 +38,7 @@ public:
     World grass;
 
 	AABB HITBOX;
-
+    double counter;
     GameObject monster,rock,net;
 };
 
