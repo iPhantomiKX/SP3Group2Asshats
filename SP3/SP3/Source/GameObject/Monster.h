@@ -34,6 +34,9 @@ public:
 	void SetPosition(Vector3 m_position);
 	Vector3 GetPosition();
 
+	void ResetAggression();
+	void ResetFear();
+
 	virtual void Update(double dt) = 0;
 
 protected:
@@ -46,6 +49,9 @@ protected:
     int m_captureRateStat;
     int m_aggressionStat;
     int m_fearStat;
+
+	int m_originalAggression;
+	int m_originalFear;
 
 	AI_Strategy* m_strategy;
 
