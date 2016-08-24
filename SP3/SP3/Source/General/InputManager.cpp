@@ -7,6 +7,7 @@ InputManager::InputManager()
         keyState[i].state = false;
         keyState[i].isReleased = false;
         keyState[i].isHeldDown = false;
+        keyState[i].isPressed = false;
     }
 
     keyState[KEY_SPACE].Assign(VK_SPACE);

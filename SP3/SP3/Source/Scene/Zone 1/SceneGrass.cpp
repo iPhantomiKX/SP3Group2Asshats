@@ -455,6 +455,10 @@ void SceneGrass::Render()
 
     if (SharedData::GetInstance()->inputManager->keyState[InputManager::KEY_ENTER].isPressed)
         std::cout << "asd" << std::endl;
+
+    std::stringstream ss;
+    ss << "FPS: " << fps;
+    RenderTextOnScreen(SharedData::GetInstance()->graphicsLoader->GetMesh(GraphicsLoader::GEO_TEXT_IMPACT), ss.str(), Color(1, 1, 0), 3, 0, 3);
 }
 
 void SceneGrass::RenderGrassScene()

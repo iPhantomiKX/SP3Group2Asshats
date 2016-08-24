@@ -110,10 +110,6 @@ void Player::Update(double dt)
     }
     if (SharedData::GetInstance()->inputManager->keyState[InputManager::KEY_CTRL].isPressed)
     {
-        prone();
-    }
-    else if (SharedData::GetInstance()->inputManager->keyState[InputManager::KEY_CTRL].isPressed)
-    {
         if (m_heightState == HEIGHT_STATE_STANDING)
             crouch();
         else if (m_heightState == HEIGHT_STATE_CROUCH)
@@ -145,7 +141,7 @@ void Player::Update(double dt)
         //speed = 0;
         if (m_speed != 0.f)
         {
-            m_speed -= 40.f * (float)(dt);
+            m_speed -= 100.f * (float)(dt);
             if (m_speed < 0.f)
                 m_speed = 0.f;
         }

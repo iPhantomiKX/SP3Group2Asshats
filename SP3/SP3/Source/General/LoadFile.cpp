@@ -185,9 +185,9 @@ void LoadLevelMapData(std::ifstream& fileStream)
 {
     if (Scene::m_levelMap)
     {
-        for (int i = 0; i < 50; ++i)
+        for (int i = 0; i < Scene::m_rows; ++i)
         {
-            for (int j = 0; i < 50; ++j)
+            for (int j = 0; i < Scene::m_cols; ++j)
             {
                 delete Scene::m_levelMap[i];
             }
@@ -195,10 +195,10 @@ void LoadLevelMapData(std::ifstream& fileStream)
         delete Scene::m_levelMap;
     }
 
-    Scene::m_levelMap = new char*[50];  // rows
-    for (int i = 0; i < 50; ++i)
+    Scene::m_levelMap = new char*[Scene::m_rows];  // rows
+    for (int i = 0; i < Scene::m_rows; ++i)
     {
-        Scene::m_levelMap[i] = new char[50];
+        Scene::m_levelMap[i] = new char[Scene::m_cols];
     }
 
     std::string line;

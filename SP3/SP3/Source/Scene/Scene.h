@@ -25,9 +25,9 @@ public:
 
     static char** m_levelMap;    // store for pathfinding
 
-    static const int m_rows = 50;
-    static const int m_cols = 50;
-    static const int tileSize = 4;
+    static const int m_rows = 40;
+    static const int m_cols = 40;
+    static const int tileSize = 5;
 
 	Scene() {}
 	~Scene() {}
