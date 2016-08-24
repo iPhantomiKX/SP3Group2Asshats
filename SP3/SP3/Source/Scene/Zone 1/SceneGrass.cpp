@@ -96,6 +96,16 @@ void SceneGrass::Update(double dt)
 	//m_worldHeight = 100.f;
 	//m_worldWidth = m_worldHeight * (float)Application::GetWindowWidth() / Application::GetWindowHeight();
 
+    // Toggle settings
+    if (Application::IsKeyPressed('1'))
+        glEnable(GL_CULL_FACE);
+    if (Application::IsKeyPressed('2'))
+        glDisable(GL_CULL_FACE);
+    if (Application::IsKeyPressed('3'))
+        glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+    if (Application::IsKeyPressed('4'))
+        glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+
     fps = (float)(1.f / dt);
 
     //===============================================================================================================================//

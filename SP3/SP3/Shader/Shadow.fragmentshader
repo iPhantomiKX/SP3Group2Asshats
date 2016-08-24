@@ -229,15 +229,10 @@ void main(){
 		color.xyz = mix(color.xyz, fogParam.color, fogFactor);
 	}
 
-	// Set alpha
-	color.w = color.w * fragmentColor.w;
-	if (color.w == 0.f)
-	{
-		discard;
-	}
-	
-	if (stencilReflection)
-	{
-		color = 0.75f * color;
-	}
+	//// Set alpha
+	//color.w = color.w * fragmentColor.w;
+	//if (color.w == 0.f)
+	//{
+	//	discard;
+	//}
 }
