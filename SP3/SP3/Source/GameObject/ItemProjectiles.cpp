@@ -11,6 +11,9 @@ A Class that is define for the ItemProjectiles in the game
 #include "../General/WorldValues.h"
 
 vector<ItemProjectile*> ItemProjectile::ItemProjectileList;
+vector<ItemProjectile*> ItemProjectile::RockProjectileList;
+vector<ItemProjectile*> ItemProjectile::NetProjectileList;
+vector<ItemProjectile*> ItemProjectile::BaitProjectileList;
 /****************************************************************************/
 /*!
 \brief 
@@ -76,11 +79,10 @@ void ItemProjectile::Update(double dt)
 		deleteBullet = true;
 	}
 
-	if (position.y <= 1)
+	if (position.y < -2)
 	{
 		deleteBullet = true;
 	}
-
 }
 /****************************************************************************/
 /*!
@@ -96,6 +98,72 @@ void ItemProjectile::UpdateProjectile(double dt)
 		if ((*it)->deleteBullet == true){
 			delete *it;
 			it = ItemProjectile::ItemProjectileList.erase(it);
+		}
+		else
+		{
+			(*it)->Update(dt);
+			it++;
+		}
+	}
+}
+/****************************************************************************/
+/*!
+\brief UpdateRockProjectile(double dt)
+
+\param dt
+dt to update rockprojectiles in other scene
+*/
+/****************************************************************************/
+void ItemProjectile::UpdateRockProjectile(double dt)
+{
+	for (vector<ItemProjectile*>::iterator it = RockProjectileList.begin(); it != RockProjectileList.end();){
+		if ((*it)->deleteBullet == true){
+			delete *it;
+			it = ItemProjectile::RockProjectileList.erase(it);
+		}
+		else
+		{
+			(*it)->Update(dt);
+			it++;
+		}
+	}
+}
+/****************************************************************************/
+/*!
+\brief UpdateNetProjectile(double dt)
+
+\param dt
+dt to update netprojectiles in other scene
+*/
+/****************************************************************************/
+void ItemProjectile::UpdateNetProjectile(double dt)
+{
+	for (vector<ItemProjectile*>::iterator it = NetProjectileList.begin(); it != NetProjectileList.end();){
+		if ((*it)->deleteBullet == true){
+			delete *it;
+			it = ItemProjectile::NetProjectileList.erase(it);
+		}
+		else
+		{
+			(*it)->Update(dt);
+			it++;
+		}
+	}
+}
+/****************************************************************************/
+/*!
+\brief UpdateBaitProjectile(double dt)
+
+\param dt
+dt to update baitprojectiles in other scene
+*/
+/****************************************************************************/
+void ItemProjectile::UpdateBaitProjectile(double dt)
+{
+	for (vector<ItemProjectile*>::iterator it = BaitProjectileList.begin(); it != BaitProjectileList.end();){
+		if ((*it)->deleteBullet == true){
+			delete *it;
+			it = ItemProjectile::BaitProjectileList.erase(it);
 		}
 		else
 		{

@@ -89,7 +89,7 @@ void GraphicsLoader::Init()
 	m_lights.type = Light::LIGHT_DIRECTIONAL;
 	m_lights.position.Set(0, 20, 10);
 	m_lights.color.Set(1, 1, 1);
-	m_lights.power = 10.f;
+	m_lights.power = 5.f;
 	m_lights.kC = 1.f;
 	m_lights.kL = 0.01f;
 	m_lights.kQ = 0.001f;
@@ -128,24 +128,24 @@ void GraphicsLoader::Init()
 	m_meshList[GEO_RABBIT] = MeshBuilder::GenerateOBJ("Rabbit", "OBJ//GrassZone//Rabbit.obj");
 	m_meshList[GEO_RABBIT]->textureArray[0] = LoadTGA("Image//GrassZone//Rabbit.tga");
 
-	m_meshList[GEO_BIRD] = MeshBuilder::GenerateOBJ("Bird", "OBJ//GrassZone//Birdv2.obj");
+	m_meshList[GEO_BIRD] = MeshBuilder::GenerateOBJ("Bird", "OBJ//GrassZone//Bird.obj");
 	m_meshList[GEO_BIRD]->textureArray[0] = LoadTGA("Image//GrassZone//Bird.tga");
 
-	//m_meshList[GEO_GRASS1] = MeshBuilder::GenerateOBJ("Grass1", "OBJ//GrassZone//Grass_02.obj");
-    m_meshList[GEO_GRASS1] = MeshBuilder::GenerateCone("test cube", Color(1, 1, 1), 36, 1.f, 1.f);
-	m_meshList[GEO_GRASS1]->textureArray[0] = LoadTGA("Image//GrassZone//Leafs.tga");
+	m_meshList[GEO_GRASS1] = MeshBuilder::GenerateOBJ("Grass1", "OBJ//GrassZone//Grass_02.obj");
+    //m_meshList[GEO_GRASS1] = MeshBuilder::GenerateCone("test cube", Color(1, 1, 1), 36, 1.f, 1.f);
+	m_meshList[GEO_GRASS1]->textureArray[0] = LoadTGA("Image//GrassZone//GrassObj.tga");
 
-	//m_meshList[GEO_GRASS2] = MeshBuilder::GenerateOBJ("Grass2", "OBJ//GrassZone//Grass_03.obj");
-    m_meshList[GEO_GRASS2] = MeshBuilder::GenerateCone("test cube", Color(1, 1, 1), 36, 1.f, 1.f);
-	m_meshList[GEO_GRASS2]->textureArray[0] = LoadTGA("Image//GrassZone//Leafs.tga");
+	m_meshList[GEO_GRASS2] = MeshBuilder::GenerateOBJ("Grass2", "OBJ//GrassZone//Grass_03.obj");
+   // m_meshList[GEO_GRASS2] = MeshBuilder::GenerateCone("test cube", Color(1, 1, 1), 36, 1.f, 1.f);
+	m_meshList[GEO_GRASS2]->textureArray[0] = LoadTGA("Image//GrassZone//GrassObj.tga");
 
-    //m_meshList[GEO_TREE1] = MeshBuilder::GenerateOBJ("Grass2", "OBJ//GrassZone//TreeBush2.obj");
-    m_meshList[GEO_TREE1] = MeshBuilder::GenerateSphere("test cube", Color(1, 1, 1), 18, 36, 1.f);
-    //m_meshList[GEO_TREE1]->textureArray[0] = LoadTGA("Image//GrassZone//Leafs.tga");
+    m_meshList[GEO_TREE1] = MeshBuilder::GenerateOBJ("Grass2", "OBJ//GrassZone//TreeBush2.obj");
+    //m_meshList[GEO_TREE1] = MeshBuilder::GenerateSphere("test cube", Color(1, 1, 1), 18, 36, 1.f);
+    m_meshList[GEO_TREE1]->textureArray[0] = LoadTGA("Image//GrassZone//Trees.tga");
 
-    //m_meshList[GEO_TREE2] = MeshBuilder::GenerateOBJ("Grass2", "OBJ//GrassZone//TreeBush4.obj");
-    m_meshList[GEO_TREE2] = MeshBuilder::GenerateSphere("test cube", Color(1, 1, 1), 18, 36, 1.f);
-    //m_meshList[GEO_TREE2]->textureArray[0] = LoadTGA("Image//GrassZone//Leafs.tga");
+    m_meshList[GEO_TREE2] = MeshBuilder::GenerateOBJ("Grass2", "OBJ//GrassZone//TreeBush4.obj");
+   // m_meshList[GEO_TREE2] = MeshBuilder::GenerateSphere("test cube", Color(1, 1, 1), 18, 36, 1.f);
+    m_meshList[GEO_TREE2]->textureArray[0] = LoadTGA("Image//GrassZone//Trees.tga");
 
 	//meshList[GEO_TREES] = MeshBuilder::GenerateOBJ("Bird", "OBJ//Birdv2.obj");
 	//meshList[GEO_TREES]->textureArray[0] = LoadTGA("Image//grass_lightgreen.tga");
@@ -155,6 +155,8 @@ void GraphicsLoader::Init()
 
 	m_meshList[GEO_TRAP] = MeshBuilder::GenerateOBJ("Trap", "OBJ//GrassZone//Traps.obj");
 	m_meshList[GEO_TRAP]->textureArray[0] = LoadTGA("Image//GrassZone//Steel.tga");
+
+	m_meshList[GEO_BAIT] = MeshBuilder::GenerateCube("Cube", Color(1, 0.75, 0.79), 1.0f);
 
 	m_meshList[GEO_GRASSZONESKYPLANE] = MeshBuilder::GenerateSkyPlane("skyplane", Color(1, 1, 1), 128, 400.0f, 3000.0f, 1.0f, 1.0f);
 	m_meshList[GEO_GRASSZONESKYPLANE]->textureArray[0] = LoadTGA("Image//GrassZone//SkyPlane.tga");

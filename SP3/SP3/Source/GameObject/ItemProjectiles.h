@@ -30,8 +30,14 @@ public:
 
 	void Update(double dt);
 	void UpdateProjectile(double dt);
+	void UpdateRockProjectile(double dt);
+	void UpdateNetProjectile(double dt);
+	void UpdateBaitProjectile(double dt);
 
 	static vector<ItemProjectile*> ItemProjectileList;
+	static vector<ItemProjectile*> RockProjectileList;
+	static vector<ItemProjectile*> NetProjectileList;
+	static vector<ItemProjectile*> BaitProjectileList;
 
 	Vector3 position;
 	bool deleteBullet;

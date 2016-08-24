@@ -72,7 +72,7 @@ void SceneGrass::Init()
 	rock = createGO(&grass);
 	grass.mask[rock] = COMPONENT_DISPLACEMENT | COMPONENT_VELOCITY | COMPONENT_APPEARANCE | COMPONENT_HITBOX;
 	grass.position[rock].Set(SharedData::GetInstance()->player->GetPositionVector().x, SharedData::GetInstance()->player->GetPositionVector().y, SharedData::GetInstance()->player->GetPositionVector().z);
-	grass.appearance[rock].mesh = SharedData::GetInstance()->graphicsLoader->GetMesh(GraphicsLoader::GEO_CUBE);
+	grass.appearance[rock].mesh = SharedData::GetInstance()->graphicsLoader->GetMesh(GraphicsLoader::GEO_ROCKS1);
 	grass.appearance[rock].scale.Set(1, 1, 1);
 
 	net = createGO(&grass);
@@ -83,10 +83,10 @@ void SceneGrass::Init()
 	//HITBOX.m_origin = Vector3(0, 5, 0);
 	//HITBOX.m_scale = Vector3(10, 10, 10);
 
-	b_capturing = false;
-    b_captured = false;
-    captureCounter = 0;
     counter = 0;
+	b_Rocks = true;
+	b_Nets = false;
+	b_Baits = false;
 }
 static double counter = 0;
 
@@ -96,273 +96,298 @@ void SceneGrass::Update(double dt)
 	//m_worldHeight = 100.f;
 	//m_worldWidth = m_worldHeight * (float)Application::GetWindowWidth() / Application::GetWindowHeight();
 
-    // Toggle settings
-    if (Application::IsKeyPressed('1'))
-        glEnable(GL_CULL_FACE);
-    if (Application::IsKeyPressed('2'))
-        glDisable(GL_CULL_FACE);
-    if (Application::IsKeyPressed('3'))
-        glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-    if (Application::IsKeyPressed('4'))
-        glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+	fps = (float)(1.f / dt);
 
-    fps = (float)(1.f / dt);
+	//===============================================================================================================================//
+	//                                                            Updates                                                            //
+	//===============================================================================================================================//
 
-    //===============================================================================================================================//
-    //                                                            Updates                                                            //
-    //===============================================================================================================================//
-
-    //Update Projectiles
+	//Update Projectiles
 	itemProjectile->UpdateProjectile(dt);
+	rockProjectile->UpdateRockProjectile(dt);
+	netProjectile->UpdateNetProjectile(dt);
+	baitProjectile->UpdateBaitProjectile(dt);
 
-    //Movement update for Gameobjects
-    UpdateGameObjects(&grass, dt);
+	//Movement update for Gameobjects
+	UpdateGameObjects(&grass, dt);
 
-    //Camera Update
-    camera.Update(dt);
+	//Camera Update
+	camera.Update(dt);
 
-    //Player Update
-    SharedData::GetInstance()->player->Update(dt);
+	//Player Update
+	SharedData::GetInstance()->player->Update(dt);
+	SharedData::GetInstance()->inputManager->Update();
 
-    SharedData::GetInstance()->inputManager->Update();
+	//===============================================================================================================================//
+	//                                                            Checks                                                             //
+	//===============================================================================================================================//
+	////////////////////////////////////////////////
+	////Projectile checks//////////////ROCKS////////
+	////////////////////////////////////////////////
 
-    //===============================================================================================================================//
-    //                                                            Checks                                                             //
-    //===============================================================================================================================//
-
-	//Projectile checks
-	if (ItemProjectile::ItemProjectileList.size())
+	if (ItemProjectile::RockProjectileList.size())
 	{
-		for (unsigned i = 0; i < ItemProjectile::ItemProjectileList.size(); ++i)
+		for (unsigned i = 0; i < ItemProjectile::RockProjectileList.size(); ++i)
 		{
-			if (grass.hitbox[monster].CheckCollision(ItemProjectile::ItemProjectileList[i]->position))
+			for (GameObject ai = 0; ai < grass.GAMEOBJECT_COUNT; ++ai)
 			{
-				b_capturing = true;
-				ItemProjectile::ItemProjectileList[i]->deleteBullet;
-				grass.position[net] = grass.position[monster];
-			}
-            if (b_capturing == true)
-			{	
-				int v1 = rand() % 100;
-				std::cout << v1 << std::endl;
-				if (v1 < 20)
+				if ((grass.mask[ai] & COMPONENT_AI) == COMPONENT_AI)
 				{
-                    b_captured = true;
+					if (grass.hitbox[ai].CheckCollision(ItemProjectile::RockProjectileList[i]->position))
+					{
+						grass.velocity[ai] = (grass.position[ai] - camera.position).Normalized();
+						grass.velocity[ai].y = 0;
+					}
 				}
-                b_capturing = false;//fail capture
-				grass.position[net] = 0;//set net to false
-			}
-            if (b_captured == true)
-			{
-				grass.velocity[monster] = 0;
-				grass.position[net] = grass.position[monster];
-				break;
 			}
 		}
 	}
 
-    if (Application::IsKeyPressed('C') && SharedData::GetInstance()->player->inventory[Item::TYPE_BAIT].Use() && counter > 0.5)
-    {
-        ItemProjectile::ItemProjectileList.push_back(new ItemProjectile(
-            Vector3(SharedData::GetInstance()->player->GetPositionVector().x, SharedData::GetInstance()->player->GetPositionVector().y, SharedData::GetInstance()->player->GetPositionVector().z),
-            Vector3(SharedData::GetInstance()->player->GetViewVector().x, SharedData::GetInstance()->player->GetViewVector().y, SharedData::GetInstance()->player->GetViewVector().z),
-            500,
-            50,
-            10
-            ));
-        counter = 0;
-    }
-    //////////////////////////////////////////////
-    ////Projectile checks//////////////NET////////
-    //////////////////////////////////////////////
-    if (ItemProjectile::ItemProjectileList.size())
-    {
-        for (unsigned i = 0; i < ItemProjectile::ItemProjectileList.size(); ++i)
-        {
-            for (GameObject ai = 0; ai < grass.GAMEOBJECT_COUNT; ++ai)
-            {
-                if ((grass.mask[ai] & COMPONENT_AI) == COMPONENT_AI)
-                {
-                    if (grass.hitbox[ai].CheckCollision(ItemProjectile::ItemProjectileList[i]->position))
-                    {
-                        ItemProjectile::ItemProjectileList[i]->deleteBullet;
-                        net = createGO(&grass);
-                        grass.mask[net] = COMPONENT_DISPLACEMENT | COMPONENT_APPEARANCE;
-                        grass.capture[net].capturingMonster = true;
-                        grass.capture[net].capturedMonster = false;
-                        grass.capture[net].timeBeforeCapture = 3;
-                        grass.appearance[net].mesh = SharedData::GetInstance()->graphicsLoader->GetMesh(GraphicsLoader::GEO_NET);
-                        grass.appearance[net].scale.Set(2, 2, 2);
-                        if (grass.capture[net].capturingMonster == true)
-                        {
-                            grass.position[net] = grass.position[ai];
-                            int v1 = rand() % 100;
-                            std::cout << v1 << std::endl;
-                            if (v1 < 20)
-                            {
-                                grass.capture[net].capturedMonster = true;//Captured!
-                            }
-                            grass.capture[net].capturingMonster = false;//fail capture
-                        }
-                        if (grass.capture[net].capturedMonster == true)
-                        {
-                            grass.velocity[ai] = 0;
-                            grass.position[net] = grass.position[ai];
-                        }
-                    }
-                }
-            }
-        }
-    }
-    //////////////////////////////////////////////
-    ////////BAIT /////////////////////////////////
-    //////////////////////////////////////////////
-    //if (ItemProjectile::ItemProjectileList.size())
-    //{
-    //	for (unsigned i = 0; i < ItemProjectile::ItemProjectileList.size(); ++i)
-    //	{
-    //		if (ItemProjectile::ItemProjectileList[i]->position.y <= 1)
-    //		{
-    //			Vector3 tempo = ItemProjectile::ItemProjectileList[i]->position;
-    //			ItemProjectile::ItemProjectileList[i]->deleteBullet;
 
-    //			bait = createGO(&grass);
-    //			grass.mask[bait] = COMPONENT_DISPLACEMENT | COMPONENT_APPEARANCE | COMPONENT_BAIT;
-    //			grass.position[bait] = tempo;
-    //			grass.appearance[bait].mesh = SharedData::GetInstance()->graphicsLoader->GetMesh(GraphicsLoader::GEO_CUBE);
-    //			grass.appearance[bait].scale.Set(1, 1, 1);
-    //			grass.bait[bait].scentRadius = 200;
-    //			grass.bait[bait].foundRadius = 5;
-    //			grass.bait[bait].eattingBait = false;
-    //			grass.bait[bait].foundBait = false;
-    //			grass.bait[bait].timeEatting = 3.0f;
-    //		}
-    //	} 
-    //}
-
-    //for (GameObject ai = 0; ai < grass.GAMEOBJECT_COUNT; ++ai)
-    //{
-    //	if ((grass.mask[ai] & COMPONENT_AI) == COMPONENT_AI)
-    //	{
-    //		for (GameObject bait = 0; bait < grass.GAMEOBJECT_COUNT; ++bait)
-    //		{
-    //			if ((grass.mask[bait] & COMPONENT_BAIT) == COMPONENT_BAIT)
-    //			{
-    //				if ((grass.position[ai] - grass.position[bait]).LengthSquared() < grass.bait[bait].scentRadius && grass.bait[bait].eattingBait == false)
-    //				{
-    //					grass.bait[bait].foundBait = true;
-    //					std::cout << " FOUND BAIT " + grass.bait[bait].foundBait << std::endl;
-    //					if (grass.bait[bait].foundBait == true)
-    //					{
-    //						grass.velocity[ai] = (grass.position[ai] - grass.position[bait]).Normalized();
-    //						grass.velocity[ai].y = 0;
-    //						grass.velocity[ai] *= -1;
-    //					}
-    //				}
-    //				if ((grass.position[ai] - grass.position[bait]).LengthSquared() < grass.bait[bait].foundRadius)
-    //				{
-    //					std::cout << "EATTING BAIT " + grass.bait[bait].foundBait << std::endl;
-    //					grass.bait[bait].foundBait = false;
-    //					grass.bait[bait].eattingBait = true;
-    //					grass.velocity[ai] = 0;
-    //					grass.velocity[ai].y = 0;
-    //				}
-    //				if (grass.bait[bait].eattingBait == true)
-    //				{
-    //					grass.bait[bait].timeEatting -= dt;
-    //					std::cout << grass.bait[bait].timeEatting << std::endl;
-    //					if (grass.bait[bait].timeEatting <= 0)
-    //					{
-    //						grass.bait[bait].eattingBait == false;
-    //						destroyGO(&grass, bait);
-    //						std::cout << "Done Eatting" << std::endl;
-    //						//PUT WHATEVER THE RABBIT DO NORMALLY HERE :D (DONE EATTING BAIT)
-    //						grass.velocity[ai] = 2;
-    //						grass.velocity[ai].y = 0;
-    //					}
-    //				}
-    //			}
-    //		}
-    //	}
-    //}
-
-
-    //Trap check (radius)
-    for (GameObject trap = 0; trap < grass.GAMEOBJECT_COUNT; ++trap)
-    {
-        if ((grass.mask[trap] & COMPONENT_TRAP) == COMPONENT_TRAP)
-        {
-            if (!grass.trap[trap].activated)
-            {
-                for (GameObject ai = 0; ai < grass.GAMEOBJECT_COUNT; ++ai)
-                {
-                    if ((grass.mask[ai] & COMPONENT_AI) == COMPONENT_AI)
-                    {
-                        if ((grass.position[trap] - grass.position[ai]).LengthSquared() < grass.trap[trap].radius)
-                        {
-                            grass.trap[trap].caughtMonsterVel = grass.velocity[ai];
-                            grass.trap[trap].caughtMonster = ai;
-                            grass.trap[trap].activated = true;
-                            grass.velocity[ai].SetZero();
-                        }
-                    }
-                }
-            }
-            else
-            {
-                if (grass.trap[trap].triggerTimer < grass.trap[trap].triggerDuration)
-                {
-                    grass.trap[trap].triggerTimer += dt;
-                }
-                else
-                {
-                    grass.velocity[grass.trap[trap].caughtMonster] = grass.trap[trap].caughtMonsterVel;
-                    destroyGO(&grass, trap);
-                }
-            }
-        }
-    }
-
-
-    //===============================================================================================================================//
-    //                                                            Key Inputs                                                         //
-    //===============================================================================================================================//
-
-    //Place trap
-    if (SharedData::GetInstance()->inputManager->keyState[InputManager::KEY_G].isPressed && SharedData::GetInstance()->player->inventory[Item::TYPE_TRAP_ONE].Use())
-    {
-        GameObject trap = createGO(&grass);
-
-        grass.mask[trap] = COMPONENT_DISPLACEMENT | COMPONENT_APPEARANCE | COMPONENT_TRAP;
-
-        grass.position[trap].Set(SharedData::GetInstance()->player->GetPositionVector().x + SharedData::GetInstance()->player->GetViewVector().x * 20, 0, SharedData::GetInstance()->player->GetPositionVector().z + SharedData::GetInstance()->player->GetViewVector().z * 20);
-        grass.appearance[trap].mesh = SharedData::GetInstance()->graphicsLoader->GetMesh(GraphicsLoader::GEO_TRAP);
-        grass.appearance[trap].scale.Set(3, 3, 3);
-
-        grass.trap[trap].triggerDuration = 3.0f;
-        grass.trap[trap].triggerTimer = 0.f;
-        grass.trap[trap].radius = 2.5f;
-        grass.trap[trap].activated = false;
-        grass.trap[trap].caughtMonster = 0;
-        grass.trap[trap].caughtMonsterVel.SetZero();
-
-        counter = 0;
-    }
-
-    //Shoot projectile
-    if (SharedData::GetInstance()->inputManager->keyState[InputManager::KEY_X].isPressed && SharedData::GetInstance()->player->inventory[Item::TYPE_NET].Use())
+	//////////////////////////////////////////////
+	////Projectile checks//////////////NET////////
+	//////////////////////////////////////////////
+	if (ItemProjectile::NetProjectileList.size())
 	{
-		ItemProjectile::ItemProjectileList.push_back(new ItemProjectile(
-			Vector3(SharedData::GetInstance()->player->GetPositionVector().x, SharedData::GetInstance()->player->GetPositionVector().y, SharedData::GetInstance()->player->GetPositionVector().z),
-			Vector3(SharedData::GetInstance()->player->GetViewVector().x, 0.5, SharedData::GetInstance()->player->GetViewVector().z),
-			500,
-			15,
-			10
-			));
+		for (unsigned i = 0; i < ItemProjectile::NetProjectileList.size(); ++i)
+		{
+			for (GameObject ai = 0; ai < grass.GAMEOBJECT_COUNT; ++ai)
+			{
+				if ((grass.mask[ai] & COMPONENT_AI) == COMPONENT_AI)
+				{
+					if (grass.hitbox[ai].CheckCollision(ItemProjectile::NetProjectileList[i]->position))
+					{
+						ItemProjectile::NetProjectileList[i]->deleteBullet;
+						net = createGO(&grass);
+						grass.mask[net] = COMPONENT_DISPLACEMENT | COMPONENT_APPEARANCE;
+						grass.capture[net].capturingMonster = true;
+						grass.capture[net].capturedMonster = false;
+						grass.capture[net].timeBeforeCapture = 3;
+						grass.appearance[net].mesh = SharedData::GetInstance()->graphicsLoader->GetMesh(GraphicsLoader::GEO_NET);
+						grass.appearance[net].scale.Set(2, 2, 2);
+						if (grass.capture[net].capturingMonster == true)
+						{
+							grass.position[net] = grass.position[ai];
+							int v1 = rand() % 100;
+							std::cout << v1 << std::endl;
+							if (v1 < 20)
+							{
+								grass.capture[net].capturedMonster = true;//Captured!
+							}
+							grass.capture[net].capturingMonster = false;//fail capture
+						}
+						if (grass.capture[net].capturedMonster == true)
+						{
+							grass.velocity[ai] = 0;
+							grass.position[net] = grass.position[ai];
+						}
+					}
+				}
+			}
+		}
+	}
+	//////////////////////////////////////////////
+	////////BAIT /////////////////////////////////
+	//////////////////////////////////////////////
+	if (ItemProjectile::BaitProjectileList.size())
+	{
+		for (unsigned i = 0; i < ItemProjectile::BaitProjectileList.size(); ++i)
+		{
+			if (ItemProjectile::BaitProjectileList[i]->position.y <= 1)
+			{
+				Vector3 tempo = ItemProjectile::BaitProjectileList[i]->position;
+				ItemProjectile::BaitProjectileList[i]->deleteBullet = true;
 
-        counter = 0;
+				bait = createGO(&grass);
+				grass.mask[bait] = COMPONENT_DISPLACEMENT | COMPONENT_APPEARANCE | COMPONENT_BAIT;
+				grass.position[bait] = tempo;
+				grass.appearance[bait].mesh = SharedData::GetInstance()->graphicsLoader->GetMesh(GraphicsLoader::GEO_BAIT);
+				grass.appearance[bait].scale.Set(1, 1, 1);
+				grass.bait[bait].scentRadius = 200;
+				grass.bait[bait].foundRadius = 5;
+				grass.bait[bait].eattingBait = false;
+				grass.bait[bait].foundBait = false;
+				grass.bait[bait].timeEatting = 3.0f;
+			}
+		}
 	}
 
+	for (GameObject ai = 0; ai < grass.GAMEOBJECT_COUNT; ++ai)
+	{
+		if ((grass.mask[ai] & COMPONENT_AI) == COMPONENT_AI)
+		{
+			for (GameObject bait = 0; bait < grass.GAMEOBJECT_COUNT; ++bait)
+			{
+				if ((grass.mask[bait] & COMPONENT_BAIT) == COMPONENT_BAIT)
+				{
+					if ((grass.position[ai] - grass.position[bait]).LengthSquared() < grass.bait[bait].scentRadius && grass.bait[bait].eattingBait == false)
+					{
+						grass.bait[bait].foundBait = true;
+						std::cout << " FOUND BAIT " + grass.bait[bait].foundBait << std::endl;
+						if (grass.bait[bait].foundBait == true)
+						{
+							grass.velocity[ai] = (grass.position[ai] - grass.position[bait]).Normalized();
+							grass.velocity[ai].y = 0;
+							grass.velocity[ai] *= -1;
+						}
+					}
+					if ((grass.position[ai] - grass.position[bait]).LengthSquared() < grass.bait[bait].foundRadius)
+					{
+						std::cout << "EATTING BAIT " + grass.bait[bait].foundBait << std::endl;
+						grass.bait[bait].foundBait = false;
+						grass.bait[bait].eattingBait = true;
+						grass.velocity[ai] = 0;
+						grass.velocity[ai].y = 0;
+					}
+					if (grass.bait[bait].eattingBait == true)
+					{
+						grass.bait[bait].timeEatting -= dt;
+						std::cout << grass.bait[bait].timeEatting << std::endl;
+						if (grass.bait[bait].timeEatting <= 0)
+						{
+							grass.bait[bait].eattingBait == false;
+							destroyGO(&grass, bait);
+							std::cout << "Done Eatting" << std::endl;
+							//PUT WHATEVER THE RABBIT DO NORMALLY HERE :D (DONE EATTING BAIT)
+							grass.velocity[ai] = 2;
+							grass.velocity[ai].y = 0;
+						}
+					}
+				}
+			}
+		}
+	}
+
+	//Trap check (radius)
+	for (GameObject trap = 0; trap < grass.GAMEOBJECT_COUNT; ++trap)
+	{
+		if ((grass.mask[trap] & COMPONENT_TRAP) == COMPONENT_TRAP)
+		{
+			if (!grass.trap[trap].activated)
+			{
+				for (GameObject ai = 0; ai < grass.GAMEOBJECT_COUNT; ++ai)
+				{
+					if ((grass.mask[ai] & COMPONENT_AI) == COMPONENT_AI)
+					{
+						if ((grass.position[trap] - grass.position[ai]).LengthSquared() < grass.trap[trap].radius)
+						{
+							grass.trap[trap].caughtMonsterVel = grass.velocity[ai];
+							grass.trap[trap].caughtMonster = ai;
+							grass.trap[trap].activated = true;
+							grass.velocity[ai].SetZero();
+						}
+					}
+				}
+			}
+			else
+			{
+				if (grass.trap[trap].triggerTimer < grass.trap[trap].triggerDuration)
+				{
+					grass.trap[trap].triggerTimer += dt;
+				}
+				else
+				{
+					grass.velocity[grass.trap[trap].caughtMonster] = grass.trap[trap].caughtMonsterVel;
+					destroyGO(&grass, trap);
+				}
+			}
+		}
+	}
+
+
+	//===============================================================================================================================//
+	//                                                            Key Inputs                                                         //
+	//===============================================================================================================================//
+
+	//Place trap
+	if (SharedData::GetInstance()->inputManager->keyState[InputManager::KEY_G].isPressed && SharedData::GetInstance()->player->inventory[Item::TYPE_TRAP_ONE].Use())
+	{
+		GameObject trap = createGO(&grass);
+
+		grass.mask[trap] = COMPONENT_DISPLACEMENT | COMPONENT_APPEARANCE | COMPONENT_TRAP;
+
+		grass.position[trap].Set(SharedData::GetInstance()->player->GetPositionVector().x + SharedData::GetInstance()->player->GetViewVector().x * 20, 0, SharedData::GetInstance()->player->GetPositionVector().z + SharedData::GetInstance()->player->GetViewVector().z * 20);
+		grass.appearance[trap].mesh = SharedData::GetInstance()->graphicsLoader->GetMesh(GraphicsLoader::GEO_TRAP);
+		grass.appearance[trap].scale.Set(3, 3, 3);
+
+		grass.trap[trap].triggerDuration = 3.0f;
+		grass.trap[trap].triggerTimer = 0.f;
+		grass.trap[trap].radius = 2.5f;
+		grass.trap[trap].activated = false;
+		grass.trap[trap].caughtMonster = 0;
+		grass.trap[trap].caughtMonsterVel.SetZero();
+
+		counter = 0;
+	}
+	//Rocks
+	if (SharedData::GetInstance()->inputManager->keyState[InputManager::KEY_1].isPressed)
+	{
+		b_Rocks = true;
+		b_Baits = false;
+		b_Nets = false;
+	}
+	//Nets
+	if (SharedData::GetInstance()->inputManager->keyState[InputManager::KEY_2].isPressed)
+	{
+		b_Nets = true;
+		b_Rocks = false;
+		b_Baits = false;
+	}
+	//Baits
+	if (SharedData::GetInstance()->inputManager->keyState[InputManager::KEY_3].isPressed)
+	{
+		b_Baits = true;
+		b_Rocks = false;
+		b_Nets = false;
+	}
+
+	if (b_Rocks)
+	{	
+		//Rock projectile
+		if (SharedData::GetInstance()->inputManager->keyState[InputManager::MOUSE_L].isPressed && SharedData::GetInstance()->player->inventory[Item::TYPE_ROCK].Use())
+		{
+			ItemProjectile::RockProjectileList.push_back(new ItemProjectile(
+				Vector3(SharedData::GetInstance()->player->GetPositionVector().x, SharedData::GetInstance()->player->GetPositionVector().y, SharedData::GetInstance()->player->GetPositionVector().z),
+				Vector3(SharedData::GetInstance()->player->GetViewVector().x, SharedData::GetInstance()->player->GetViewVector().y, SharedData::GetInstance()->player->GetViewVector().z),
+				500,
+				50,
+				10
+				));
+
+			counter = 0;
+		}
+	}
+	if (b_Nets)
+	{
+		//Net projectile
+		if (SharedData::GetInstance()->inputManager->keyState[InputManager::MOUSE_L].isPressed && SharedData::GetInstance()->player->inventory[Item::TYPE_NET].Use() && counter > 3)
+		{
+			ItemProjectile::NetProjectileList.push_back(new ItemProjectile(
+				Vector3(SharedData::GetInstance()->player->GetPositionVector().x, SharedData::GetInstance()->player->GetPositionVector().y, SharedData::GetInstance()->player->GetPositionVector().z),
+				Vector3(SharedData::GetInstance()->player->GetViewVector().x, 0.5, SharedData::GetInstance()->player->GetViewVector().z),
+				500,
+				15,
+				10
+				));
+
+			counter = 0;
+		}
+	}
+	if (b_Baits)
+	{
+		//Bait Projectile
+		if (SharedData::GetInstance()->inputManager->keyState[InputManager::MOUSE_L].isPressed && SharedData::GetInstance()->player->inventory[Item::TYPE_BAIT].Use())
+		{
+			ItemProjectile::BaitProjectileList.push_back(new ItemProjectile(
+				Vector3(SharedData::GetInstance()->player->GetPositionVector().x, SharedData::GetInstance()->player->GetPositionVector().y, SharedData::GetInstance()->player->GetPositionVector().z),
+				Vector3(SharedData::GetInstance()->player->GetViewVector().x, SharedData::GetInstance()->player->GetViewVector().y, SharedData::GetInstance()->player->GetViewVector().z),
+				500,
+				50,
+				10
+				));
+			counter = 0;
+		}
+	}
     //Spawn monster at origin
     if (SharedData::GetInstance()->inputManager->keyState[InputManager::KEY_E].isPressed)
     {
@@ -425,7 +450,31 @@ void SceneGrass::Render()
 
 	RenderMesh(SharedData::GetInstance()->graphicsLoader->GetMesh(GraphicsLoader::GEO_AXES), false);
 
-	for (vector<ItemProjectile*>::iterator it = ItemProjectile::ItemProjectileList.begin(); it != ItemProjectile::ItemProjectileList.end(); ++it){
+	//for (vector<ItemProjectile*>::iterator it = ItemProjectile::ItemProjectileList.begin(); it != ItemProjectile::ItemProjectileList.end(); ++it){
+	//	modelStack.PushMatrix();
+	//	modelStack.Translate(
+	//		(*it)->position.x,
+	//		(*it)->position.y,
+	//		(*it)->position.z
+	//		);
+	//	modelStack.Scale(0.5, 0.5, 0.5);
+	//	RenderMesh(SharedData::GetInstance()->graphicsLoader->GetMesh(GraphicsLoader::GEO_NET), false);
+	//	modelStack.PopMatrix();
+	//}
+
+	for (vector<ItemProjectile*>::iterator it = ItemProjectile::RockProjectileList.begin(); it != ItemProjectile::RockProjectileList.end(); ++it){
+		modelStack.PushMatrix();
+		modelStack.Translate(
+			(*it)->position.x,
+			(*it)->position.y,
+			(*it)->position.z
+			);
+		modelStack.Scale(0.5, 0.5, 0.5);
+		RenderMesh(SharedData::GetInstance()->graphicsLoader->GetMesh(GraphicsLoader::GEO_ROCKS1), false);
+		modelStack.PopMatrix();
+	}
+
+	for (vector<ItemProjectile*>::iterator it = ItemProjectile::NetProjectileList.begin(); it != ItemProjectile::NetProjectileList.end(); ++it){
 		modelStack.PushMatrix();
 		modelStack.Translate(
 			(*it)->position.x,
@@ -434,6 +483,18 @@ void SceneGrass::Render()
 			);
 		modelStack.Scale(0.5, 0.5, 0.5);
 		RenderMesh(SharedData::GetInstance()->graphicsLoader->GetMesh(GraphicsLoader::GEO_NET), false);
+		modelStack.PopMatrix();
+	}
+
+	for (vector<ItemProjectile*>::iterator it = ItemProjectile::BaitProjectileList.begin(); it != ItemProjectile::BaitProjectileList.end(); ++it){
+		modelStack.PushMatrix();
+		modelStack.Translate(
+			(*it)->position.x,
+			(*it)->position.y,
+			(*it)->position.z
+			);
+		modelStack.Scale(0.5, 0.5, 0.5);
+		RenderMesh(SharedData::GetInstance()->graphicsLoader->GetMesh(GraphicsLoader::GEO_BAIT), false);
 		modelStack.PopMatrix();
 	}
 

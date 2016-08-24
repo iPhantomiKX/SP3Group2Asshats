@@ -27,6 +27,8 @@ InputManager::InputManager()
     keyState[KEY_CTRL].Assign(VK_CONTROL);
     keyState[KEY_SHIFT].Assign(VK_SHIFT);
 
+	keyState[MOUSE_L].Assign(VK_LBUTTON);
+
     keyState[KEY_1].Assign('1');
     keyState[KEY_2].Assign('2');
     keyState[KEY_3].Assign('3');

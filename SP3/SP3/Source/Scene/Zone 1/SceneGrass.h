@@ -24,12 +24,17 @@ public:
 	bool ViewCheckPosition(Vector3 pos, float degree);
     //Test stuff
 	ItemProjectile* itemProjectile;
+	ItemProjectile* rockProjectile;
+	ItemProjectile* netProjectile;
+	ItemProjectile* baitProjectile;
 
     //For placing traps
-    //bool b_placing = false;
-	bool b_capturing = false;
-	bool b_captured = false;
-	int captureCounter = 0;
+    bool b_placing = false;
+
+	//Item Switch
+	bool b_Rocks;
+	bool b_Nets;
+	bool b_Baits;
 
     std::vector<Vector3> placedTraps;
 
