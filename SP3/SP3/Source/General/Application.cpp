@@ -157,12 +157,6 @@ void Application::Run()
 
 	sceneManager->ChangeScene(2);
 
-    if (!(rand() % 6))
-    {
-        while (true)
-            std::cout << "hehe xD" << std::endl;
-    }
-
     //Main Loop
 	m_timer.startTimer();    // Start timer to calculate how long it takes to render this frame
     while (!glfwWindowShouldClose(m_window) && !IsKeyPressed(VK_ESCAPE))

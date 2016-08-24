@@ -19,7 +19,7 @@ public:
     virtual void Init();
     virtual void Update(double dt);
     virtual void Render();
-    virtual void RenderLavaScene();
+    virtual void RenderRockScene();
     virtual void Exit();
     bool ViewCheckPosition(Vector3 pos, float degree);
     //Test stuff
