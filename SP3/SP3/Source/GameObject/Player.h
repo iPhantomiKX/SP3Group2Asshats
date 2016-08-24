@@ -84,6 +84,12 @@ public:
     Vector3 GetViewVector();
     Vector3 GetUpVector();
 
+    float m_noiseFactor;
+    bool m_bHiding;
+
+    float GetNoiseFactor();
+    void SetToHiding();
+
     void Update(double dt);
 	AABB PlayerHitBox;
 };

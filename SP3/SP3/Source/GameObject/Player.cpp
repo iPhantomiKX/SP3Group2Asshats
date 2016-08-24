@@ -25,6 +25,9 @@ Player::Player()
     m_gravity = -100.f;
     m_jumpHeight = 0.f;
 
+    m_noiseFactor = 0.5f;
+    m_bHiding = false;
+
 	PlayerHitBox.m_origin.SetZero();
 	PlayerHitBox.m_scale = Vector3(10, 0.1, 10);
 
@@ -72,6 +75,7 @@ static const float CAMERA_SPEED = 5.0f;
 
 void Player::Update(double dt)
 {
+    //m_bHiding = false;
     m_movementState = MOVEMENT_STATE_IDLE;
     m_velocity.SetZero();
 
@@ -122,18 +126,19 @@ void Player::Update(double dt)
         jump();
     }
 
-    if (SharedData::GetInstance()->inputManager->keyState[InputManager::KEY_SHIFT].isHeldDown)
+    if (SharedData::GetInstance()->inputManager->keyState[InputManager::KEY_SHIFT].isHeldDown && m_heightState == HEIGHT_STATE_STANDING)
     {
-        if (m_heightState == HEIGHT_STATE_STANDING)
-        {
-            m_movementState = MOVEMENT_STATE_RUN;
-        }
+        m_movementState = MOVEMENT_STATE_RUN;
     }
 
     if (m_heightState == HEIGHT_STATE_CROUCH)
+    {
         m_movementState = MOVEMENT_STATE_CROUCH;
+    }
     else if (m_heightState == HEIGHT_STATE_PRONE)
+    {
         m_movementState = MOVEMENT_STATE_PRONE;
+    }
 
     switch (m_movementState)
     {
@@ -251,6 +256,9 @@ void Player::Update(double dt)
         m_view = rotation * m_view;
         //target = position + view;
     }
+
+    if (m_bHiding)
+        m_noiseFactor *= 0.5f;
 }
 
 void Player::pitch(const double dt)
@@ -266,7 +274,6 @@ void Player::yaw(const double dt)
 void Player::move(const double dt)
 {
     m_position += m_velocity * m_speed * (float)dt;
-
     //std::cout << m_movementState << " | " << m_heightState  << " | " << m_speed << std::endl;
     //std::cout << m_position << std::endl;
     switch (m_heightState)
@@ -287,7 +294,6 @@ void Player::move(const double dt)
         updateProne(dt);
         break;
     }
-
     m_position.y = m_eyeLevel + m_jumpHeight;
 }
 
@@ -306,7 +312,12 @@ void Player::crouch()
 
 void Player::prone()
 {
-    if (m_heightState != HEIGHT_STATE_PRONE && m_eyeLevel == 2.5f) 
+    if (m_heightState != HEIGHT_STATE_PRONE && m_eyeLevel == 5.f) 
+    {
+        m_heightState = HEIGHT_STATE_PRONE;
+    }
+
+    if (m_heightState != HEIGHT_STATE_PRONE && m_eyeLevel == 2.5f)
     {
         m_heightState = HEIGHT_STATE_PRONE;
     }
@@ -341,18 +352,21 @@ void Player::updateStandUp(const double dt)
         m_eyeLevel += (float)(20.f * dt);
         m_eyeLevel = Math::Min(5.f, m_eyeLevel);
     }
+   // m_noiseFactor = 0.5f;
 }
 
 void Player::updateCrouch(const double dt)
 {
     m_eyeLevel -= (float)(20.f * dt);
     m_eyeLevel = Math::Max(2.5f, m_eyeLevel);
+    //m_noiseFactor = 0.35f;
 }
 
 void Player::updateProne(const double dt)
 {
     m_eyeLevel -= (float)(20.f * dt);
     m_eyeLevel = Math::Max(1.f, m_eyeLevel);
+    //m_noiseFactor = 0.2f;
 }
 
 void Player::updateJump(const double dt)
@@ -379,4 +393,9 @@ void Player::updateJump(const double dt)
         m_heightState = HEIGHT_STATE_STANDING;
         m_jumpHeight = 0.f;
     }
+}
+
+float Player::GetNoiseFactor()
+{
+    return this->m_noiseFactor;
 }
